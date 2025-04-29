@@ -52,71 +52,62 @@ function ChatMessage({
   }
 
   return (
-    <div className={`mb-6 ${isAI ? '' : 'ml-auto'}`}>
+    <div className={`mb-8 ${isAI ? '' : 'ml-auto'} max-w-3xl transform transition-all duration-300`}>
       <div className={`flex ${isAI ? 'justify-start' : 'justify-end'}`}>
         {isAI && (
-          <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center mr-4">
-            🤖
+          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-sky-400 to-sky-600 flex items-center justify-center mr-4 shadow-md">
+            <span className="text-white text-lg">🤖</span>
           </div>
         )}
         
-        <div className={`max-w-3xl rounded-lg ${
+        <div className={`rounded-xl shadow-lg ${
           isAI 
-            ? 'bg-white border border-gray-200 shadow-sm' 
-            : 'bg-sky-500 text-white'
+            ? 'bg-white border border-gray-200' 
+            : 'bg-gradient-to-r from-sky-500 to-sky-600 text-white'
         }`}>
           {isAI ? (
             <div className="divide-y divide-gray-100">
-              {/* Metadata Bar */}
-              <div className="px-4 py-2 bg-gray-50 rounded-t-lg flex items-center justify-between">
+              {/* Improved metadata bar */}
+              <div className="px-6 py-3 bg-gray-50 rounded-t-xl flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-500">Confidence:</span>
-                    <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+                    <span className="text-sm text-gray-500">Confidence</span>
+                    <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
                       {confidence}
                     </span>
                   </div>
                   {targetPersona && (
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-500">🎯 Persona:</span>
-                      <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">
+                      <span className="text-sm text-gray-500">Target</span>
+                      <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
                         {truncateText(targetPersona, 20)}
                       </span>
                     </div>
                   )}
                 </div>
-                <div className="text-sm text-gray-500">
-                  Based on {referencesCount} sources
-                </div>
               </div>
 
-              {/* Main AI Response */}
-              <div className="p-4">
-                <p className="text-gray-800 mb-2">
+              {/* Improved message content */}
+              <div className="p-6">
+                <p className="text-gray-800 text-lg leading-relaxed">
                   {message}
                 </p>
 
-                {/* Add Followup Recommendations */}
-                {followupRecs && followupRecs.length > 0 && (
-                  <div className="mt-4">
-                    <h4 className="text-sm font-medium text-gray-500 mb-2 flex items-center">
-                      <span className="mr-2">💡</span>
-                      Follow-up Questions
+                {/* Improved follow-up suggestions */}
+                {followupRecs?.length > 0 && (
+                  <div className="mt-6">
+                    <h4 className="text-sm font-medium text-gray-500 mb-3">
+                      Suggested Follow-ups
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {followupRecs.map((rec, index) => (
                         <button
                           key={index}
-                          onClick={() => {
-                            if (typeof onFollowupClick === 'function') {
-                              onFollowupClick(rec);
-                            }
-                          }}
-                          className="text-sm px-3 py-1.5 rounded-full bg-gray-100 
-                                   text-gray-700 hover:bg-sky-100 hover:text-sky-700 
-                                   transition-colors duration-200 flex items-center"
+                          onClick={() => onFollowupClick?.(rec)}
+                          className="px-4 py-2 rounded-lg bg-gray-50 text-gray-700 
+                                   hover:bg-sky-50 hover:text-sky-700 
+                                   transition-all duration-300 transform hover:scale-105"
                         >
-                          <span className="mr-1">↗️</span>
                           {rec}
                         </button>
                       ))}
@@ -125,18 +116,19 @@ function ChatMessage({
                 )}
               </div>
 
-              {/* References Section */}
+              {/* Improved references section */}
               {references.length > 0 && (
-                <div className="bg-gray-50 p-4 rounded-b-lg">
-                  <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center">
-                    <span className="mr-2">📚</span>
-                    Expert Insights
+                <div className="bg-gray-50 p-6 rounded-b-xl">
+                  <h3 className="text-sm font-medium text-gray-500 mb-4">
+                    Expert Insights ({references.length})
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {references.map((ref, index) => (
                       <div 
-                        key={index} 
-                        className="bg-white rounded-lg border border-gray-200 p-3 hover:border-sky-200 transition-colors duration-200"
+                        key={index}
+                        className="bg-white rounded-xl border border-gray-200 p-4
+                                 hover:border-sky-200 hover:shadow-md 
+                                 transition-all duration-300"
                       >
                         <blockquote className="text-gray-700 mb-3 italic">
                           "{ref.quote}"
@@ -151,7 +143,9 @@ function ChatMessage({
                                 {ref.source}
                               </div>
                               <div className="text-xs text-gray-500 flex items-center">
-                                <span>{ref.role} · {ref.company}</span>
+                                <span>
+                                  {ref.role} · {ref.university || ref.company}
+                                </span>
                                 {ref.linkedinProfile && (
                                   <a 
                                     href={ref.linkedinProfile}
@@ -204,7 +198,7 @@ function ChatMessage({
             </div>
           ) : (
             <div className="p-4">
-              <p className="text-white">{message}</p>
+              <p className="text-white text-lg">{message}</p>
             </div>
           )}
         </div>

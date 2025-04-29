@@ -3,6 +3,7 @@ import Sidebar from '../components/layout/Sidebar';
 import { usePersona } from '../context/PersonaContext';
 import { useAuth } from '../context/AuthContext';
 import { createNewThread } from '../services/chatService'; // We'll create this function
+import { useField } from '../context/FieldContext';  // Add this import
 
 function StartScreen({ onStart, onThreadSelect }) {
   const [question, setQuestion] = useState('');
@@ -11,6 +12,7 @@ function StartScreen({ onStart, onThreadSelect }) {
   const [showPersonaInput, setShowPersonaInput] = useState(false);
   const [tempPersona, setTempPersona] = useState('');
   const { user } = useAuth();
+  const { selectedField, setSelectedField } = useField();
 
   console.log('StartScreen: Current targetPersona:', targetPersona);
 
@@ -23,8 +25,8 @@ function StartScreen({ onStart, onThreadSelect }) {
         const { thread_id, title } = await createNewThread(question);
         console.log('StartScreen: Created thread with ID:', thread_id);
         
-        // This should always trigger regardless of auth status
-        onStart(question, thread_id);
+        // Pass selectedField along with question and thread_id
+        onStart(question, thread_id, selectedField);
       } catch (error) {
         console.error('Error creating new thread:', error);
         setIsSubmitting(false);
@@ -62,10 +64,39 @@ function StartScreen({ onStart, onThreadSelect }) {
           <h1 className="text-2xl font-semibold mb-8">Hi, It's HUMINT. Human Intelligence.</h1>
           <div className="w-full max-w-2xl">
             <div className="bg-white rounded-lg border shadow-sm">
+              <div className="p-3 border-b">
+                <div className="flex justify-center space-x-2">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedField('finance')}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2
+                      ${selectedField === 'finance' 
+                        ? 'bg-sky-500 text-white' 
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                  >
+                    <span>💼</span>
+                    <span>Finance Recruiting</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedField('college')}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2
+                      ${selectedField === 'college' 
+                        ? 'bg-sky-500 text-white' 
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                  >
+                    <span>🎓</span>
+                    <span>College Admissions</span>
+                  </button>
+                </div>
+              </div>
+
               <div className="p-3">
                 <input
                   type="text"
-                  placeholder="Ask anything"
+                  placeholder={selectedField === 'finance' 
+                    ? "Ask about finance recruiting..." 
+                    : "Ask about college admissions..."}
                   className="w-full focus:outline-none"
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}

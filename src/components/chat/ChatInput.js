@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { usePersona } from '../../context/PersonaContext';
+import { useField } from '../../context/FieldContext';
 
 function ChatInput({ onSendMessage }) {
   const [input, setInput] = useState('');
   const [showPersonaInput, setShowPersonaInput] = useState(false);
   const [tempPersona, setTempPersona] = useState('');
   const { targetPersona, setTargetPersona } = usePersona();
+  const { selectedField, setSelectedField } = useField();
 
   console.log('ChatInput: Current targetPersona:', targetPersona);
 
@@ -13,7 +15,7 @@ function ChatInput({ onSendMessage }) {
     e.preventDefault();
     if (input.trim()) {
       onSendMessage(input);
-      setInput(''); // Clear input after sending
+      setInput('');
     }
   };
 
@@ -43,10 +45,38 @@ function ChatInput({ onSendMessage }) {
     <div className="border-t border-gray-200 p-4 bg-white">
       <form onSubmit={handleSubmit}>
         <div className="bg-white rounded-lg border shadow-sm">
+          <div className="p-3 border-b">
+            <div className="flex justify-center space-x-2">
+              <button
+                type="button"
+                onClick={() => setSelectedField('finance')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2
+                  ${selectedField === 'finance' 
+                    ? 'bg-sky-500 text-white' 
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              >
+                <span>💼</span>
+                <span>Finance Recruiting</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedField('college')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2
+                  ${selectedField === 'college' 
+                    ? 'bg-sky-500 text-white' 
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              >
+                <span>🎓</span>
+                <span>College Admissions</span>
+              </button>
+            </div>
+          </div>
           <div className="p-3">
             <input
               type="text"
-              placeholder="Ask anything"
+              placeholder={selectedField === 'finance' 
+                ? "Ask about finance recruiting..." 
+                : "Ask about college admissions..."}
               className="w-full focus:outline-none"
               value={input}
               onChange={(e) => setInput(e.target.value)}

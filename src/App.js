@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
 import StartScreen from './pages/StartScreen';
 import ChatScreen from './pages/ChatScreen';
 import { PersonaProvider } from './context/PersonaContext';
 import { AuthProvider } from './context/AuthContext';
 import AuthCallback from './components/auth/AuthCallback';
+import { FieldProvider } from './context/FieldContext';
+import WaitlistForm from './pages/WaitlistForm';
 import './App.css';
 
 function App() {
@@ -44,33 +47,34 @@ function App() {
   };
 
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <PersonaProvider>
-          <Routes>
-            <Route path="/auth/callback" element={<AuthCallback />} />
-            <Route path="/" element={
-              <div className="App">
-                {currentScreen === 'start' ? (
-                  <StartScreen 
-                    onStart={handleStart}
-                    onThreadSelect={handleThreadSelect}
-                    onReset={handleReset}
-                  />
-                ) : (
-                  <ChatScreen 
-                    initialMessage={chatData.initialMessage}
-                    threadId={chatData.threadId}
-                    onThreadSelect={handleThreadSelect}
-                    onReset={handleReset}
-                  />
-                )}
-              </div>
-            } />
-          </Routes>
-        </PersonaProvider>
-      </BrowserRouter>
-    </AuthProvider>
+    <Router>
+      <FieldProvider>
+        <AuthProvider>
+          <PersonaProvider>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/waitlist/:type" element={<WaitlistForm />} />
+              <Route path="/auth/callback" element={<AuthCallback />} />
+              <Route 
+                path="/chat" 
+                element={
+                  currentScreen === 'start' ? (
+                    <StartScreen onStart={handleStart} onThreadSelect={handleThreadSelect} />
+                  ) : (
+                    <ChatScreen
+                      initialMessage={chatData.initialMessage}
+                      threadId={chatData.threadId}
+                      onThreadSelect={handleThreadSelect}
+                      onReset={handleReset}
+                    />
+                  )
+                } 
+              />
+            </Routes>
+          </PersonaProvider>
+        </AuthProvider>
+      </FieldProvider>
+    </Router>
   );
 }
 

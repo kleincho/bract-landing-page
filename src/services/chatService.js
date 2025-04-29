@@ -51,7 +51,7 @@ export async function createNewThread(initialMessage) {
 }
 
 // Function for sending messages to existing threads
-export async function sendMessage(message, threadId) {
+export async function sendMessage(message, threadId, field) {
   if (!threadId) {
     throw new Error('threadId is required for sending messages');
   }
@@ -67,7 +67,8 @@ export async function sendMessage(message, threadId) {
       body: JSON.stringify({ 
         message,
         thread_id: threadId,
-        targetPersona: targetPersona || null
+        targetPersona: targetPersona || null,
+        field: field
       }),
     });
 
