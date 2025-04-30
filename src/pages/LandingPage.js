@@ -1,27 +1,99 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/animations.css';
+import { API_URL } from '../services/config';
+
 
 function LandingPage() {
   const sliderRef = useRef(null);
+  const scrollIntervalRef = useRef(null);
   const [activeFeature, setActiveFeature] = useState('feature1');
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    // Auto-scroll animation for logos
+  const startScrolling = () => {
     const slider = sliderRef.current;
     if (slider) {
-      const scroll = () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+      }
+      
+      scrollIntervalRef.current = setInterval(() => {
         if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
           slider.scrollLeft = 0;
         } else {
           slider.scrollLeft += 1;
         }
-      };
-      
-      const interval = setInterval(scroll, 30);
-      return () => clearInterval(interval);
+      }, 30);
     }
+  };
+
+  useEffect(() => {
+    startScrolling();
+    
+    return () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+      }
+    };
   }, []);
+
+  useEffect(() => {
+    startScrolling();
+  }, [activeFeature]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startScrolling();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sliderRef.current) {
+      observer.observe(sliderRef.current);
+    }
+
+    return () => {
+      if (sliderRef.current) {
+        observer.unobserve(sliderRef.current);
+      }
+    };
+  }, []);
+
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get('email');
+    
+    try {
+      // Add to waitlist
+      const response = await fetch(`${API_URL}/api/waitlist/join`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          email,
+          has_valid_card: false,
+          created_at: new Date().toISOString()
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to join waitlist');
+      }
+
+      // Navigate to confirmation page
+      navigate('/confirmation', { state: { email } });
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error (show error message to user)
+    }
+  };
 
   const ExpertSection = () => (
     <section className="px-6 py-20 bg-gray-50">
@@ -147,25 +219,116 @@ function LandingPage() {
 
     // Animation for Feature 1: Database Animation
     const DatabaseAnimation = () => (
-      <div className="relative w-full h-64 flex items-center justify-center">
+      <div className="relative w-full h-[32rem] flex items-center justify-center">
         <div className="absolute inset-0 flex items-center justify-center">
-          {/* Animated Cards */}
+          {/* Animated Interview Transcripts */}
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className={`absolute bg-white rounded-lg shadow-lg p-4 w-48 transform transition-all duration-700
-                ${activeFeature === 'feature1' ? 'opacity-100' : 'opacity-0'}
-                translate-y-${i * 4}`}
+              className={`absolute bg-white rounded-lg shadow-lg p-6 w-[36rem] transform transition-all duration-700 max-h-[28rem] overflow-hidden
+                ${activeFeature === 'feature1' ? 'opacity-100' : 'opacity-0'}`}
               style={{
                 animation: `float${i + 1} 3s ease-in-out infinite`,
-                animationDelay: `${i * 0.2}s`
+                animationDelay: `${i * 0.2}s`,
+                transform: `translateY(${i * 20}px) scale(${1 - i * 0.05})`,
+                zIndex: 3 - i
               }}
             >
-              <div className="h-2 w-12 bg-sky-200 rounded mb-2"></div>
-              <div className="h-2 w-24 bg-gray-100 rounded"></div>
-              <div className="mt-2 flex items-center">
-                <div className="w-6 h-6 rounded-full bg-gray-100"></div>
-                <div className="ml-2 h-2 w-16 bg-gray-100 rounded"></div>
+              {/* Interview Metadata Header */}
+              <div className="border-b-2 border-gray-200 pb-3 mb-4">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <div className="font-mono text-xs text-gray-500 mb-1">
+                      INTERVIEW_ID: {['GS_VP_2024_03', 'MS_AD_2024_02', 'JPM_AN_2024_01'][i]}
+                    </div>
+                    <div className="text-sm font-medium text-gray-900">
+                      {['Vice President', 'Associate Director', 'Senior Analyst'][i]}
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      {['Goldman Sachs - Investment Banking', 'Morgan Stanley - M&A', 'JPMorgan - ECM'][i]}
+                    </div>
+                  </div>
+                  <div className="font-mono text-xs text-gray-500 text-right">
+                    DATE: 2024-03-{15 - i}
+                    <br />
+                    LOCATION: New York, NY
+                  </div>
+                </div>
+              </div>
+
+              {/* Updated Transcript Content with More Follow-ups */}
+              <div className="font-mono text-xs space-y-4">
+                <div className="grid grid-cols-[80px,1fr] gap-2">
+                  <div className="text-gray-400">[00:03:15]</div>
+                  <div className="text-gray-800">
+                    <span className="text-sky-600 font-semibold">INTERVIEWER: </span>
+                    Could you walk us through a typical deal process?
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-[80px,1fr] gap-2">
+                  <div className="text-gray-400">[00:03:42]</div>
+                  <div className="text-gray-800">
+                    <span className="text-sky-600 font-semibold">PARTICIPANT: </span>
+                    {[
+                      "Sure. The process typically starts with client outreach or inbound requests. First thing we do is assemble a team...",
+                      "Let me break this down into phases. Phase one is always about understanding the client's strategic objectives...",
+                      "I'll give you a concrete example from a recent deal. We started with extensive market analysis..."
+                    ][i]}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-[80px,1fr] gap-2">
+                  <div className="text-gray-400">[00:04:18]</div>
+                  <div className="text-gray-800">
+                    <span className="text-sky-600 font-semibold">INTERVIEWER: </span>
+                    What are the key challenges in this stage?
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-[80px,1fr] gap-2">
+                  <div className="text-gray-400">[00:04:45]</div>
+                  <div className="text-gray-800">
+                    <span className="text-sky-600 font-semibold">PARTICIPANT: </span>
+                    {[
+                      "The main challenge is managing multiple stakeholders while maintaining confidentiality...",
+                      "Time management becomes critical. You're often coordinating across different time zones...",
+                      "The biggest challenge is ensuring accuracy in your financial models..."
+                    ][i]}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-[80px,1fr] gap-2">
+                  <div className="text-gray-400">[00:05:30]</div>
+                  <div className="text-gray-800">
+                    <span className="text-sky-600 font-semibold">INTERVIEWER: </span>
+                    How do you handle client communication during this process?
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-[80px,1fr] gap-2">
+                  <div className="text-gray-400">[00:05:45]</div>
+                  <div className="text-gray-800">
+                    <span className="text-sky-600 font-semibold">PARTICIPANT: </span>
+                    {[
+                      "Clear communication is crucial. We have weekly updates with the client...",
+                      "We maintain a structured communication cadence with daily internal updates...",
+                      "It's important to have a single point of contact for the client..."
+                    ][i]}
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer Metadata */}
+              <div className="mt-4 pt-2 border-t border-gray-100">
+                <div className="flex justify-between items-center">
+                  <div className="text-xs text-gray-400 font-mono">
+                    DURATION: 1:45:30
+                  </div>
+                  <div className="text-xs text-gray-400 font-mono">
+                    PAGE 4/28
+                  </div>
+                </div>
               </div>
             </div>
           ))}
@@ -174,63 +337,217 @@ function LandingPage() {
     );
 
     // Animation for Feature 2: Persona Matching
-    const PersonaAnimation = () => (
-      <div className="relative w-full h-64 flex items-center justify-center">
-        <div className={`transition-all duration-700 ${activeFeature === 'feature2' ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Central Avatar */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-16 h-16 bg-sky-500 rounded-full flex items-center justify-center text-white text-2xl">
-              👤
+    const PersonaAnimation = () => {
+      const [showResults, setShowResults] = useState(false);
+
+      useEffect(() => {
+        if (activeFeature === 'feature2') {
+          setShowResults(false);
+          const timer = setTimeout(() => setShowResults(true), 1000);
+          return () => clearTimeout(timer);
+        }
+      }, [activeFeature]);
+
+      return (
+        <div className="relative w-full h-[32rem] flex flex-col items-center">
+          {/* Target Persona Input */}
+          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-sky-200 max-w-lg mx-auto mb-12">
+            <div className="text-sm text-gray-500 mb-4">🎯 Emory Alumni from Korea currently working in IB</div>
+            <div className="flex flex-wrap gap-2">
+              {['University: Emory', 'Region: Korea', 'Interest: IB'].map((tag) => (
+                <span key={tag} className="bg-sky-50 text-sky-600 text-xs px-3 py-1.5 rounded-full">
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
-          {/* Orbiting Personas */}
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center"
-              style={{
-                animation: `orbit 4s linear infinite`,
-                animationDelay: `${i * (4 / 4)}s`,
-                transformOrigin: 'center center',
-                left: 'calc(50% - 5rem)',
-                top: 'calc(50% - 5rem)',
-              }}
-            >
-              <span className="text-sm">🎯</span>
+
+          {/* Matched Profiles */}
+          {showResults && (
+            <div className="grid grid-cols-3 gap-6 w-full max-w-4xl mx-auto animate-fade-in">
+              {[
+                {
+                  name: "Jae Kim",
+                  role: "IB Analyst",
+                  firm: "Goldman Sachs",
+                  background: "Emory '22",
+                  match: "100%",
+                  quote: "Leveraging alumni network was key..."
+                },
+                {
+                  name: "Min Park",
+                  role: "Summer Analyst",
+                  firm: "Morgan Stanley",
+                  background: "Emory '23",
+                  match: "97%",
+                  quote: "Unique recruiting process..."
+                },
+                {
+                  name: "Sarah Lee",
+                  role: "IB Analyst",
+                  firm: "J.P. Morgan",
+                  background: "Emory '21",
+                  match: "94%",
+                  quote: "Adapted networking approach..."
+                }
+              ].map((profile, i) => (
+                <div
+                  key={i}
+                  className={`bg-white rounded-xl p-5 shadow-sm border ${
+                    i === 0 ? 'border-sky-200' : 'border-gray-100'
+                  }`}
+                >
+                  {/* Header with Name and Match */}
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="font-medium text-gray-900">{profile.name}</div>
+                    <div className="bg-green-50 text-green-600 text-xs px-2 py-1 rounded-full">
+                      {profile.match}
+                    </div>
+                  </div>
+
+                  {/* Role Info */}
+                  <div className="space-y-1 mb-4">
+                    <div className="text-sm text-gray-600">
+                      {profile.role} · {profile.firm}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {profile.background}
+                    </div>
+                  </div>
+
+                  {/* Quote */}
+                  <div className="text-sm text-gray-600 italic bg-gray-50 p-3 rounded-lg">
+                    "{profile.quote}"
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
-      </div>
-    );
+      );
+    };
 
     // Animation for Feature 3: Interactive Chat
-    const ChatAnimation = () => (
-      <div className="relative w-full h-64 flex items-center justify-center">
-        <div className={`space-y-4 transition-all duration-700 ${activeFeature === 'feature3' ? 'opacity-100' : 'opacity-0'}`}>
-          {/* User Message */}
-          <div className="flex justify-end">
-            <div className="bg-sky-500 text-white rounded-lg px-4 py-2 max-w-xs animate-slideIn">
-              Tell me more about...
+    const ChatAnimation = () => {
+      const [animationStep, setAnimationStep] = useState(0);
+
+      useEffect(() => {
+        if (activeFeature === 'feature3') {
+          setAnimationStep(0);
+          const timer = setTimeout(() => setAnimationStep(1), 500);
+          return () => clearTimeout(timer);
+        }
+      }, [activeFeature]);
+
+      return (
+        <div className="relative w-full h-[32rem] flex items-center justify-center">
+          <div className={`transition-all duration-700 ${activeFeature === 'feature3' ? 'opacity-100' : 'opacity-0'} w-full max-w-3xl mx-auto`}>
+            {/* Main Question */}
+            <div className="flex justify-end mb-6">
+              <div className="bg-sky-500 text-white rounded-2xl px-6 py-3 shadow-md max-w-xl">
+                <p className="text-sm">What's the difference between Evercore SF vs NYC?</p>
+              </div>
             </div>
-          </div>
-          {/* AI Response */}
-          <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg px-4 py-2 max-w-xs animate-slideIn animation-delay-300">
-              Based on your interests...
+
+            {/* AI Initial Response Preview */}
+            <div className="flex items-start space-x-3 mb-8">
+              <div className="w-8 h-8 rounded-full bg-[#4AA3DF]/10 flex items-center justify-center flex-shrink-0">
+                <img 
+                  src="/humint_icon.png" 
+                  alt="HUMINT AI"
+                  className="w-5 h-5 object-contain"
+                />
+              </div>
+              <div className="bg-white rounded-2xl shadow-md p-4 max-w-xl">
+                <p className="text-sm text-gray-600 mb-3">
+                  Based on our interviews with Evercore bankers, there are several key differences between the SF and NYC offices...
+                </p>
+                <div className="text-xs text-gray-400">Click to expand full response</div>
+              </div>
             </div>
-          </div>
-          {/* Follow-up Suggestions */}
-          <div className="flex flex-wrap gap-2 justify-center animate-slideIn animation-delay-600">
-            <div className="bg-sky-100 text-sky-700 rounded-full px-3 py-1 text-sm">
-              Follow-up 1 →
-            </div>
-            <div className="bg-sky-100 text-sky-700 rounded-full px-3 py-1 text-sm">
-              Follow-up 2 →
+
+            {/* Follow-up Questions Section */}
+            <div className="bg-gray-50 rounded-2xl p-6">
+              <div className="flex items-center mb-4">
+                <span className="mr-2">💡</span>
+                <h3 className="text-sm font-medium text-gray-700">Related questions you might want to ask:</h3>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  {
+                    question: "What types of deals does SF office handle?",
+                    preview: "Tech & Healthcare focus...",
+                    category: "Deals & Coverage"
+                  },
+                  {
+                    question: "How's the culture different?",
+                    preview: "Work style & team dynamics...",
+                    category: "Culture"
+                  },
+                  {
+                    question: "What's the size comparison?",
+                    preview: "Team structure & growth...",
+                    category: "Office Size"
+                  },
+                  {
+                    question: "Which office has better exit opps?",
+                    preview: "Different paths & opportunities...",
+                    category: "Career Path"
+                  }
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className={`bg-white rounded-xl p-4 border border-gray-100 hover:border-sky-200 transition-all duration-300 cursor-pointer group
+                      ${animationStep >= 1 ? 'opacity-100 transform-none' : 'opacity-0 translate-y-4'}`}
+                    style={{ animationDelay: `${i * 0.1}s` }}
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="text-xs text-sky-600 font-medium px-2 py-1 bg-sky-50 rounded-full">
+                        {item.category}
+                      </div>
+                      <div className="text-gray-400 group-hover:text-sky-500 transition-colors">
+                        →
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-800 mb-1 font-medium">
+                      {item.question}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {item.preview}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Quick Follow-ups */}
+              <div className="mt-6 flex flex-wrap gap-2">
+                <div className="text-xs text-gray-500 flex items-center mr-2">
+                  <span className="mr-2">🔍</span>
+                  Quick follow-ups:
+                </div>
+                {[
+                  "Average deal size?",
+                  "Work-life balance?",
+                  "Team structure?",
+                  "Exit opportunities?"
+                ].map((q, i) => (
+                  <button
+                    key={i}
+                    className={`text-xs px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 
+                      hover:bg-sky-50 hover:border-sky-200 hover:text-sky-600 transition-all duration-300
+                      ${animationStep >= 1 ? 'opacity-100 transform-none' : 'opacity-0 translate-y-4'}`}
+                    style={{ animationDelay: `${0.4 + i * 0.1}s` }}
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    };
 
     return (
       <section className="px-6 py-20 bg-white">
@@ -263,7 +580,7 @@ function LandingPage() {
                     <div className="flex items-start">
                       <div className="mr-4 mt-2">
                         <div className={`w-1 h-full rounded ${
-                          feature.isActive ? 'bg-sky-500' : 'bg-gray-200'
+                          feature.isActive ? 'bg-[#4AA3DF]' : 'bg-gray-200'
                         }`} style={{ height: '24px' }}></div>
                       </div>
                       <div>
@@ -339,7 +656,7 @@ function LandingPage() {
         <div className="p-6 space-y-6">
           {/* User Question */}
           <div className="flex justify-end">
-            <div className="bg-sky-500 text-white rounded-2xl px-6 py-4 max-w-2xl">
+            <div className="bg-[#4AA3DF] text-white rounded-2xl px-6 py-4 max-w-2xl">
               <p>{typedText || "..."}</p>
             </div>
           </div>
@@ -347,15 +664,19 @@ function LandingPage() {
           {/* Loading State */}
           {demoState === 1 && (
             <div className="flex items-start space-x-4 animate-fade-in">
-              <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center">
-                🤖
+              <div className="w-8 h-8 rounded-full bg-[#4AA3DF]/10 flex items-center justify-center">
+                <img 
+                  src="/humint_icon.png" 
+                  alt="HUMINT AI"
+                  className="w-5 h-5 object-contain"
+                />
               </div>
               <div className="flex-1 bg-white border border-gray-200 rounded-2xl p-6">
                 <div className="flex items-center space-x-3">
                   <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-sky-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-sky-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-sky-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    <div className="w-2 h-2 bg-[#4AA3DF] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-[#4AA3DF] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-[#4AA3DF] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                   </div>
                   <span className="text-gray-600 animate-fade-in">
                     {loadingMessage}
@@ -368,8 +689,12 @@ function LandingPage() {
           {/* AI Response */}
           {demoState === 2 && (
             <div className="flex items-start space-x-4 animate-fade-in">
-              <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center">
-                🤖
+              <div className="w-8 h-8 rounded-full bg-[#4AA3DF]/10 flex items-center justify-center">
+                <img 
+                  src="/humint_icon.png" 
+                  alt="HUMINT AI"
+                  className="w-5 h-5 object-contain"
+                />
               </div>
               <div className="flex-1 bg-white border border-gray-200 rounded-2xl shadow-sm">
                 {/* Metadata Bar */}
@@ -414,7 +739,7 @@ function LandingPage() {
                           <div className="flex items-center space-x-2">
                             <span className="text-xl">💼</span>
                             <div>
-                              <div className="text-sky-600 font-medium">
+                              <div className="text-[#4AA3DF] font-medium">
                                 VP at Goldman Sachs
                               </div>
                               <div className="text-xs text-gray-500">
@@ -438,7 +763,7 @@ function LandingPage() {
             <div className="flex-1 bg-white rounded-full border border-gray-200 px-6 py-3 text-gray-400">
               Ask about finance recruiting...
             </div>
-            <button className="p-3 rounded-full bg-sky-500 text-white">
+            <button className="p-3 rounded-full bg-[#4AA3DF] text-white">
               <span className="w-5 h-5 block">➤</span>
             </button>
           </div>
@@ -452,7 +777,11 @@ function LandingPage() {
       {/* Navigation */}
       <nav className="px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold text-sky-600">HUMINT</div>
+          <img 
+            src="/humint_logo.png" 
+            alt="HUMINT"
+            className="h-8 w-auto"
+          />
         </div>
       </nav>
 
@@ -462,10 +791,10 @@ function LandingPage() {
           {/* Text Content */}
           <div className="text-center max-w-4xl mx-auto mb-12">
             <h1 className="text-6xl font-bold text-gray-900 mb-6">
-              Your AI-Powered
+              We Interviewed 150+ Bankers 
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-sky-700">
-                Finance Career Guide
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4AA3DF] to-[#3182a8]">
+                So You Don't Have To
               </span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
@@ -474,22 +803,24 @@ function LandingPage() {
             
             {/* New Email Form */}
             <div className="max-w-md mx-auto">
-              <form className="flex items-center gap-3 bg-white rounded-full p-1 border-2 border-sky-100">
+              <form 
+                onSubmit={handleEmailSubmit}
+                className="flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#4AA3DF]/20"
+              >
                 <input
                   type="email"
+                  name="email"
                   placeholder="Enter your email"
                   className="flex-1 px-4 py-2 bg-transparent outline-none text-gray-800 placeholder-gray-400"
+                  required
                 />
                 <button 
                   type="submit"
-                  className="px-6 py-2 bg-sky-500 text-white rounded-full hover:bg-sky-600 transition-colors text-base font-medium whitespace-nowrap"
+                  className="px-6 py-2 bg-[#4AA3DF] text-white rounded-full hover:bg-[#3182a8] transition-colors text-base font-medium whitespace-nowrap"
                 >
                   Join Waitlist
                 </button>
               </form>
-              <p className="text-sm text-gray-500 mt-2">
-                Be among the first to experience HUMINT
-              </p>
             </div>
           </div>
 
@@ -510,12 +841,27 @@ function LandingPage() {
           <p className="text-gray-600 mb-8">
             Join the waitlist to be among the first to experience HUMINT
           </p>
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="px-8 py-3 bg-sky-500 text-white rounded-full hover:bg-sky-600 transition-colors text-lg font-medium"
-          >
-            Join Waitlist
-          </button>
+          
+          <div className="max-w-md mx-auto">
+            <form 
+              onSubmit={handleEmailSubmit}
+              className="flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#4AA3DF]/20"
+            >
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-2 bg-transparent outline-none text-gray-800 placeholder-gray-400"
+                required
+              />
+              <button 
+                type="submit"
+                className="px-6 py-2 bg-[#4AA3DF] text-white rounded-full hover:bg-[#3182a8] transition-colors text-base font-medium whitespace-nowrap"
+              >
+                Join Waitlist
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 

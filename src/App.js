@@ -8,6 +8,7 @@ import { AuthProvider } from './context/AuthContext';
 import AuthCallback from './components/auth/AuthCallback';
 import { FieldProvider } from './context/FieldContext';
 import WaitlistForm from './pages/WaitlistForm';
+import ConfirmationPage from './pages/ConfirmationPage';
 import './App.css';
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
                   )
                 } 
               />
+              <Route path="/confirmation" element={<ConfirmationPage />} />
             </Routes>
           </PersonaProvider>
         </AuthProvider>
