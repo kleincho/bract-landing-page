@@ -159,13 +159,14 @@ const MobileConfirmationPage = ({ email }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Mobile Navigation - With left-aligned logo */}
+      {/* Mobile Navigation - With clickable left-aligned logo */}
       <nav className="px-4 py-3 bg-white border-b">
         <div className="flex justify-start items-center">
           <img 
             src="/humint_logo.png" 
             alt="HUMINT"
-            className="h-8 w-auto"
+            className="h-8 w-auto cursor-pointer"
+            onClick={() => navigate('/')}
           />
         </div>
       </nav>
@@ -200,7 +201,7 @@ const MobileConfirmationPage = ({ email }) => {
         <div className="bg-white rounded-xl shadow-sm border border-[#4AA3DF]/10 p-6">
           <div className="text-center mb-6">
             <div className="inline-block bg-amber-100 text-amber-800 text-xs font-medium px-3 py-1 rounded-full mb-3">
-              Pre-Launch Offer • Expires in 30 Days
+              Exclusive Early Access • Limited to 100 Spots
             </div>
             <h2 className="text-xl font-bold text-gray-900 mb-2">
               Lock in 50% Off Forever
@@ -255,16 +256,16 @@ const MobileConfirmationPage = ({ email }) => {
             <div className="space-y-3">
               {[
                 {
-                  quote: "This is exactly what I needed for my IB recruiting.",
-                  author: "Finance Student, NYU"
+                  quote: "Made behavioral prep way easier.",
+                  author: "Sophomore, NYU"
                 },
                 {
-                  quote: "The personalized insights are game-changing.",
-                  author: "Analyst, Goldman Sachs"
+                  quote: "Helped me nail the ‘Why this company?’ question.",
+                  author: "Incoming Summer Analyst, Goldman Sachs"
                 },
                 {
-                  quote: "Worth every penny for the quality of information.",
-                  author: "Associate, Morgan Stanley"
+                  quote: "Got me back on track after a bad networking call.",
+                  author: "Sophomore, UChicago"
                 }
               ].map((testimonial, i) => (
                 <div 
@@ -319,10 +320,11 @@ function ConfirmationPage() {
               <img 
                 src="/humint_logo.png" 
                 alt="HUMINT"
-                className="h-8 w-auto"
+                className="h-8 w-auto cursor-pointer"
+                onClick={() => navigate('/')}
               />
               <div className="text-sm text-gray-500">
-                Questions? Email support@humint.ai
+                Questions? Email sungcho9@wharton.upenn.edu
               </div>
             </div>
           </nav>
@@ -357,7 +359,7 @@ function ConfirmationPage() {
             <div className="bg-white rounded-2xl shadow-sm border border-[#4AA3DF]/10 p-8">
               <div className="text-center mb-8">
                 <div className="inline-block bg-amber-100 text-amber-800 text-xs font-medium px-3 py-1 rounded-full mb-4">
-                  Pre-Launch Offer • Expires in 30 Days
+                  Exclusive Early Access • Limited to 100 Spots
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
                   Lock in 50% Off Forever
@@ -411,16 +413,16 @@ function ConfirmationPage() {
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                   {[
                     {
-                      quote: "This is exactly what I needed for my IB recruiting.",
-                      author: "Finance Student, NYU"
+                      quote: "Made behavioral prep way easier.",
+                      author: "Sophomore, NYU"
                     },
                     {
-                      quote: "The personalized insights are game-changing.",
-                      author: "Analyst, Goldman Sachs"
+                      quote: "Helped me nail the ‘Why this company?’ question.",
+                      author: "Incoming Summer Analyst, Goldman Sachs"
                     },
                     {
-                      quote: "Worth every penny for the quality of information.",
-                      author: "Associate, Morgan Stanley"
+                      quote: "Got me back on track after a bad networking call.",
+                      author: "Sophomore, UChicago"
                     }
                   ].map((testimonial, i) => (
                     <div key={i} className="bg-gray-50 rounded-lg p-4">

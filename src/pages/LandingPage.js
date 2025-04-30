@@ -1048,22 +1048,22 @@ function LandingPage() {
       {
         id: 'feature1',
         icon: '📚',
-        title: 'Expert Knowledge',
-        description: 'Real insights from 200+ bankers',
+        title: 'Proprietary Expert Knowledge Base',
+        description: 'Every response is powered by real insights from our database of 200+ banker interviews.',
         component: MobileDatabaseAnimation  // Updated reference
       },
       {
         id: 'feature2',
         icon: '🎯',
-        title: 'Personalized',
-        description: 'Advice matched to your profile',
+        title: 'Target Persona Matching',
+        description: 'Get personalized advice based on your background and goals, ensuring relevant guidance for your specific situation.',
         component: MobilePersonaAnimation  // Updated reference
       },
       {
         id: 'feature3',
         icon: '💬',
-        title: 'Interactive',
-        description: 'Natural follow-up questions',
+        title: 'Interactive Follow-ups',
+        description: 'Keep the conversation going with AI-powered suggestions and follow-ups based on what you ask.',
         component: MobileChatAnimation  // Updated reference
       }
     ];

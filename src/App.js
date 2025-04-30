@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import StartScreen from './pages/StartScreen';
 import ChatScreen from './pages/ChatScreen';
@@ -56,6 +56,7 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/waitlist/:type" element={<WaitlistForm />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
+              {/* <Route 
               <Route 
                 path="/chat" 
                 element={
@@ -71,7 +72,11 @@ function App() {
                   )
                 } 
               />
+              */}
               <Route path="/confirmation" element={<ConfirmationPage />} />
+              
+              {/* Redirect all other routes to landing page */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </PersonaProvider>
         </AuthProvider>
