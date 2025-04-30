@@ -190,7 +190,7 @@ function ConfirmationPage() {
               </svg>
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Welcome to HUMINT!
+              Welcome to humint!
             </h1>
             <p className="text-gray-600 mb-2">
               You're officially on our waitlist. We're launching in just one month!

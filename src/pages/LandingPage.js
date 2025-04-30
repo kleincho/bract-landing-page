@@ -199,7 +199,7 @@ function LandingPage() {
     const features = [
       {
         id: 'feature1',
-        title: 'Expert Interview Database',
+        title: 'Proprietary Expert Knowledge Base',
         description: 'Access curated insights from successful professionals and students, providing real-world guidance for your journey.',
         isActive: activeFeature === 'feature1'
       },
@@ -212,7 +212,7 @@ function LandingPage() {
       {
         id: 'feature3',
         title: 'Interactive Follow-ups',
-        description: 'Engage in dynamic conversations with AI that adapts to your responses and provides targeted recommendations.',
+        description: 'Keep the conversation going with AI-powered suggestions and follow-ups based on what you ask.',
         isActive: activeFeature === 'feature3'
       }
     ];
@@ -552,7 +552,7 @@ function LandingPage() {
     return (
       <section className="px-6 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-16 text-gray-900">What makes HUMINT different</h2>
+          <h2 className="text-3xl font-bold mb-16 text-gray-900">What makes humint different</h2>
           
           <div className="flex flex-col lg:flex-row gap-12">
             {/* Visualization Area */}
@@ -605,15 +605,8 @@ function LandingPage() {
   const DemoAnimation = () => {
     const [demoState, setDemoState] = useState(0); // 0: typing, 1: loading, 2: response
     const [typedText, setTypedText] = useState('');
-    const [loadingMessage, setLoadingMessage] = useState('');
-    const demoQuestion = "What's the typical career path in investment banking?";
-
-    const loadingMessages = [
-      "Retrieving expert interview insights...",
-      "Analyzing responses from top finance professionals...",
-      "Matching relevant career experiences...",
-      "Synthesizing personalized guidance..."
-    ];
+    const [loadingMessage, setLoadingMessage] = useState('Analyzing responses from top finance professionals...');
+    const demoQuestion = "How early should I start networking for junior internships?";
 
     useEffect(() => {
       // Type out the demo question
@@ -634,19 +627,9 @@ function LandingPage() {
 
       // Handle loading state
       if (demoState === 1) {
-        let messageIndex = 0;
-        const loadingInterval = setInterval(() => {
-          setLoadingMessage(loadingMessages[messageIndex]);
-          messageIndex = (messageIndex + 1) % loadingMessages.length;
-        }, 2000);
-
-        // After loading completes, show the response
         setTimeout(() => {
-          clearInterval(loadingInterval);
           setDemoState(2);
-        }, 6000);
-
-        return () => clearInterval(loadingInterval);
+        }, 2000);
       }
     }, [demoState]);
 
@@ -714,36 +697,69 @@ function LandingPage() {
                     </div>
                   </div>
                   <div className="text-sm text-gray-500">
-                    Based on 5 sources
+                    Based on 8 sources
                   </div>
                 </div>
 
                 {/* Main Response */}
                 <div className="p-4">
                   <p className="text-gray-800 mb-4">
-                    A typical investment banking career path usually starts as an Analyst (2-3 years), followed by Associate (3-4 years), then VP, Director, and Managing Director...
+                    While opinions vary on the ideal timing, the consensus is that starting early gives you more options. However, quality of networking matters more than timing—focus on building genuine relationships rather than rushing to check a box.
                   </p>
 
                   {/* Expert Insights */}
                   <div className="bg-gray-50 rounded-xl p-4 mt-4">
                     <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center">
                       <span className="mr-2">📚</span>
-                      Expert Insights
+                      Expert Perspectives
                     </h3>
                     <div className="space-y-3">
+                      {/* Early Start Perspective */}
                       <div className="bg-white rounded-lg border border-gray-200 p-3">
                         <blockquote className="text-gray-700 mb-3 italic">
-                          "The first two years as an analyst are crucial. You'll learn financial modeling, deal execution, and build a strong foundation for your career."
+                          "Starting early in freshman year gave me a huge advantage. I had time to build relationships naturally and was well-prepared when accelerated recruiting began."
                         </blockquote>
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-xl">💼</span>
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                              <span className="text-base">💼</span>
+                            </div>
                             <div>
-                              <div className="text-[#4AA3DF] font-medium">
-                                VP at Goldman Sachs
+                              <div className="text-[#4AA3DF] font-medium flex items-center">
+                                Sarah Smith
                               </div>
-                              <div className="text-xs text-gray-500">
-                                Investment Banking Division
+                              <div className="text-xs text-gray-600 flex items-center">
+                                <span className="font-medium">Goldman Sachs</span>
+                                <span className="mx-1.5">·</span>
+                                <span>Investment Banking</span>
+                                <span className="mx-1.5">·</span>
+                                <span>Summer Analyst</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Alternative Perspective */}
+                      <div className="bg-white rounded-lg border border-gray-200 p-3">
+                        <blockquote className="text-gray-700 mb-3 italic">
+                          "Don't stress too much about starting super early. I began networking mid-sophomore year and still landed my dream role. Focus on quality connections and genuine interest in the industry."
+                        </blockquote>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                              <span className="text-base">💼</span>
+                            </div>
+                            <div>
+                              <div className="text-[#4AA3DF] font-medium flex items-center">
+                                Michael Park
+                              </div>
+                              <div className="text-xs text-gray-600 flex items-center">
+                                <span className="font-medium">Jefferies</span>
+                                <span className="mx-1.5">·</span>
+                                <span>Investment Banking</span>
+                                <span className="mx-1.5">·</span>
+                                <span>Analyst</span>
                               </div>
                             </div>
                           </div>
@@ -791,14 +807,14 @@ function LandingPage() {
           {/* Text Content */}
           <div className="text-center max-w-4xl mx-auto mb-12">
             <h1 className="text-6xl font-bold text-gray-900 mb-6">
-              We Interviewed 150+ Bankers 
+              We Interviewed 200+ Bankers 
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4AA3DF] to-[#3182a8]">
                 So You Don't Have To
               </span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Get personalized insights from 200+ finance professionals at top investment banks and private equity firms
+            Stop guessing in recruiting. Get AI-powered recruiting answers by real people at top investment banks.
             </p>
             
             {/* New Email Form */}
@@ -839,7 +855,7 @@ function LandingPage() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-900">Ready to Get Started?</h2>
           <p className="text-gray-600 mb-8">
-            Join the waitlist to be among the first to experience HUMINT
+            Join the waitlist to be among the first to experience humint
           </p>
           
           <div className="max-w-md mx-auto">
@@ -868,7 +884,7 @@ function LandingPage() {
       {/* Footer */}
       <footer className="px-6 py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto text-center text-gray-600">
-          <p>© 2024 HUMINT. All rights reserved.</p>
+          <p>© 2024 Humint. All rights reserved.</p>
         </div>
       </footer>
     </div>
@@ -876,3 +892,4 @@ function LandingPage() {
 }
 
 export default LandingPage;
+
