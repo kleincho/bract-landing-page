@@ -1005,7 +1005,7 @@ function LandingPage() {
       <div className="bg-white rounded-xl shadow-sm p-3 w-[280px] scale-[0.8]">
         <div className="text-xs text-gray-500 mb-2">🎯 Duke Alumni, Econ Major</div>
         <div className="flex flex-wrap gap-1">
-          {['Emory', 'Korea', 'IB'].map((tag) => (
+          {['Duke', 'Econ Major'].map((tag) => (
             <span key={tag} className="bg-sky-50 text-sky-600 text-[10px] px-2 py-1 rounded-full">
               {tag}
             </span>
