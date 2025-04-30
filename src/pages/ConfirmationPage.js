@@ -143,7 +143,7 @@ const PaymentForm = ({ email }) => {
           </button>
 
           <p className="text-xs text-gray-500 text-center">
-            No charge now. Your card will only be charged when we launch in March 2024.
+            No charge now. Your card will only be charged when we launch in June 2025.
             <br />
             Cancel anytime before launch at no cost.
           </p>
@@ -440,7 +440,7 @@ function ConfirmationPage() {
                 onClick={() => navigate('/')}
                 className="text-gray-500 text-sm hover:text-[#4AA3DF] transition-colors"
               >
-                I'll wait for the full price launch in March →
+                I'll wait for the full price launch in June→
               </button>
             </div>
           </main>
