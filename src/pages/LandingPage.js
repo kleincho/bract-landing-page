@@ -824,6 +824,16 @@ function LandingPage() {
             >
               Join Waitlist
             </button>
+            <div className="text-center">
+              <a 
+                href="https://www.notion.so/Terms-and-Conditions-1e5e61a777638057bb1fd022c0f739e8?pvs=4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                Terms & Conditions
+              </a>
+            </div>
           </form>
         </div>
       </div>
@@ -1287,6 +1297,16 @@ function LandingPage() {
           >
             Join Waitlist
           </button>
+          <div className="text-center">
+            <a 
+              href="https://www.notion.so/Terms-and-Conditions-1e5e61a777638057bb1fd022c0f739e8?pvs=4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              Terms & Conditions
+            </a>
+          </div>
         </form>
       </div>
     </section>
@@ -1369,21 +1389,31 @@ function LandingPage() {
             <div className="max-w-md mx-auto">
               <form 
                 onSubmit={handleEmailSubmit}
-                className="flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#4AA3DF]/20"
+                className="flex flex-col items-center gap-3"
               >
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 bg-transparent outline-none text-gray-800 placeholder-gray-400"
-                  required
-                />
-                <button 
-                  type="submit"
-                  className="px-6 py-2 bg-[#4AA3DF] text-white rounded-full hover:bg-[#3182a8] transition-colors text-base font-medium whitespace-nowrap"
+                <div className="w-full flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#4AA3DF]/20">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-2 bg-transparent outline-none text-gray-800 placeholder-gray-400"
+                    required
+                  />
+                  <button 
+                    type="submit"
+                    className="px-6 py-2 bg-[#4AA3DF] text-white rounded-full hover:bg-[#3182a8] transition-colors text-base font-medium whitespace-nowrap"
+                  >
+                    Join Waitlist
+                  </button>
+                </div>
+                <a 
+                  href="https://www.notion.so/Terms-and-Conditions-1e5e61a777638057bb1fd022c0f739e8?pvs=4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
                 >
-                  Join Waitlist
-                </button>
+                  Terms & Conditions
+                </a>
               </form>
             </div>
           </div>
@@ -1409,21 +1439,31 @@ function LandingPage() {
           <div className="max-w-md mx-auto">
             <form 
               onSubmit={handleEmailSubmit}
-              className="flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#4AA3DF]/20"
+              className="flex flex-col items-center gap-3"
             >
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2 bg-transparent outline-none text-gray-800 placeholder-gray-400"
-                required
-              />
-              <button 
-                type="submit"
-                className="px-6 py-2 bg-[#4AA3DF] text-white rounded-full hover:bg-[#3182a8] transition-colors text-base font-medium whitespace-nowrap"
+              <div className="w-full flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#4AA3DF]/20">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-2 bg-transparent outline-none text-gray-800 placeholder-gray-400"
+                  required
+                />
+                <button 
+                  type="submit"
+                  className="px-6 py-2 bg-[#4AA3DF] text-white rounded-full hover:bg-[#3182a8] transition-colors text-base font-medium whitespace-nowrap"
+                >
+                  Join Waitlist
+                </button>
+              </div>
+              <a 
+                href="https://www.notion.so/Terms-and-Conditions-1e5e61a777638057bb1fd022c0f739e8?pvs=4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
               >
-                Join Waitlist
-              </button>
+                Terms & Conditions
+              </a>
             </form>
           </div>
         </div>
