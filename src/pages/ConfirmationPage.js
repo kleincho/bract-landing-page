@@ -120,7 +120,7 @@ const PaymentForm = ({ email }) => {
       {succeeded ? (
         <div className="bg-green-50 text-green-700 rounded-lg p-4 text-center">
           <div className="font-medium">You're all set!</div>
-          <div className="text-sm">We'll notify you when we launch in June 2025</div>
+          <div className="text-sm">We'll notify you soon</div>
         </div>
       ) : (
         <>
@@ -138,12 +138,16 @@ const PaymentForm = ({ email }) => {
                 Processing...
               </span>
             ) : (
-              'Secure Your Discount Before Launch →'
+              <>
+                Secure Your Discount →
+                <br />
+                <i>No Charge Today</i>
+              </>
             )}
           </button>
 
           <p className="text-xs text-gray-500 text-center">
-            No charge now. Your card will only be charged when we launch in June 2025.
+            No charge now. Your card will only be charged with consent when we launch in June 2025.
             <br />
             Cancel anytime before launch at no cost.
           </p>
@@ -192,7 +196,7 @@ const MobileConfirmationPage = ({ email }) => {
           </div>
 
           <div className="bg-gray-50 rounded-lg p-3 mb-4">
-            <div className="text-xs text-gray-600">Confirmation sent to:</div>
+            <div className="text-xs text-gray-600">Confirmed Email:</div>
             <div className="text-sm font-medium text-gray-900">{email}</div>
           </div>
         </div>
@@ -204,10 +208,10 @@ const MobileConfirmationPage = ({ email }) => {
               Exclusive Early Access • Limited to 100 Spots
             </div>
             <h2 className="text-xl font-bold text-gray-900 mb-2">
-              Lock in 50% Off Forever
+              Lock in 70% Off
             </h2>
             <p className="text-sm text-gray-600">
-              Join our founding members before launch and get lifetime access at half price
+              Join our founding members before launch and get access at half price
             </p>
           </div>
 
@@ -216,7 +220,7 @@ const MobileConfirmationPage = ({ email }) => {
             <h3 className="font-medium text-gray-900 text-sm">What you get:</h3>
             <ul className="space-y-2">
               {[
-                '50% off forever on all plans',
+                '70% off on all plans',
                 'Priority access when we launch',
                 'Dedicated support channel',
                 'Early access to new features',
@@ -236,10 +240,10 @@ const MobileConfirmationPage = ({ email }) => {
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <div className="text-center">
               <div className="text-gray-900 text-sm font-medium mb-1">Regular Price</div>
-              <div className="text-gray-500 line-through text-lg">$30/month</div>
+              <div className="text-gray-500 line-through text-lg">$19.99/month</div>
               <div className="text-gray-900 text-sm font-medium mt-3 mb-1">Your Price</div>
-              <div className="text-2xl font-bold text-[#4AA3DF]">$15/month</div>
-              <div className="text-xs text-gray-500 mt-1">Lock in this price forever</div>
+              <div className="text-2xl font-bold text-[#4AA3DF]">$5.99/month</div>
+              <div className="text-xs text-gray-500 mt-1"></div>
             </div>
           </div>
 
@@ -260,11 +264,11 @@ const MobileConfirmationPage = ({ email }) => {
                   author: "Sophomore, NYU"
                 },
                 {
-                  quote: "Helped me nail the ‘Why this company?’ question.",
+                  quote: "Helped me nail the 'Why this company?' question.",
                   author: "Incoming Summer Analyst, Goldman Sachs"
                 },
                 {
-                  quote: "Got me back on track after a bad networking call.",
+                  quote: "Vague mock feedback didn’t help — seeing real intern answers on humint changed everything.",
                   author: "Sophomore, UChicago"
                 }
               ].map((testimonial, i) => (
@@ -350,7 +354,7 @@ function ConfirmationPage() {
               </div>
 
               <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                <div className="text-sm text-gray-600">Confirmation sent to:</div>
+                <div className="text-sm text-gray-600">Confirmed Email:</div>
                 <div className="font-medium text-gray-900">{email}</div>
               </div>
             </div>
@@ -362,10 +366,10 @@ function ConfirmationPage() {
                   Exclusive Early Access • Limited to 100 Spots
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Lock in 50% Off Forever
+                  Lock in 70% Off
                 </h2>
                 <p className="text-gray-600">
-                  Join our founding members before launch and get lifetime access at half price
+                  Join our founding members before launch and get access at Early Price
                 </p>
               </div>
 
@@ -374,7 +378,7 @@ function ConfirmationPage() {
                   <h3 className="font-medium text-gray-900">What you get:</h3>
                   <ul className="space-y-3">
                     {[
-                      '50% off forever on all plans',
+                      '70% off on all plans',
                       'Priority access when we launch',
                       'Dedicated support channel',
                       'Early access to new features',
@@ -393,10 +397,10 @@ function ConfirmationPage() {
                 <div className="bg-gray-50 rounded-xl p-6 border border-[#4AA3DF]/10">
                   <div className="text-center mb-6">
                     <div className="text-gray-900 font-medium mb-1">Regular Price</div>
-                    <div className="text-gray-500 line-through text-2xl">$30/month</div>
+                    <div className="text-gray-500 line-through text-2xl">$19.99/month</div>
                     <div className="text-gray-900 font-medium mt-4 mb-1">Your Price</div>
-                    <div className="text-3xl font-bold text-[#4AA3DF]">$15/month</div>
-                    <div className="text-sm text-gray-500 mt-1">Lock in this price forever</div>
+                    <div className="text-3xl font-bold text-[#4AA3DF]">$5.99/month</div>
+                    <div className="text-sm text-gray-500 mt-1"></div>
                   </div>
 
                   <Elements stripe={stripePromise}>
@@ -417,11 +421,11 @@ function ConfirmationPage() {
                       author: "Sophomore, NYU"
                     },
                     {
-                      quote: "Helped me nail the ‘Why this company?’ question.",
+                      quote: "Helped me nail the 'Why this company?' question.",
                       author: "Incoming Summer Analyst, Goldman Sachs"
                     },
                     {
-                      quote: "Got me back on track after a bad networking call.",
+                      quote: "Vague mock feedback didn’t help — seeing real intern answers on humint changed everything.",
                       author: "Sophomore, UChicago"
                     }
                   ].map((testimonial, i) => (

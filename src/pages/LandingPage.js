@@ -355,9 +355,9 @@ function LandingPage() {
         <div className="relative w-full h-[32rem] flex flex-col items-center">
           {/* Target Persona Input */}
           <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-sky-200 max-w-lg mx-auto mb-12">
-            <div className="text-sm text-gray-500 mb-4">🎯 Emory Alumni from Korea currently working in IB</div>
+            <div className="text-sm text-gray-500 mb-4">🎯 Emory Alumni, International Student, Econ Major</div>
             <div className="flex flex-wrap gap-2">
-              {['University: Emory', 'Region: Korea', 'Interest: IB'].map((tag) => (
+              {['University: Emory', 'Region: International', 'Major: Econ'].map((tag) => (
                 <span key={tag} className="bg-sky-50 text-sky-600 text-xs px-3 py-1.5 rounded-full">
                   {tag}
                 </span>
@@ -370,7 +370,7 @@ function LandingPage() {
             <div className="grid grid-cols-3 gap-6 w-full max-w-4xl mx-auto animate-fade-in">
               {[
                 {
-                  name: "Jae Kim",
+                  name: "Michael Jackson",
                   role: "IB Analyst",
                   firm: "Goldman Sachs",
                   background: "Emory '22",
@@ -378,7 +378,7 @@ function LandingPage() {
                   quote: "Leveraging alumni network was key..."
                 },
                 {
-                  name: "Min Park",
+                  name: "Tom Brady",
                   role: "Summer Analyst",
                   firm: "Morgan Stanley",
                   background: "Emory '23",
@@ -386,7 +386,7 @@ function LandingPage() {
                   quote: "Unique recruiting process..."
                 },
                 {
-                  name: "Sarah Lee",
+                  name: "Timothee Chalamet",
                   role: "IB Analyst",
                   firm: "J.P. Morgan",
                   background: "Emory '21",
@@ -729,7 +729,7 @@ function LandingPage() {
                             </div>
                             <div>
                               <div className="text-[#4AA3DF] font-medium flex items-center">
-                                Sarah Smith
+                                Jane Doe
                               </div>
                               <div className="text-xs text-gray-600 flex items-center">
                                 <span className="font-medium">Goldman Sachs</span>
@@ -755,7 +755,7 @@ function LandingPage() {
                             </div>
                             <div>
                               <div className="text-[#4AA3DF] font-medium flex items-center">
-                                Michael Park
+                                John Doe
                               </div>
                               <div className="text-xs text-gray-600 flex items-center">
                                 <span className="font-medium">Jefferies</span>
@@ -921,7 +921,7 @@ function LandingPage() {
                             </div>
                             <div>
                               <div className="text-[#4AA3DF] text-xs font-medium">
-                                Sarah Smith
+                                Jane Doe
                               </div>
                               <div className="text-[10px] text-gray-600">
                                 Goldman Sachs · IB
@@ -940,7 +940,7 @@ function LandingPage() {
                             </div>
                             <div>
                               <div className="text-[#4AA3DF] text-xs font-medium">
-                                Michael Park
+                                John Doe
                               </div>
                               <div className="text-[10px] text-gray-600">
                                 Jefferies · IB
@@ -1003,7 +1003,7 @@ function LandingPage() {
   const MobilePersonaAnimation = () => (
     <div className="relative w-full h-[200px] flex items-center justify-center">
       <div className="bg-white rounded-xl shadow-sm p-3 w-[280px] scale-[0.8]">
-        <div className="text-xs text-gray-500 mb-2">🎯 Emory Alumni from Korea</div>
+        <div className="text-xs text-gray-500 mb-2">🎯 Duke Alumni, Econ Major</div>
         <div className="flex flex-wrap gap-1">
           {['Emory', 'Korea', 'IB'].map((tag) => (
             <span key={tag} className="bg-sky-50 text-sky-600 text-[10px] px-2 py-1 rounded-full">
@@ -1362,7 +1362,7 @@ function LandingPage() {
               </span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-            Stop guessing in recruiting. Get AI-powered recruiting answers by real people at top investment banks.
+            Stop guessing in recruiting. Get AI-powered answers by real people at top investment banks.
             </p>
             
             {/* New Email Form */}
