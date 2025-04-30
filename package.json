@@ -15,6 +15,7 @@
     "openai": "^4.96.0",
     "postcss": "^8.4.31",
     "react": "^19.1.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.5.2",
     "react-scripts": "5.0.1",
