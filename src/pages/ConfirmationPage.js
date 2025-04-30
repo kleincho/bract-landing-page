@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { API_URL } from '../services/config';
+import { isMobile } from 'react-device-detect';
 
 // Initialize Stripe (move this outside the component)
 const stripePromise = loadStripe('pk_live_51QdrunAYYPWY7sydmp1XEy80jBrIjT9QFZZJxHd3K1qiycO2DpLTxi4sU4ddZcREAFP31T1L5r0tuTgXrqMipJWX008YFtL0xy');
@@ -152,116 +153,106 @@ const PaymentForm = ({ email }) => {
   );
 };
 
-function ConfirmationPage() {
+// Mobile version of the confirmation page
+const MobileConfirmationPage = ({ email }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const email = location.state?.email;
-
-  // Redirect if no email (if someone tries to access directly)
-  useEffect(() => {
-    if (!email) {
-      navigate('/');
-    }
-  }, [email, navigate]);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="px-6 py-4 bg-white border-b">
-        <div className="max-w-5xl mx-auto flex justify-between items-center">
+      {/* Mobile Navigation - With left-aligned logo */}
+      <nav className="px-4 py-3 bg-white border-b">
+        <div className="flex justify-start items-center">
           <img 
             src="/humint_logo.png" 
             alt="HUMINT"
             className="h-8 w-auto"
           />
-          <div className="text-sm text-gray-500">
-            Questions? Email support@humint.ai
-          </div>
         </div>
       </nav>
 
-      <main className="max-w-3xl mx-auto px-6 py-12">
+      <main className="px-4 py-8">
         {/* Success Message */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
-          <div className="text-center mb-6">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="text-center mb-4">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            <h1 className="text-xl font-bold text-gray-900 mb-2">
               Welcome to humint!
             </h1>
-            <p className="text-gray-600 mb-2">
+            <p className="text-sm text-gray-600 mb-2">
               You're officially on our waitlist. We're launching in just one month!
             </p>
-            <div className="inline-block bg-[#4AA3DF]/10 text-[#4AA3DF] text-sm px-3 py-1 rounded-full">
+            <div className="inline-block bg-[#4AA3DF]/10 text-[#4AA3DF] text-xs px-3 py-1 rounded-full">
               Expected Launch: June 2025
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-lg p-4 mb-6">
-            <div className="text-sm text-gray-600">Confirmation sent to:</div>
-            <div className="font-medium text-gray-900">{email}</div>
+          <div className="bg-gray-50 rounded-lg p-3 mb-4">
+            <div className="text-xs text-gray-600">Confirmation sent to:</div>
+            <div className="text-sm font-medium text-gray-900">{email}</div>
           </div>
         </div>
 
         {/* Launch Offer */}
-        <div className="bg-white rounded-2xl shadow-sm border border-[#4AA3DF]/10 p-8">
-          <div className="text-center mb-8">
-            <div className="inline-block bg-amber-100 text-amber-800 text-xs font-medium px-3 py-1 rounded-full mb-4">
+        <div className="bg-white rounded-xl shadow-sm border border-[#4AA3DF]/10 p-6">
+          <div className="text-center mb-6">
+            <div className="inline-block bg-amber-100 text-amber-800 text-xs font-medium px-3 py-1 rounded-full mb-3">
               Pre-Launch Offer • Expires in 30 Days
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <h2 className="text-xl font-bold text-gray-900 mb-2">
               Lock in 50% Off Forever
             </h2>
-            <p className="text-gray-600">
+            <p className="text-sm text-gray-600">
               Join our founding members before launch and get lifetime access at half price
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div className="space-y-4">
-              <h3 className="font-medium text-gray-900">What you get:</h3>
-              <ul className="space-y-3">
-                {[
-                  '50% off forever on all plans',
-                  'Priority access when we launch',
-                  'Dedicated support channel',
-                  'Early access to new features',
-                  'Founding member badge'
-                ].map((benefit, i) => (
-                  <li key={i} className="flex items-start">
-                    <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-600">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Benefits */}
+          <div className="space-y-4 mb-6">
+            <h3 className="font-medium text-gray-900 text-sm">What you get:</h3>
+            <ul className="space-y-2">
+              {[
+                '50% off forever on all plans',
+                'Priority access when we launch',
+                'Dedicated support channel',
+                'Early access to new features',
+                'Founding member badge'
+              ].map((benefit, i) => (
+                <li key={i} className="flex items-start text-sm">
+                  <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-600">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className="bg-gray-50 rounded-xl p-6 border border-[#4AA3DF]/10">
-              <div className="text-center mb-6">
-                <div className="text-gray-900 font-medium mb-1">Regular Price</div>
-                <div className="text-gray-500 line-through text-2xl">$30/month</div>
-                <div className="text-gray-900 font-medium mt-4 mb-1">Your Price</div>
-                <div className="text-3xl font-bold text-[#4AA3DF]">$15/month</div>
-                <div className="text-sm text-gray-500 mt-1">Lock in this price forever</div>
-              </div>
-
-              <Elements stripe={stripePromise}>
-                <PaymentForm email={email} />
-              </Elements>
+          {/* Pricing */}
+          <div className="bg-gray-50 rounded-lg p-4 mb-6">
+            <div className="text-center">
+              <div className="text-gray-900 text-sm font-medium mb-1">Regular Price</div>
+              <div className="text-gray-500 line-through text-lg">$30/month</div>
+              <div className="text-gray-900 text-sm font-medium mt-3 mb-1">Your Price</div>
+              <div className="text-2xl font-bold text-[#4AA3DF]">$15/month</div>
+              <div className="text-xs text-gray-500 mt-1">Lock in this price forever</div>
             </div>
           </div>
 
-          {/* Social Proof */}
-          <div className="border-t pt-8">
-            <h3 className="text-center font-medium text-gray-900 mb-6">
+          {/* Payment Form - Using the same PaymentForm component to ensure API consistency */}
+          <Elements stripe={stripePromise}>
+            <PaymentForm email={email} />
+          </Elements>
+
+          {/* Beta Users Testimonials - Horizontal Stack */}
+          <div className="border-t pt-6 mt-6">
+            <h3 className="text-center font-medium text-gray-900 mb-4 text-sm">
               What Beta Users Are Saying
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="space-y-3">
               {[
                 {
                   quote: "This is exactly what I needed for my IB recruiting.",
@@ -276,9 +267,12 @@ function ConfirmationPage() {
                   author: "Associate, Morgan Stanley"
                 }
               ].map((testimonial, i) => (
-                <div key={i} className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-sm text-gray-600 italic mb-2">"{testimonial.quote}"</p>
-                  <p className="text-xs text-gray-500">{testimonial.author}</p>
+                <div 
+                  key={i} 
+                  className="bg-gray-50 rounded-lg p-3 flex flex-col justify-between h-20 border border-gray-100"
+                >
+                  <p className="text-sm text-gray-600">{testimonial.quote}</p>
+                  <p className="text-xs text-gray-500 mt-1">{testimonial.author}</p>
                 </div>
               ))}
             </div>
@@ -286,16 +280,171 @@ function ConfirmationPage() {
         </div>
 
         {/* Skip Option */}
-        <div className="text-center mt-6">
+        <div className="text-center mt-4">
           <button
             onClick={() => navigate('/')}
-            className="text-gray-500 text-sm hover:text-[#4AA3DF] transition-colors"
+            className="text-gray-500 text-xs hover:text-[#4AA3DF] transition-colors"
           >
-            I'll wait for the full price launch in March →
+            I'll wait for the full price launch →
           </button>
         </div>
       </main>
     </div>
+  );
+};
+
+// Update the main ConfirmationPage component to use mobile version when appropriate
+function ConfirmationPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email;
+
+  useEffect(() => {
+    if (!email) {
+      navigate('/');
+    }
+  }, [email, navigate]);
+
+  if (!email) return null;
+
+  return (
+    <>
+      {isMobile ? (
+        <MobileConfirmationPage email={email} />
+      ) : (
+        <div className="min-h-screen bg-gray-50">
+          {/* Navigation */}
+          <nav className="px-6 py-4 bg-white border-b">
+            <div className="max-w-5xl mx-auto flex justify-between items-center">
+              <img 
+                src="/humint_logo.png" 
+                alt="HUMINT"
+                className="h-8 w-auto"
+              />
+              <div className="text-sm text-gray-500">
+                Questions? Email support@humint.ai
+              </div>
+            </div>
+          </nav>
+
+          <main className="max-w-3xl mx-auto px-6 py-12">
+            {/* Success Message */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                  Welcome to humint!
+                </h1>
+                <p className="text-gray-600 mb-2">
+                  You're officially on our waitlist. We're launching in just one month!
+                </p>
+                <div className="inline-block bg-[#4AA3DF]/10 text-[#4AA3DF] text-sm px-3 py-1 rounded-full">
+                  Expected Launch: June 2025
+                </div>
+              </div>
+
+              <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                <div className="text-sm text-gray-600">Confirmation sent to:</div>
+                <div className="font-medium text-gray-900">{email}</div>
+              </div>
+            </div>
+
+            {/* Launch Offer */}
+            <div className="bg-white rounded-2xl shadow-sm border border-[#4AA3DF]/10 p-8">
+              <div className="text-center mb-8">
+                <div className="inline-block bg-amber-100 text-amber-800 text-xs font-medium px-3 py-1 rounded-full mb-4">
+                  Pre-Launch Offer • Expires in 30 Days
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  Lock in 50% Off Forever
+                </h2>
+                <p className="text-gray-600">
+                  Join our founding members before launch and get lifetime access at half price
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="space-y-4">
+                  <h3 className="font-medium text-gray-900">What you get:</h3>
+                  <ul className="space-y-3">
+                    {[
+                      '50% off forever on all plans',
+                      'Priority access when we launch',
+                      'Dedicated support channel',
+                      'Early access to new features',
+                      'Founding member badge'
+                    ].map((benefit, i) => (
+                      <li key={i} className="flex items-start">
+                        <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-gray-600">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="bg-gray-50 rounded-xl p-6 border border-[#4AA3DF]/10">
+                  <div className="text-center mb-6">
+                    <div className="text-gray-900 font-medium mb-1">Regular Price</div>
+                    <div className="text-gray-500 line-through text-2xl">$30/month</div>
+                    <div className="text-gray-900 font-medium mt-4 mb-1">Your Price</div>
+                    <div className="text-3xl font-bold text-[#4AA3DF]">$15/month</div>
+                    <div className="text-sm text-gray-500 mt-1">Lock in this price forever</div>
+                  </div>
+
+                  <Elements stripe={stripePromise}>
+                    <PaymentForm email={email} />
+                  </Elements>
+                </div>
+              </div>
+
+              {/* Social Proof */}
+              <div className="border-t pt-8">
+                <h3 className="text-center font-medium text-gray-900 mb-6">
+                  What Beta Users Are Saying
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  {[
+                    {
+                      quote: "This is exactly what I needed for my IB recruiting.",
+                      author: "Finance Student, NYU"
+                    },
+                    {
+                      quote: "The personalized insights are game-changing.",
+                      author: "Analyst, Goldman Sachs"
+                    },
+                    {
+                      quote: "Worth every penny for the quality of information.",
+                      author: "Associate, Morgan Stanley"
+                    }
+                  ].map((testimonial, i) => (
+                    <div key={i} className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm text-gray-600 italic mb-2">"{testimonial.quote}"</p>
+                      <p className="text-xs text-gray-500">{testimonial.author}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Skip Option */}
+            <div className="text-center mt-6">
+              <button
+                onClick={() => navigate('/')}
+                className="text-gray-500 text-sm hover:text-[#4AA3DF] transition-colors"
+              >
+                I'll wait for the full price launch in March →
+              </button>
+            </div>
+          </main>
+        </div>
+      )}
+    </>
   );
 }
 

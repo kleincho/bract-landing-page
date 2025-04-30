@@ -8,6 +8,8 @@ import { isMobile } from 'react-device-detect';
 function LandingPage() {
   const sliderRef = useRef(null);
   const scrollIntervalRef = useRef(null);
+  const mobileSliderRef = useRef(null);
+  const mobileScrollIntervalRef = useRef(null);
   const [activeFeature, setActiveFeature] = useState('feature1');
   const navigate = useNavigate();
 
@@ -553,7 +555,7 @@ function LandingPage() {
     return (
       <section className="px-6 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-16 text-gray-900">What makes humint different</h2>
+          <h2 className="text-3xl font-bold mb-16 text-gray-900">Why Choose humint</h2>
           
           <div className="flex flex-col lg:flex-row gap-12">
             {/* Visualization Area */}
@@ -804,8 +806,11 @@ function LandingPage() {
             Stop guessing in recruiting. Get AI-powered answers from real bankers.
           </p>
           
-          {/* Separated email form and button */}
-          <div className="space-y-3">
+          {/* Updated email form with proper form handling */}
+          <form 
+            onSubmit={handleEmailSubmit}  // Use the same handler as desktop version
+            className="space-y-3"
+          >
             <input
               type="email"
               name="email"
@@ -819,7 +824,7 @@ function LandingPage() {
             >
               Join Waitlist
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </section>
@@ -1082,7 +1087,7 @@ function LandingPage() {
     return (
       <section className="py-6 bg-white">
         <h2 className="text-lg font-semibold text-center mb-4">
-          Why Choose HUMINT
+          Why Choose humint
         </h2>
         
         {/* Feature Cards with Animations */}
@@ -1127,52 +1132,134 @@ function LandingPage() {
     );
   };
 
-  // Add a simplified mobile version of the institutions section
-  const MobileInstitutionsSection = () => (
-    <section className="px-4 py-8 bg-gray-50">
-      <h2 className="text-lg font-semibold text-center mb-4">
-        Expert Insights from Top Institutions
-      </h2>
+  // Add a new function for mobile scrolling
+  const startMobileScrolling = () => {
+    const slider = mobileSliderRef.current;
+    if (slider) {
+      if (mobileScrollIntervalRef.current) {
+        clearInterval(mobileScrollIntervalRef.current);
+      }
       
-      {/* Simplified scrolling logos */}
-      <div className="relative overflow-hidden py-4 bg-white rounded-xl shadow-sm mb-6">
-        <div className="flex space-x-8 overflow-x-auto hide-scrollbar px-4 py-2">
-          {[
-            { src: '/logos/Duke.png', alt: 'Duke' },
-            { src: '/logos/Wharton.png', alt: 'Wharton' },
-            { src: '/logos/GS.png', alt: 'Goldman Sachs' },
-            { src: '/logos/JPM.png', alt: 'JP Morgan' },
-            { src: '/logos/BofA.png', alt: 'Bank of America' },
-            { src: '/logos/Evercore.png', alt: 'Evercore' }
-          ].map((logo, i) => (
-            <div key={i} className="flex-shrink-0">
-              <img 
-                src={logo.src} 
-                alt={logo.alt}
-                className="h-8 w-auto grayscale hover:grayscale-0 transition-all"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+      mobileScrollIntervalRef.current = setInterval(() => {
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
+          slider.scrollLeft = 0;
+        } else {
+          slider.scrollLeft += 1;
+        }
+      }, 30);
+    }
+  };
 
-      {/* Stats in a row */}
-      <div className="grid grid-cols-3 gap-2 px-2">
-        <div className="text-center">
-          <div className="text-xl font-bold text-[#4AA3DF]">200+</div>
-          <div className="text-xs text-gray-600">Interviews</div>
+  // Update the MobileInstitutionsSection component
+  const MobileInstitutionsSection = () => {
+    useEffect(() => {
+      startMobileScrolling();
+      
+      return () => {
+        if (mobileScrollIntervalRef.current) {
+          clearInterval(mobileScrollIntervalRef.current);
+        }
+      };
+    }, []);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              startMobileScrolling();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      if (mobileSliderRef.current) {
+        observer.observe(mobileSliderRef.current);
+      }
+
+      return () => {
+        if (mobileSliderRef.current) {
+          observer.unobserve(mobileSliderRef.current);
+        }
+      };
+    }, []);
+
+    return (
+      <section className="px-4 py-8 bg-gray-50">
+        <h2 className="text-lg font-semibold text-center mb-4">
+          Expert Insights from Top Institutions
+        </h2>
+        
+        {/* Scrolling Logos Container */}
+        <div className="relative overflow-hidden py-4 bg-white rounded-xl shadow-sm mb-6">
+          {/* Gradient Overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10"></div>
+          
+          {/* Scrolling Logos */}
+          <div 
+            ref={mobileSliderRef}
+            className="flex space-x-8 overflow-x-hidden whitespace-nowrap px-4"
+          >
+            <div className="flex items-center space-x-8">
+              {[
+                { src: '/logos/Duke.png', alt: 'Duke', width: 'min-w-[100px]' },
+                { src: '/logos/Wharton.png', alt: 'Wharton', width: 'min-w-[150px]' },
+                { src: '/logos/GS.png', alt: 'Goldman Sachs', width: 'min-w-[100px]' },
+                { src: '/logos/JPM.png', alt: 'JP Morgan', width: 'min-w-[175px]' },
+                { src: '/logos/BofA.png', alt: 'Bank of America', width: 'min-w-[100px]' },
+                { src: '/logos/Evercore.png', alt: 'Evercore', width: 'min-w-[200px]' },
+                { src: '/logos/Foros.png', alt: 'Foros', width: 'min-w-[100px]' }
+              ].map((logo, i) => (
+                <div key={i} className={`inline-flex flex-col items-center ${logo.width}`}>
+                  <img 
+                    src={logo.src} 
+                    alt={logo.alt}
+                    className="h-8 w-auto grayscale hover:grayscale-0 transition-all"
+                  />
+                </div>
+              ))}
+              {/* Duplicate logos for continuous scroll */}
+              {[
+                { src: '/logos/Duke.png', alt: 'Duke', width: 'min-w-[100px]' },
+                { src: '/logos/Wharton.png', alt: 'Wharton', width: 'min-w-[150px]' },
+                { src: '/logos/GS.png', alt: 'Goldman Sachs', width: 'min-w-[100px]' },
+                { src: '/logos/JPM.png', alt: 'JP Morgan', width: 'min-w-[175px]' },
+                { src: '/logos/BofA.png', alt: 'Bank of America', width: 'min-w-[100px]' },
+                { src: '/logos/Evercore.png', alt: 'Evercore', width: 'min-w-[200px]' },
+                { src: '/logos/Foros.png', alt: 'Foros', width: 'min-w-[100px]' }
+              ].map((logo, i) => (
+                <div key={`duplicate-${i}`} className={`inline-flex flex-col items-center ${logo.width}`}>
+                  <img 
+                    src={logo.src} 
+                    alt={logo.alt}
+                    className="h-8 w-auto grayscale hover:grayscale-0 transition-all"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="text-center">
-          <div className="text-xl font-bold text-[#4AA3DF]">15+</div>
-          <div className="text-xs text-gray-600">Universities</div>
+
+        {/* Stats in a row */}
+        <div className="grid grid-cols-3 gap-2 px-2">
+          <div className="text-center">
+            <div className="text-xl font-bold text-[#4AA3DF]">200+</div>
+            <div className="text-xs text-gray-600">Interviews</div>
+          </div>
+          <div className="text-center">
+            <div className="text-xl font-bold text-[#4AA3DF]">15+</div>
+            <div className="text-xs text-gray-600">Universities</div>
+          </div>
+          <div className="text-center">
+            <div className="text-xl font-bold text-[#4AA3DF]">15+</div>
+            <div className="text-xs text-gray-600">Banks</div>
+          </div>
         </div>
-        <div className="text-center">
-          <div className="text-xl font-bold text-[#4AA3DF]">15+</div>
-          <div className="text-xs text-gray-600">Banks</div>
-        </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  };
 
   // Add a simplified mobile CTA section
   const MobileCTASection = () => (
@@ -1184,7 +1271,7 @@ function LandingPage() {
         </p>
         
         <form 
-          onSubmit={handleEmailSubmit}
+          onSubmit={handleEmailSubmit}  // Use the same handler as desktop version
           className="space-y-3"
         >
           <input
