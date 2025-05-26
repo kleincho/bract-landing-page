@@ -120,25 +120,28 @@ function LandingPage() {
         </h2>
         
         {/* Visual Elements */}
-        <div className="flex items-center justify-center space-x-12 mb-12">
+        <div className="flex items-center justify-center space-x-16 mb-12">
           {/* Field Icon */}
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 flex items-center justify-center">
               <svg className="w-12 h-12 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
               </svg>
             </div>
             <span className="text-sm font-medium text-gray-600 mt-2">Field</span>
           </div>
 
-          {/* Disconnect Icon */}
-          <div className="flex flex-col items-center">
-            <div className="w-16 h-16 flex items-center justify-center">
-              <svg className="w-12 h-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+          {/* Disconnect Line */}
+          <div className="flex-1 max-w-[200px] relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full h-0.5 bg-gray-200"></div>
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
             </div>
-            <span className="text-sm font-medium text-gray-600 mt-2">Disconnect</span>
+            <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-sm font-medium text-gray-600">Disconnect</span>
           </div>
 
           {/* Operations Icon */}
@@ -154,14 +157,11 @@ function LandingPage() {
 
         {/* Problem Description */}
         <div className="max-w-3xl mx-auto text-center space-y-4">
-          <p className="text-lg text-gray-600">
-            HVAC teams still operate in silos — field activity lives in PDFs and spreadsheets, while operations rely on delayed manual updates.
+          <p className="text-xl text-gray-600">
+            Field data gets buried in PDFs and spreadsheets.
           </p>
-          <p className="text-lg text-gray-600">
-            There's no real-time bridge between what's happening on-site and what's being recorded in the office.
-          </p>
-          <p className="text-lg text-gray-600">
-            This disconnect causes slow decisions, delayed revenue recognition, and mounting risks.
+          <p className="text-xl font-semibold text-gray-900">
+            Operations can't see what's really happening — until it's too late.
           </p>
         </div>
       </div>
@@ -1545,10 +1545,9 @@ function LandingPage() {
       <section className="px-6 py-20">
         <div className="max-w-7xl mx-auto">
           {/* Text Content */}
-          <div className="text-center max-w-4xl mx-auto mb-12">
-            <h1 className="text-6xl font-bold text-gray-900 mb-6">
+          <div className="text-center max-w-5xl mx-auto mb-12">
+            <h1 className="text-5xl font-bold text-gray-900 mb-6 whitespace-nowrap">
               Sync HVAC field and operations.
-              <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">
                 Instantly.
               </span>
