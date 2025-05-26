@@ -134,26 +134,15 @@ function LandingPage() {
           {/* Disconnect Line */}
           <div className="flex-1 max-w-[200px] relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full h-0.5 bg-gray-200"></div>
-              {/* Left Arrow */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2">
-                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                </svg>
-              </div>
-              {/* Right Arrow */}
-              <div className="absolute right-0 top-1/2 -translate-y-1/2">
-                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </div>
+              {/* Line with X mark */}
+              <div className="absolute left-4 right-4 h-1 bg-gray-500"></div>
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </div>
             </div>
-            <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-sm font-medium text-gray-600">Disconnect</span>
+            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-gray-600">Disconnect</span>
           </div>
 
           {/* Operations Icon */}
@@ -763,12 +752,13 @@ function LandingPage() {
       const runAnimation = () => {
         // Phase 1: Upload (3 seconds total)
         setPhase('upload');
-        setIsDragging(false);
+        setIsDragging(true); // Show cursor from the beginning
         
-        // Show static content for first 1.5 seconds
+        // Set initial cursor position (left side)
+        setCursorPosition({ x: 25, y: 50 });
+        
+        // Wait 1.5 seconds, then start cursor movement
         setTimeout(() => {
-          setIsDragging(true);
-          
           // Animate cursor from left to right over 1.5 seconds
           const startTime = Date.now();
           const duration = 1500;
@@ -916,12 +906,17 @@ function LandingPage() {
 
             {/* Phase 3: Insights */}
             {phase === 'insights' && (
-              <div className="w-full h-full">
-                <div className="grid grid-cols-2 gap-6 h-full">
-                  {/* Project Completion - Donut Chart */}
-                  <div className="bg-white rounded-xl p-6 border border-[#103F31]/10 flex flex-col items-center justify-center">
-                    <h3 className="text-sm font-medium text-gray-900 mb-4">Project Completion</h3>
-                    <div className="relative w-24 h-24">
+              <div className="w-full h-full flex">
+                {/* Left Side - Insights Grid */}
+                <div className="w-1/2 grid grid-cols-1 gap-4 pr-4">
+                  {/* Project Completion - Enhanced */}
+                  <div className="bg-white rounded-xl p-4 border border-[#103F31]/10 flex flex-col justify-between shadow-lg transform scale-105 animate-fade-in-up h-full">
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900 mb-1">✅ 64% complete</h3>
+                      <p className="text-xs text-gray-600 mb-2">11 of 17 total tasks parsed from the report</p>
+                      <span className="text-2xl font-bold text-[#103F31]">64%</span>
+                    </div>
+                    <div className="relative w-16 h-16 self-end">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                         <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" strokeWidth="8" />
                         <circle 
@@ -936,46 +931,117 @@ function LandingPage() {
                           className="transition-all duration-1000 ease-out"
                         />
                       </svg>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-xl font-bold text-[#103F31]">64%</span>
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs text-gray-500">
+                        11/17
                       </div>
                     </div>
                   </div>
 
-                  {/* Underbilling Detected */}
-                  <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-200 flex flex-col justify-center">
-                    <h3 className="text-sm font-medium text-yellow-800 mb-2">Underbilling Detected</h3>
-                    <div className="text-2xl font-bold text-yellow-900 mb-2">$12,400</div>
-                    <div className="h-8 relative">
-                      <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                        <path d="M0,15 L25,12 L50,8 L75,5 L100,2" fill="none" stroke="#F59E0B" strokeWidth="2" />
-                        <path d="M85,8 L100,2 L95,12 Z" fill="#F59E0B" />
-                      </svg>
+                  {/* Underbilling Detected - Enhanced */}
+                  <div className="bg-yellow-50 rounded-xl pt-4 px-4 pb-1 border border-yellow-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.1s'}}>
+                    <div>
+                      <h3 className="text-sm font-medium text-yellow-800 mb-1">⚠️ You're underbilling by $12,400</h3>
+                      <p className="text-xs text-yellow-700 mb-3">Based on 64% actual completion vs. 48% recognized revenue</p>
+                      <div className="text-xl font-bold text-yellow-900 mb-3">$12,400</div>
                     </div>
-                  </div>
-
-                  {/* Task Delay */}
-                  <div className="bg-red-50 rounded-xl p-6 border border-red-200 flex flex-col justify-center">
-                    <h3 className="text-sm font-medium text-red-800 mb-2">Task Delay</h3>
-                    <p className="text-xs text-gray-600 mb-2">"Insulate ductwork"</p>
-                    <div className="relative h-4 bg-gray-200 rounded-full mb-2">
-                      <div className="absolute inset-y-0 left-0 w-3/4 bg-[#103F31] rounded-full"></div>
-                      <div className="absolute top-0 bottom-0 left-3/4 w-1 bg-red-500 rounded-full">
-                        <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full"></div>
+                    {/* Bar chart comparison - moved further down */}
+                    <div className="mt-4 flex items-end space-x-4">
+                      {/* Actual bar */}
+                      <div className="flex-1 flex flex-col items-center">
+                        <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '96px'}}>
+                          <div className="w-full bg-yellow-500 rounded-t transition-all duration-1000 ease-out" style={{height: '64%'}}>
+                          </div>
+                        </div>
+                        <div className="text-xs text-yellow-700 mt-0 font-medium">Actual</div>
+                        <div className="text-xs text-yellow-800 font-bold mb-0">64%</div>
+                      </div>
+                      {/* Billed bar */}
+                      <div className="flex-1 flex flex-col items-center">
+                        <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '96px'}}>
+                          <div className="w-full bg-yellow-600 rounded-t transition-all duration-1000 ease-out" style={{height: '48%'}}>
+                          </div>
+                        </div>
+                        <div className="text-xs text-yellow-700 mt-0 font-medium">Billed</div>
+                        <div className="text-xs text-yellow-800 font-bold mb-0">48%</div>
                       </div>
                     </div>
-                    <span className="text-sm font-bold text-red-600">3 days late</span>
+                  </div>
+                </div>
+
+                {/* Center - Daily Report (De-emphasized) */}
+                <div className="w-1/3 flex justify-center items-center px-2">
+                  <div className="bg-white rounded-lg shadow-md p-3 border border-[#103F31]/10 max-w-xs opacity-75 scale-90">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <svg className="w-5 h-5 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <div>
+                        <h3 className="text-xs font-semibold text-gray-900">Daily Field Report</h3>
+                        <p className="text-xs text-gray-500">May 26, 2025</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1 text-left">
+                      <div className="flex items-start">
+                        <span className="text-red-500 mr-1 mt-0.5 text-xs">•</span>
+                        <p className="text-xs text-gray-700">Insulate ductwork delayed due to missing material</p>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-red-500 mr-1 mt-0.5 text-xs">•</span>
+                        <p className="text-xs text-gray-700">Projected completion pushed back by 3 days</p>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-yellow-500 mr-1 mt-0.5 text-xs">•</span>
+                        <p className="text-xs text-gray-700">Spent $9,000 on unplanned sealant delivery</p>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-gray-400 mr-1 mt-0.5 text-xs">•</span>
+                        <p className="text-xs text-gray-700">No update on thermostat wiring</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Side - More Insights */}
+                <div className="w-1/2 grid grid-cols-1 gap-4 pl-4">
+                  {/* Task Delay - Enhanced */}
+                  <div className="bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.2s'}}>
+                    <div>
+                      <h3 className="text-sm font-medium text-red-800 mb-1">🕒 "Insulate ductwork" is 3 days late</h3>
+                      <p className="text-xs text-red-700 mb-3">Delays 2 downstream tasks and risks HVAC inspection deadline</p>
+                    </div>
+                    <div>
+                      <div className="relative h-4 bg-gray-200 rounded-full mb-2">
+                        <div className="absolute inset-y-0 left-0 w-3/4 bg-[#103F31] rounded-full"></div>
+                        {/* Deadline marker */}
+                        <div className="absolute top-0 bottom-0 left-3/4 w-0.5 bg-red-500 rounded-full">
+                          <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></div>
+                          <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-red-600 whitespace-nowrap">
+                            Deadline
+                          </div>
+                        </div>
+                      </div>
+                      <span className="text-sm font-bold text-red-600">3 days late</span>
+                    </div>
                   </div>
 
-                  {/* Cost Overrun Forecast */}
-                  <div className="bg-red-50 rounded-xl p-6 border border-red-200 flex flex-col justify-center">
-                    <h3 className="text-sm font-medium text-red-800 mb-2">Forecasted Cost Overrun</h3>
-                    <div className="text-2xl font-bold text-red-900 mb-2">$8,900</div>
+                  {/* Cost Overrun Forecast - Enhanced */}
+                  <div className="bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.3s'}}>
+                    <div>
+                      <h3 className="text-sm font-medium text-red-800 mb-1">🔺 $8,900 over budget</h3>
+                      <p className="text-xs text-red-700 mb-3">If material delay continues 3+ days</p>
+                      <div className="text-xl font-bold text-red-900 mb-3">$8,900</div>
+                    </div>
                     <div className="h-8 relative">
-                      <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                        <path d="M0,15 L25,13 L50,10 L75,7 L100,3" fill="none" stroke="#DC2626" strokeWidth="2" />
-                        <path d="M85,8 L100,3 L95,13 Z" fill="#DC2626" />
+                      <svg className="w-full h-full" viewBox="0 0 100 25" preserveAspectRatio="none">
+                        {/* Budget baseline */}
+                        <line x1="0" y1="20" x2="100" y2="20" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="2,2" />
+                        {/* Trending cost line */}
+                        <path d="M0,20 L25,18 L50,15 L75,10 L100,5" fill="none" stroke="#DC2626" strokeWidth="2" />
+                        <path d="M85,10 L100,5 L95,15 Z" fill="#DC2626" />
                       </svg>
+                      <div className="absolute bottom-0 left-0 text-xs text-gray-500">Budget</div>
+                      <div className="absolute top-0 right-0 text-xs text-red-600">Forecast</div>
                     </div>
                   </div>
                 </div>
@@ -1526,6 +1592,21 @@ function LandingPage() {
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    @keyframes fade-in-up {
+      0% {
+        opacity: 0;
+        transform: translateY(10px) scale(1);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1.05);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 0.6s ease-out forwards;
     }
   `;
 
