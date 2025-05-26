@@ -116,7 +116,7 @@ function LandingPage() {
     <section className="px-6 py-20 bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">
-          The Problem We're Solving
+          The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">Problem</span> We're Solving
         </h2>
         
         {/* Visual Elements */}
@@ -125,7 +125,7 @@ function LandingPage() {
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 flex items-center justify-center">
               <svg className="w-12 h-12 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
               </svg>
             </div>
             <span className="text-sm font-medium text-gray-600 mt-2">Field</span>
@@ -135,6 +135,18 @@ function LandingPage() {
           <div className="flex-1 max-w-[200px] relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full h-0.5 bg-gray-200"></div>
+              {/* Left Arrow */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2">
+                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+              </div>
+              {/* Right Arrow */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2">
+                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </div>
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
@@ -690,7 +702,9 @@ function LandingPage() {
     return (
       <section className="px-6 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-16 text-gray-900">Why Choose Bract</h2>
+          <h2 className="text-3xl font-bold mb-16 text-gray-900 text-center">
+            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">Bract</span>
+          </h2>
           
           <div className="flex flex-col lg:flex-row gap-12">
             {/* Visualization Area */}
@@ -740,216 +754,234 @@ function LandingPage() {
     );
   };
 
-  const AutomationDemo = () => {
-    const [isProcessing, setIsProcessing] = useState(true);
-    const [showContent, setShowContent] = useState(false);
+    const AutomationDemo = () => {
+    const [phase, setPhase] = useState('upload'); // 'upload', 'processing', 'insights'
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
-      const animationInterval = setInterval(() => {
-        setIsProcessing(true);
-        setShowContent(false);
-
-        // Show results after processing
+      const runAnimation = () => {
+        // Phase 1: Upload (3 seconds total)
+        setPhase('upload');
+        setIsDragging(false);
+        
+        // Show static content for first 1.5 seconds
         setTimeout(() => {
-          setIsProcessing(false);
-          setShowContent(true);
-        }, 1500);
-
-      }, 6000); // Total animation cycle
-
-      return () => clearInterval(animationInterval);
+          setIsDragging(true);
+          
+          // Animate cursor from left to right over 1.5 seconds
+          const startTime = Date.now();
+          const duration = 1500;
+          
+          const animateCursor = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Smooth easing function for more natural movement
+            const easeProgress = progress < 0.5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            
+            // Move cursor from left (25%) to right (75%) of container
+            const x = 25 + (50 * easeProgress);
+            setCursorPosition({ x, y: 50 });
+            
+            if (progress < 1) {
+              requestAnimationFrame(animateCursor);
+            } else {
+              // Phase 2: Processing (1.5 seconds)
+              setPhase('processing');
+              setIsDragging(false);
+              
+              setTimeout(() => {
+                // Phase 3: Insights (5 seconds)
+                setPhase('insights');
+                
+                setTimeout(() => {
+                  // Restart the cycle
+                  runAnimation();
+                }, 5000);
+              }, 1500);
+            }
+          };
+          
+          requestAnimationFrame(animateCursor);
+        }, 1500); // Wait 1.5 seconds before starting cursor animation
+      };
+      
+      runAnimation();
     }, []);
 
     return (
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+      <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
         <div className="p-8">
-          {/* Main Content Area */}
-          <div className="relative min-h-[200px] flex items-center justify-center">
-            {/* File Preview */}
-            {showContent && (
-              <div className="w-full max-w-lg mx-auto transition-all duration-500">
-                <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-                  {/* Report Header */}
-                  <div className="border-b border-gray-200 pb-3 mb-4">
-                    <div className="flex items-center justify-between">
+          {/* Fixed Height Container */}
+          <div className="relative h-[500px] flex items-center justify-center">
+            
+            {/* Phase 1: Upload */}
+            {phase === 'upload' && (
+              <div className="w-full h-full flex items-center justify-between">
+                {/* Left Side - Daily Report */}
+                <div className="w-1/2 flex justify-center">
+                  <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200 max-w-sm">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <svg className="w-8 h-8 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">Daily Field Report</h3>
-                        <p className="text-sm text-gray-500">May 26, 2024</p>
+                        <h3 className="text-sm font-semibold text-gray-900">Daily Field Report</h3>
+                        <p className="text-xs text-gray-500">May 26, 2025</p>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xs text-gray-400">PDF</span>
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#103F31]/10 text-[#103F31]">
-                          ✓ Uploaded
-                        </span>
+                    </div>
+                    
+                    <div className="space-y-2 text-left">
+                      <div className="flex items-start">
+                        <span className="text-red-500 mr-2 mt-1 text-xs">•</span>
+                        <p className="text-xs text-gray-700">Insulate ductwork delayed due to missing material</p>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-red-500 mr-2 mt-1 text-xs">•</span>
+                        <p className="text-xs text-gray-700">Projected completion pushed back by 3 days</p>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-yellow-500 mr-2 mt-1 text-xs">•</span>
+                        <p className="text-xs text-gray-700">Spent $9,000 on unplanned sealant delivery</p>
+                      </div>
+                      <div className="flex items-start">
+                        <span className="text-gray-400 mr-2 mt-1 text-xs">•</span>
+                        <p className="text-xs text-gray-700">No update on thermostat wiring</p>
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Report Content */}
-                  <div className="space-y-3 text-left">
-                    <div className="flex items-start">
-                      <span className="text-red-500 mr-2 mt-1">•</span>
-                      <p className="text-sm text-gray-700">Insulate ductwork on 2nd floor delayed due to missing material.</p>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="text-red-500 mr-2 mt-1">•</span>
-                      <p className="text-sm text-gray-700">Projected completion pushed back by 3 days.</p>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="text-yellow-500 mr-2 mt-1">•</span>
-                      <p className="text-sm text-gray-700">Spent $9,000 on additional sealant delivery (unplanned).</p>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="text-[#103F31] mr-2 mt-1">•</span>
-                      <p className="text-sm text-gray-700">Site crew worked 8 hours. Minor rain delays.</p>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="text-gray-400 mr-2 mt-1">•</span>
-                      <p className="text-sm text-gray-700">No update on thermostat wiring – likely pushed to next week.</p>
-                    </div>
+                </div>
+
+                                 {/* Right Side - Drop Zone */}
+                 <div className="w-1/2 flex justify-center">
+                   <div className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 ease-out w-64 h-48 flex flex-col items-center justify-center ${
+                     isDragging && cursorPosition.x > 60 ? 'border-[#103F31] bg-[#103F31]/8 shadow-lg' : 'border-gray-300'
+                   }`}>
+                     <svg className={`w-12 h-12 mb-4 transition-all duration-200 ease-out ${
+                       isDragging && cursorPosition.x > 60 ? 'text-[#103F31] scale-110' : 'text-gray-400'
+                     }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                     </svg>
+                     <h3 className={`text-lg font-medium mb-2 transition-colors duration-200 ${
+                       isDragging && cursorPosition.x > 60 ? 'text-[#103F31]' : 'text-gray-900'
+                     }`}>Drop report here</h3>
+                     <p className="text-sm text-gray-500">Upload your daily field report</p>
+                   </div>
+                 </div>
+
+                                 {/* Animated Cursor */}
+                 {isDragging && (
+                   <div 
+                     className="absolute pointer-events-none z-50"
+                     style={{
+                       left: `${cursorPosition.x}%`,
+                       top: `${cursorPosition.y}%`,
+                       transform: 'translate(-50%, -50%)',
+                       transition: 'all 0.05s ease-out'
+                     }}
+                   >
+                     <div className="relative">
+                       {/* Cursor shadow */}
+                       <div className="absolute inset-0 translate-x-0.5 translate-y-0.5">
+                         <svg className="w-6 h-6 text-gray-300 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                         </svg>
+                       </div>
+                       {/* Main cursor */}
+                       <svg className="w-6 h-6 text-gray-700 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                       </svg>
+                     </div>
+                   </div>
+                 )}
+              </div>
+            )}
+
+            {/* Phase 2: Processing */}
+            {phase === 'processing' && (
+              <div className="w-full h-full flex items-center justify-center">
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-2 mb-4">
+                    <div className="w-3 h-3 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-3 h-3 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-3 h-3 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                   </div>
+                  <p className="text-lg font-medium text-[#103F31]">Bract is processing your file...</p>
                 </div>
               </div>
             )}
 
-            {/* Processing Indicator */}
-            {isProcessing && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm">
-                <div className="text-center">
-                  <div className="flex items-center justify-center space-x-2 mb-2">
-                    <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+            {/* Phase 3: Insights */}
+            {phase === 'insights' && (
+              <div className="w-full h-full">
+                <div className="grid grid-cols-2 gap-6 h-full">
+                  {/* Project Completion - Donut Chart */}
+                  <div className="bg-white rounded-xl p-6 border border-[#103F31]/10 flex flex-col items-center justify-center">
+                    <h3 className="text-sm font-medium text-gray-900 mb-4">Project Completion</h3>
+                    <div className="relative w-24 h-24">
+                      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" strokeWidth="8" />
+                        <circle 
+                          cx="50" 
+                          cy="50" 
+                          r="40" 
+                          fill="none" 
+                          stroke="#103F31" 
+                          strokeWidth="8"
+                          strokeDasharray="251"
+                          strokeDashoffset="90"
+                          className="transition-all duration-1000 ease-out"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-xl font-bold text-[#103F31]">64%</span>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-sm font-medium text-[#103F31]">Bract is reading your report...</p>
+
+                  {/* Underbilling Detected */}
+                  <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-200 flex flex-col justify-center">
+                    <h3 className="text-sm font-medium text-yellow-800 mb-2">Underbilling Detected</h3>
+                    <div className="text-2xl font-bold text-yellow-900 mb-2">$12,400</div>
+                    <div className="h-8 relative">
+                      <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
+                        <path d="M0,15 L25,12 L50,8 L75,5 L100,2" fill="none" stroke="#F59E0B" strokeWidth="2" />
+                        <path d="M85,8 L100,2 L95,12 Z" fill="#F59E0B" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Task Delay */}
+                  <div className="bg-red-50 rounded-xl p-6 border border-red-200 flex flex-col justify-center">
+                    <h3 className="text-sm font-medium text-red-800 mb-2">Task Delay</h3>
+                    <p className="text-xs text-gray-600 mb-2">"Insulate ductwork"</p>
+                    <div className="relative h-4 bg-gray-200 rounded-full mb-2">
+                      <div className="absolute inset-y-0 left-0 w-3/4 bg-[#103F31] rounded-full"></div>
+                      <div className="absolute top-0 bottom-0 left-3/4 w-1 bg-red-500 rounded-full">
+                        <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full"></div>
+                      </div>
+                    </div>
+                    <span className="text-sm font-bold text-red-600">3 days late</span>
+                  </div>
+
+                  {/* Cost Overrun Forecast */}
+                  <div className="bg-red-50 rounded-xl p-6 border border-red-200 flex flex-col justify-center">
+                    <h3 className="text-sm font-medium text-red-800 mb-2">Forecasted Cost Overrun</h3>
+                    <div className="text-2xl font-bold text-red-900 mb-2">$8,900</div>
+                    <div className="h-8 relative">
+                      <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
+                        <path d="M0,15 L25,13 L50,10 L75,7 L100,3" fill="none" stroke="#DC2626" strokeWidth="2" />
+                        <path d="M85,8 L100,3 L95,13 Z" fill="#DC2626" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
           </div>
-
-          {/* Insights Dashboard */}
-          {showContent && (
-            <div className="mt-8 space-y-6 animate-fade-in">
-              <div className="grid grid-cols-2 gap-6">
-                {/* Project Completion - Radial Progress */}
-                <div className="bg-white rounded-xl p-6 border border-[#103F31]/10">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-gray-900">Project Completion</h3>
-                    <span className="text-lg font-bold text-[#103F31]">64%</span>
-                  </div>
-                  <div className="relative w-32 h-32 mx-auto">
-                    <svg className="w-full h-full" viewBox="0 0 100 100">
-                      {/* Background circle */}
-                      <circle
-                        cx="50"
-                        cy="50"
-                        r="45"
-                        fill="none"
-                        stroke="#E5E7EB"
-                        strokeWidth="8"
-                      />
-                      {/* Progress circle */}
-                      <circle
-                        cx="50"
-                        cy="50"
-                        r="45"
-                        fill="none"
-                        stroke="#103F31"
-                        strokeWidth="8"
-                        strokeDasharray="283"
-                        strokeDashoffset="102"
-                        transform="rotate(-90 50 50)"
-                        className="transition-all duration-1000 ease-out"
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-2xl font-bold text-[#103F31]">64%</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Task Delay - Timeline */}
-                <div className="bg-white rounded-xl p-6 border border-red-100">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-red-800">Task Delay</h3>
-                    <span className="text-sm text-red-600">3 days late</span>
-                  </div>
-                  <div className="relative h-16">
-                    {/* Timeline bar */}
-                    <div className="absolute inset-y-0 left-0 w-full bg-gray-100 rounded-full"></div>
-                    {/* Progress */}
-                    <div className="absolute inset-y-0 left-0 w-3/4 bg-[#103F31] rounded-full"></div>
-                    {/* Delay marker */}
-                    <div className="absolute top-0 bottom-0 left-3/4 w-0.5 bg-red-500">
-                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
-                        <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="mt-2 text-sm text-gray-600">"Insulate ductwork"</p>
-                </div>
-
-                {/* Underbilling - Sparkline */}
-                <div className="bg-white rounded-xl p-6 border border-yellow-100">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-yellow-800">Underbilling Trend</h3>
-                    <span className="text-lg font-bold text-yellow-900">$12,400</span>
-                  </div>
-                  <div className="h-20 relative">
-                    {/* Sparkline */}
-                    <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
-                      <path
-                        d="M0,35 L20,30 L40,25 L60,20 L80,15 L100,10"
-                        fill="none"
-                        stroke="#103F31"
-                        strokeWidth="2"
-                      />
-                      <path
-                        d="M0,35 L20,30 L40,25 L60,20 L80,15 L100,10"
-                        fill="url(#gradient)"
-                        opacity="0.2"
-                      />
-                      <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#103F31" />
-                          <stop offset="100%" stopColor="#103F31" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    {/* Current value marker */}
-                    <div className="absolute right-0 top-0 w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  </div>
-                </div>
-
-                {/* Cost Overrun - Trend */}
-                <div className="bg-white rounded-xl p-6 border border-red-100">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-red-800">Cost Overrun Forecast</h3>
-                    <span className="text-lg font-bold text-red-900">$8,900</span>
-                  </div>
-                  <div className="h-20 relative">
-                    {/* Trend arrow */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <svg className="w-12 h-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                      </svg>
-                    </div>
-                    {/* Background graph */}
-                    <svg className="w-full h-full absolute inset-0" viewBox="0 0 100 40" preserveAspectRatio="none">
-                      <path
-                        d="M0,20 L20,18 L40,15 L60,12 L80,8 L100,5"
-                        fill="none"
-                        stroke="#FEE2E2"
-                        strokeWidth="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     );
@@ -961,7 +993,8 @@ function LandingPage() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-3">
-            Sync HVAC field and operations.
+            <span className="whitespace-nowrap">Sync HVAC field and operations.</span>
+            <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50] block mt-1">
               Instantly.
             </span>
@@ -1546,8 +1579,9 @@ function LandingPage() {
         <div className="max-w-7xl mx-auto">
           {/* Text Content */}
           <div className="text-center max-w-5xl mx-auto mb-12">
-            <h1 className="text-5xl font-bold text-gray-900 mb-6 whitespace-nowrap">
-              Sync HVAC field and operations.
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+              <span className="whitespace-nowrap">Sync HVAC field and operations.</span>
+              <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">
                 Instantly.
               </span>
