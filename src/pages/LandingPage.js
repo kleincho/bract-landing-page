@@ -115,50 +115,54 @@ function LandingPage() {
   const ProblemSection = () => (
     <section className="px-6 py-20 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+        <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">
           The Problem We're Solving
         </h2>
         
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* Block 1 */}
-          <div className="bg-[#f0fdfa] rounded-xl p-6 border border-[#103F31]/10 hover:border-[#103F31]/20 transition-all text-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Field data lives everywhere
-            </h3>
-            <p className="text-gray-600">
-              PDFs, spreadsheets, emails — nothing flows cleanly.
-            </p>
+        {/* Visual Elements */}
+        <div className="flex items-center justify-center space-x-12 mb-12">
+          {/* Field Icon */}
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 flex items-center justify-center">
+              <svg className="w-12 h-12 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-gray-600 mt-2">Field</span>
           </div>
 
-          {/* Block 2 */}
-          <div className="bg-[#f0fdfa] rounded-xl p-6 border border-[#103F31]/10 hover:border-[#103F31]/20 transition-all text-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Manual updates drain time
-            </h3>
-            <p className="text-gray-600">
-              They're slow, error-prone, and costly.
-            </p>
+          {/* Disconnect Icon */}
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 flex items-center justify-center">
+              <svg className="w-12 h-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-gray-600 mt-2">Disconnect</span>
           </div>
 
-          {/* Block 3 */}
-          <div className="bg-[#f0fdfa] rounded-xl p-6 border border-[#103F31]/10 hover:border-[#103F31]/20 transition-all text-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Ops fly blind
-            </h3>
-            <p className="text-gray-600">
-              Managers don't see issues until it's too late.
-            </p>
+          {/* Operations Icon */}
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 flex items-center justify-center">
+              <svg className="w-12 h-12 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-gray-600 mt-2">Operations</span>
           </div>
+        </div>
 
-          {/* Block 4 */}
-          <div className="bg-[#f0fdfa] rounded-xl p-6 border border-[#103F31]/10 hover:border-[#103F31]/20 transition-all text-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Field ≠ Finance
-            </h3>
-            <p className="text-gray-600">
-              Two different languages. Bract translates both.
-            </p>
-          </div>
+        {/* Problem Description */}
+        <div className="max-w-3xl mx-auto text-center space-y-4">
+          <p className="text-lg text-gray-600">
+            HVAC teams still operate in silos — field activity lives in PDFs and spreadsheets, while operations rely on delayed manual updates.
+          </p>
+          <p className="text-lg text-gray-600">
+            There's no real-time bridge between what's happening on-site and what's being recorded in the office.
+          </p>
+          <p className="text-lg text-gray-600">
+            This disconnect causes slow decisions, delayed revenue recognition, and mounting risks.
+          </p>
         </div>
       </div>
     </section>
@@ -957,7 +961,7 @@ function LandingPage() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-3">
-            Sync field and operations.
+            Sync HVAC field and operations.
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50] block mt-1">
               Instantly.
             </span>
@@ -1543,7 +1547,7 @@ function LandingPage() {
           {/* Text Content */}
           <div className="text-center max-w-4xl mx-auto mb-12">
             <h1 className="text-6xl font-bold text-gray-900 mb-6">
-              Sync field and operations.
+              Sync HVAC field and operations.
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">
                 Instantly.
