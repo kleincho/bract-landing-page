@@ -98,6 +98,58 @@ function LandingPage() {
     }
   };
 
+  const ProblemSection = () => (
+    <section className="px-6 py-20 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+          The Problem We're Solving
+        </h2>
+        
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Block 1 */}
+          <div className="bg-[#f0fdfa] rounded-xl p-6 border border-[#103F31]/10 hover:border-[#103F31]/20 transition-all text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Field data lives everywhere
+            </h3>
+            <p className="text-gray-600">
+              PDFs, spreadsheets, emails — nothing flows cleanly.
+            </p>
+          </div>
+
+          {/* Block 2 */}
+          <div className="bg-[#f0fdfa] rounded-xl p-6 border border-[#103F31]/10 hover:border-[#103F31]/20 transition-all text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Manual updates drain time
+            </h3>
+            <p className="text-gray-600">
+              They're slow, error-prone, and costly.
+            </p>
+          </div>
+
+          {/* Block 3 */}
+          <div className="bg-[#f0fdfa] rounded-xl p-6 border border-[#103F31]/10 hover:border-[#103F31]/20 transition-all text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Ops fly blind
+            </h3>
+            <p className="text-gray-600">
+              Managers don't see issues until it's too late.
+            </p>
+          </div>
+
+          {/* Block 4 */}
+          <div className="bg-[#f0fdfa] rounded-xl p-6 border border-[#103F31]/10 hover:border-[#103F31]/20 transition-all text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Field ≠ Finance
+            </h3>
+            <p className="text-gray-600">
+              Two different languages. Bract translates both.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
   const ExpertSection = () => (
     <section className="px-6 py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto text-center">
@@ -202,349 +254,414 @@ function LandingPage() {
     const features = [
       {
         id: 'feature1',
-        title: 'Proprietary Expert Knowledge Base',
-        description: 'Access curated insights from successful professionals and students, providing real-world guidance for your journey.',
+        title: 'Automated Task & Progress Tracking',
+        description: 'Bract parses WIP schedules and daily field reports to generate and update task progress — no manual data entry required.',
         isActive: activeFeature === 'feature1'
       },
       {
         id: 'feature2',
-        title: 'Target Persona Matching',
-        description: 'Get personalized advice based on your background and goals, ensuring relevant guidance for your specific situation.',
+        title: 'Built-in Cost & Revenue Engine',
+        description: 'From contract value to actual cost and earned revenue, Bract keeps your numbers updated in real time so that field progress matches financial truth.',
         isActive: activeFeature === 'feature2'
       },
       {
         id: 'feature3',
-        title: 'Interactive Follow-ups',
-        description: 'Keep the conversation going with AI-powered suggestions and follow-ups based on what you ask.',
+        title: 'Risk Flagging & Operational Visibility',
+        description: 'Bract flags anomalies like delayed tasks or underbilling risks — helping both operations and finance stay ahead of problems, not react to them.',
         isActive: activeFeature === 'feature3'
       }
     ];
 
-    // Animation for Feature 1: Database Animation
-    const DatabaseAnimation = () => (
-      <div className="relative w-full h-[32rem] flex items-center justify-center">
-        <div className="absolute inset-0 flex items-center justify-center">
-          {/* Animated Interview Transcripts */}
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute bg-white rounded-lg shadow-lg p-6 w-[36rem] transform transition-all duration-700 max-h-[28rem] overflow-hidden
-                ${activeFeature === 'feature1' ? 'opacity-100' : 'opacity-0'}`}
-              style={{
-                animation: `float${i + 1} 3s ease-in-out infinite`,
-                animationDelay: `${i * 0.2}s`,
-                transform: `translateY(${i * 20}px) scale(${1 - i * 0.05})`,
-                zIndex: 3 - i
-              }}
-            >
-              {/* Interview Metadata Header */}
-              <div className="border-b-2 border-gray-200 pb-3 mb-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <div className="font-mono text-xs text-gray-500 mb-1">
-                      INTERVIEW_ID: {['GS_VP_2024_03', 'MS_AD_2024_02', 'JPM_AN_2024_01'][i]}
-                    </div>
-                    <div className="text-sm font-medium text-gray-900">
-                      {['Vice President', 'Associate Director', 'Senior Analyst'][i]}
-                    </div>
-                    <div className="text-xs text-gray-600">
-                      {['Goldman Sachs - Investment Banking', 'Morgan Stanley - M&A', 'JPMorgan - ECM'][i]}
-                    </div>
-                  </div>
-                  <div className="font-mono text-xs text-gray-500 text-right">
-                    DATE: 2024-03-{15 - i}
-                    <br />
-                    LOCATION: New York, NY
-                  </div>
-                </div>
-              </div>
-
-              {/* Updated Transcript Content with More Follow-ups */}
-              <div className="font-mono text-xs space-y-4">
-                <div className="grid grid-cols-[80px,1fr] gap-2">
-                  <div className="text-gray-400">[00:03:15]</div>
-                  <div className="text-gray-800">
-                    <span className="text-sky-600 font-semibold">INTERVIEWER: </span>
-                    Could you walk us through a typical deal process?
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[80px,1fr] gap-2">
-                  <div className="text-gray-400">[00:03:42]</div>
-                  <div className="text-gray-800">
-                    <span className="text-sky-600 font-semibold">PARTICIPANT: </span>
-                    {[
-                      "Sure. The process typically starts with client outreach or inbound requests. First thing we do is assemble a team...",
-                      "Let me break this down into phases. Phase one is always about understanding the client's strategic objectives...",
-                      "I'll give you a concrete example from a recent deal. We started with extensive market analysis..."
-                    ][i]}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[80px,1fr] gap-2">
-                  <div className="text-gray-400">[00:04:18]</div>
-                  <div className="text-gray-800">
-                    <span className="text-sky-600 font-semibold">INTERVIEWER: </span>
-                    What are the key challenges in this stage?
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[80px,1fr] gap-2">
-                  <div className="text-gray-400">[00:04:45]</div>
-                  <div className="text-gray-800">
-                    <span className="text-sky-600 font-semibold">PARTICIPANT: </span>
-                    {[
-                      "The main challenge is managing multiple stakeholders while maintaining confidentiality...",
-                      "Time management becomes critical. You're often coordinating across different time zones...",
-                      "The biggest challenge is ensuring accuracy in your financial models..."
-                    ][i]}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[80px,1fr] gap-2">
-                  <div className="text-gray-400">[00:05:30]</div>
-                  <div className="text-gray-800">
-                    <span className="text-sky-600 font-semibold">INTERVIEWER: </span>
-                    How do you handle client communication during this process?
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[80px,1fr] gap-2">
-                  <div className="text-gray-400">[00:05:45]</div>
-                  <div className="text-gray-800">
-                    <span className="text-sky-600 font-semibold">PARTICIPANT: </span>
-                    {[
-                      "Clear communication is crucial. We have weekly updates with the client...",
-                      "We maintain a structured communication cadence with daily internal updates...",
-                      "It's important to have a single point of contact for the client..."
-                    ][i]}
-                  </div>
-                </div>
-              </div>
-
-              {/* Footer Metadata */}
-              <div className="mt-4 pt-2 border-t border-gray-100">
-                <div className="flex justify-between items-center">
-                  <div className="text-xs text-gray-400 font-mono">
-                    DURATION: 1:45:30
-                  </div>
-                  <div className="text-xs text-gray-400 font-mono">
-                    PAGE 4/28
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-
-    // Animation for Feature 2: Persona Matching
-    const PersonaAnimation = () => {
-      const [showResults, setShowResults] = useState(false);
+    // Animation for Feature 1: Task Progress Animation
+    const DatabaseAnimation = () => {
+      const [showCards, setShowCards] = useState(false);
+      const [activeCard, setActiveCard] = useState(0);
 
       useEffect(() => {
-        if (activeFeature === 'feature2') {
-          setShowResults(false);
-          const timer = setTimeout(() => setShowResults(true), 1000);
-          return () => clearTimeout(timer);
+        if (activeFeature === 'feature1') {
+          setShowCards(false);
+          setActiveCard(0);
+          
+          // Start animation sequence
+          setTimeout(() => {
+            setShowCards(true);
+          }, 500);
+
+          // Animate cards in sequence
+          const cardInterval = setInterval(() => {
+            setActiveCard(prev => (prev + 1) % 4);
+          }, 1500);
+
+          return () => clearInterval(cardInterval);
         }
       }, [activeFeature]);
 
+      const tasks = [
+        {
+          title: "Install HVAC Units",
+          progress: 75,
+          status: "In Progress",
+          details: "Main floor units installed, testing in progress"
+        },
+        {
+          title: "Wire Thermostat",
+          progress: 45,
+          status: "Delayed",
+          details: "Materials arriving next week"
+        },
+        {
+          title: "Ductwork Setup",
+          progress: 90,
+          status: "Completed",
+          details: "All ducts installed and sealed"
+        },
+        {
+          title: "System Testing",
+          progress: 30,
+          status: "In Progress",
+          details: "Pressure testing in progress"
+        }
+      ];
+
       return (
-        <div className="relative w-full h-[32rem] flex flex-col items-center">
-          {/* Target Persona Input */}
-          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-sky-200 max-w-lg mx-auto mb-12">
-            <div className="text-sm text-gray-500 mb-4">🎯 Emory Alumni, International Student, Econ Major</div>
-            <div className="flex flex-wrap gap-2">
-              {['University: Emory', 'Region: International', 'Major: Econ'].map((tag) => (
-                <span key={tag} className="bg-sky-50 text-sky-600 text-xs px-3 py-1.5 rounded-full">
-                  {tag}
-                </span>
-              ))}
+        <div className="relative w-full h-[32rem] flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* WIP Schedule Upload */}
+            <div className={`absolute top-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
+              showCards ? 'opacity-0 -translate-y-4' : 'opacity-100'
+            }`}>
+              <div className="bg-white rounded-lg shadow-lg p-4 w-48">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-[#103F31]/10 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">WIP Schedule</p>
+                    <p className="text-xs text-gray-500">PDF</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          {/* Matched Profiles */}
-          {showResults && (
-            <div className="grid grid-cols-3 gap-6 w-full max-w-4xl mx-auto animate-fade-in">
-              {[
-                {
-                  name: "Michael Jackson",
-                  role: "IB Analyst",
-                  firm: "Goldman Sachs",
-                  background: "Emory '22",
-                  match: "100%",
-                  quote: "Leveraging alumni network was key..."
-                },
-                {
-                  name: "Tom Brady",
-                  role: "Summer Analyst",
-                  firm: "Morgan Stanley",
-                  background: "Emory '23",
-                  match: "97%",
-                  quote: "Unique recruiting process..."
-                },
-                {
-                  name: "Timothee Chalamet",
-                  role: "IB Analyst",
-                  firm: "J.P. Morgan",
-                  background: "Emory '21",
-                  match: "94%",
-                  quote: "Adapted networking approach..."
-                }
-              ].map((profile, i) => (
+            {/* Task Cards */}
+            <div className="space-y-4">
+              {tasks.map((task, index) => (
                 <div
-                  key={i}
-                  className={`bg-white rounded-xl p-5 shadow-sm border ${
-                    i === 0 ? 'border-sky-200' : 'border-gray-100'
+                  key={index}
+                  className={`bg-white rounded-lg shadow-lg p-4 w-[36rem] transform transition-all duration-500 ${
+                    showCards && index <= activeCard
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-4'
                   }`}
+                  style={{
+                    animation: showCards && index <= activeCard ? `bounceIn 0.5s ease-out ${index * 0.2}s` : 'none'
+                  }}
                 >
-                  {/* Header with Name and Match */}
                   <div className="flex items-start justify-between mb-3">
-                    <div className="font-medium text-gray-900">{profile.name}</div>
-                    <div className="bg-green-50 text-green-600 text-xs px-2 py-1 rounded-full">
-                      {profile.match}
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900">{task.title}</h3>
+                      <p className="text-xs text-gray-500 mt-1">{task.details}</p>
                     </div>
+                    <span className={`text-xs px-2 py-1 rounded-full ${
+                      task.status === 'Completed' ? 'bg-[#103F31]/10 text-[#103F31]' :
+                      task.status === 'Delayed' ? 'bg-red-50 text-red-600' :
+                      'bg-yellow-50 text-yellow-600'
+                    }`}>
+                      {task.status}
+                    </span>
                   </div>
-
-                  {/* Role Info */}
-                  <div className="space-y-1 mb-4">
-                    <div className="text-sm text-gray-600">
-                      {profile.role} · {profile.firm}
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      {profile.background}
-                    </div>
+                  
+                  {/* Progress Bar */}
+                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-[#103F31] rounded-full transition-all duration-1000 ease-out"
+                      style={{
+                        width: showCards && index <= activeCard ? `${task.progress}%` : '0%',
+                        transitionDelay: `${index * 0.2}s`
+                      }}
+                    />
                   </div>
-
-                  {/* Quote */}
-                  <div className="text-sm text-gray-600 italic bg-gray-50 p-3 rounded-lg">
-                    "{profile.quote}"
+                  <div className="mt-2 flex justify-between items-center">
+                    <span className="text-xs text-gray-500">Progress</span>
+                    <span className="text-xs font-medium text-[#103F31]">{task.progress}%</span>
                   </div>
                 </div>
               ))}
             </div>
-          )}
+          </div>
         </div>
       );
     };
 
-    // Animation for Feature 3: Interactive Chat
-    const ChatAnimation = () => {
-      const [animationStep, setAnimationStep] = useState(0);
+    // Animation for Feature 2: Cost & Revenue Engine
+    const PersonaAnimation = () => {
+      const [showMetrics, setShowMetrics] = useState(false);
+      const [progress, setProgress] = useState(0);
 
       useEffect(() => {
-        if (activeFeature === 'feature3') {
-          setAnimationStep(0);
-          const timer = setTimeout(() => setAnimationStep(1), 500);
-          return () => clearTimeout(timer);
+        if (activeFeature === 'feature2') {
+          setShowMetrics(false);
+          setProgress(0);
+
+          // Start animation sequence
+          setTimeout(() => {
+            setShowMetrics(true);
+            // Animate progress from 0 to 65%
+            const progressInterval = setInterval(() => {
+              setProgress(prev => {
+                if (prev >= 65) {
+                  clearInterval(progressInterval);
+                  return 65;
+                }
+                return prev + 1;
+              });
+            }, 20);
+
+            return () => clearInterval(progressInterval);
+          }, 500);
         }
       }, [activeFeature]);
 
       return (
         <div className="relative w-full h-[32rem] flex items-center justify-center">
-          <div className={`transition-all duration-700 ${activeFeature === 'feature3' ? 'opacity-100' : 'opacity-0'} w-full max-w-3xl mx-auto`}>
-            {/* Main Question */}
-            <div className="flex justify-end mb-6">
-              <div className="bg-sky-500 text-white rounded-2xl px-6 py-3 shadow-md max-w-xl">
-                <p className="text-sm">What's the difference between Evercore SF vs NYC?</p>
-              </div>
-            </div>
-
-            {/* AI Initial Response Preview */}
-            <div className="flex items-start space-x-3 mb-8">
-              <div className="w-8 h-8 rounded-full bg-[#4AA3DF]/10 flex items-center justify-center flex-shrink-0">
-                <img 
-                  src="/humint_icon.png" 
-                  alt="HUMINT AI"
-                  className="w-5 h-5 object-contain"
+          <div className="bg-white rounded-xl shadow-lg p-8 w-[32rem]">
+            {/* Radial Progress */}
+            <div className="relative w-48 h-48 mx-auto mb-8">
+              <svg className="w-full h-full" viewBox="0 0 100 100">
+                {/* Background circle */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="none"
+                  stroke="#E5E7EB"
+                  strokeWidth="8"
                 />
-              </div>
-              <div className="bg-white rounded-2xl shadow-md p-4 max-w-xl">
-                <p className="text-sm text-gray-600 mb-3">
-                  Based on our interviews with Evercore bankers, there are several key differences between the SF and NYC offices...
-                </p>
-                <div className="text-xs text-gray-400">Click to expand full response</div>
+                {/* Progress circle */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="none"
+                  stroke="#103F31"
+                  strokeWidth="8"
+                  strokeDasharray="283"
+                  strokeDashoffset={283 - (283 * progress) / 100}
+                  transform="rotate(-90 50 50)"
+                  className="transition-all duration-100 ease-out"
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-3xl font-bold text-[#103F31]">{progress}%</span>
               </div>
             </div>
 
-            {/* Follow-up Questions Section */}
-            <div className="bg-gray-50 rounded-2xl p-6">
-              <div className="flex items-center mb-4">
-                <span className="mr-2">💡</span>
-                <h3 className="text-sm font-medium text-gray-700">Related questions you might want to ask:</h3>
+            {/* Financial Metrics */}
+            <div className="space-y-6">
+              {/* Earned Revenue */}
+              <div className="flex items-center justify-between">
+                <div className="text-sm text-gray-600">Earned Revenue</div>
+                <div className="text-lg font-bold text-[#103F31]">
+                  ${showMetrics ? Math.floor(52000 * (progress / 65)) : 0}
+                </div>
+              </div>
+
+              {/* Actual Cost */}
+              <div className="flex items-center justify-between">
+                <div className="text-sm text-gray-600">Actual Cost</div>
+                <div className="text-lg font-bold text-[#103F31]">
+                  ${showMetrics ? Math.floor(49500 * (progress / 65)) : 0}
+                </div>
+              </div>
+
+              {/* Cost Overrun */}
+              <div className={`flex items-center justify-between transition-opacity duration-500 ${
+                progress >= 50 ? 'opacity-100' : 'opacity-0'
+              }`}>
+                <div className="text-sm text-gray-600">Forecasted Cost Overrun</div>
+                <div className="text-lg font-bold text-red-600">
+                  ${showMetrics ? Math.floor(8900 * ((progress - 50) / 15)) : 0}
+                </div>
+              </div>
+
+              {/* Profit Margin */}
+              <div className="mt-6 pt-6 border-t border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-600">Profit Margin</div>
+                  <div className="text-lg font-bold text-[#103F31]">
+                    {showMetrics ? Math.floor((52000 - 49500) * (progress / 65)) : 0}%
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sparkline */}
+            <div className="mt-8 h-16 relative">
+              <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
+                <path
+                  d={`M0,35 L20,${35 - (progress * 0.3)} L40,${35 - (progress * 0.4)} L60,${35 - (progress * 0.5)} L80,${35 - (progress * 0.6)} L100,${35 - (progress * 0.7)}`}
+                  fill="none"
+                  stroke="#103F31"
+                  strokeWidth="2"
+                  className="transition-all duration-100 ease-out"
+                />
+                <path
+                  d={`M0,35 L20,${35 - (progress * 0.3)} L40,${35 - (progress * 0.4)} L60,${35 - (progress * 0.5)} L80,${35 - (progress * 0.6)} L100,${35 - (progress * 0.7)}`}
+                  fill="url(#gradient)"
+                  opacity="0.2"
+                  className="transition-all duration-100 ease-out"
+                />
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#103F31" />
+                    <stop offset="100%" stopColor="#103F31" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // Animation for Feature 3: Risk Flagging
+    const ChatAnimation = () => {
+      const [progress, setProgress] = useState(0);
+      const [showDelay, setShowDelay] = useState(false);
+      const [showWarnings, setShowWarnings] = useState(false);
+
+      useEffect(() => {
+        if (activeFeature === 'feature3') {
+          setProgress(0);
+          setShowDelay(false);
+          setShowWarnings(false);
+
+          // Start animation sequence
+          setTimeout(() => {
+            // Animate progress bar
+            const progressInterval = setInterval(() => {
+              setProgress(prev => {
+                if (prev >= 80) {
+                  clearInterval(progressInterval);
+                  return 80;
+                }
+                return prev + 1;
+              });
+            }, 20);
+
+            // Show delay flag at 60% progress
+            setTimeout(() => {
+              setShowDelay(true);
+            }, 1200);
+
+            // Show warnings after delay flag
+            setTimeout(() => {
+              setShowWarnings(true);
+            }, 1800);
+
+            return () => clearInterval(progressInterval);
+          }, 500);
+        }
+      }, [activeFeature]);
+
+      return (
+        <div className="relative w-full h-[32rem] flex items-center justify-center">
+          <div className="bg-white rounded-xl shadow-lg p-8 w-[32rem]">
+            {/* Task Progress Section */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-medium text-gray-900">HVAC Installation</h3>
+                <span className="text-sm text-gray-500">Task Progress</span>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  {
-                    question: "What types of deals does SF office handle?",
-                    preview: "Tech & Healthcare focus...",
-                    category: "Deals & Coverage"
-                  },
-                  {
-                    question: "How's the culture different?",
-                    preview: "Work style & team dynamics...",
-                    category: "Culture"
-                  },
-                  {
-                    question: "What's the size comparison?",
-                    preview: "Team structure & growth...",
-                    category: "Office Size"
-                  },
-                  {
-                    question: "Which office has better exit opps?",
-                    preview: "Different paths & opportunities...",
-                    category: "Career Path"
-                  }
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className={`bg-white rounded-xl p-4 border border-gray-100 hover:border-sky-200 transition-all duration-300 cursor-pointer group
-                      ${animationStep >= 1 ? 'opacity-100 transform-none' : 'opacity-0 translate-y-4'}`}
-                    style={{ animationDelay: `${i * 0.1}s` }}
-                  >
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="text-xs text-sky-600 font-medium px-2 py-1 bg-sky-50 rounded-full">
-                        {item.category}
-                      </div>
-                      <div className="text-gray-400 group-hover:text-sky-500 transition-colors">
-                        →
-                      </div>
-                    </div>
-                    <p className="text-sm text-gray-800 mb-1 font-medium">
-                      {item.question}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {item.preview}
-                    </p>
+              {/* Progress Bar */}
+              <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="absolute inset-y-0 left-0 bg-[#103F31] rounded-full transition-all duration-100 ease-out"
+                  style={{ width: `${progress}%` }}
+                />
+                
+                {/* Delay Flag */}
+                <div 
+                  className={`absolute top-0 left-[60%] transform -translate-x-1/2 transition-all duration-500 ${
+                    showDelay ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                  }`}
+                >
+                  <div className="bg-red-50 text-red-600 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap">
+                    3 days late
                   </div>
-                ))}
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-red-50"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Risk Warnings */}
+            <div className={`space-y-6 transition-all duration-500 ${
+              showWarnings ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}>
+              {/* Underbilling Warning */}
+              <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm font-medium text-yellow-800">Underbilling Risk</div>
+                  <div className="text-lg font-bold text-yellow-900">$12,400</div>
+                </div>
+                <p className="text-xs text-yellow-700">
+                  Current progress exceeds billed amount by 15%
+                </p>
               </div>
 
-              {/* Quick Follow-ups */}
-              <div className="mt-6 flex flex-wrap gap-2">
-                <div className="text-xs text-gray-500 flex items-center mr-2">
-                  <span className="mr-2">🔍</span>
-                  Quick follow-ups:
+              {/* Cost Forecast */}
+              <div className="bg-white border border-gray-100 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-sm font-medium text-gray-900">Cost Forecast</div>
+                  <div className="text-sm font-medium text-red-600">+8.9%</div>
                 </div>
-                {[
-                  "Average deal size?",
-                  "Work-life balance?",
-                  "Team structure?",
-                  "Exit opportunities?"
-                ].map((q, i) => (
-                  <button
-                    key={i}
-                    className={`text-xs px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 
-                      hover:bg-sky-50 hover:border-sky-200 hover:text-sky-600 transition-all duration-300
-                      ${animationStep >= 1 ? 'opacity-100 transform-none' : 'opacity-0 translate-y-4'}`}
-                    style={{ animationDelay: `${0.4 + i * 0.1}s` }}
-                  >
-                    {q}
-                  </button>
-                ))}
+                
+                {/* Trend Graph */}
+                <div className="h-16 relative">
+                  <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
+                    {/* Background line */}
+                    <path
+                      d="M0,35 L100,35"
+                      stroke="#E5E7EB"
+                      strokeWidth="1"
+                      fill="none"
+                    />
+                    {/* Trend line */}
+                    <path
+                      d={`M0,35 L20,${35 - (progress * 0.2)} L40,${35 - (progress * 0.3)} L60,${35 - (progress * 0.4)} L80,${35 - (progress * 0.5)} L100,${35 - (progress * 0.6)}`}
+                      stroke="#DC2626"
+                      strokeWidth="2"
+                      fill="none"
+                      className="transition-all duration-100 ease-out"
+                    />
+                    {/* Trend arrow */}
+                    <path
+                      d="M90,20 L100,10 L100,30 Z"
+                      fill="#DC2626"
+                      className="transition-all duration-100 ease-out"
+                      style={{
+                        opacity: progress > 40 ? 1 : 0,
+                        transform: `translate(${progress * 0.1}px, ${-progress * 0.3}px)`
+                      }}
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Risk Summary */}
+            <div className={`mt-8 pt-6 border-t border-gray-100 transition-all duration-500 ${
+              showWarnings ? 'opacity-100' : 'opacity-0'
+            }`}>
+              <div className="flex items-center justify-between">
+                <div className="text-sm text-gray-600">Risk Level</div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-red-600">High</span>
+                </div>
               </div>
             </div>
           </div>
@@ -555,11 +672,11 @@ function LandingPage() {
     return (
       <section className="px-6 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-16 text-gray-900">Why Choose humint</h2>
+          <h2 className="text-3xl font-bold mb-16 text-gray-900">Why Choose Bract</h2>
           
           <div className="flex flex-col lg:flex-row gap-12">
             {/* Visualization Area */}
-            <div className="lg:w-1/2 bg-gray-50 rounded-2xl overflow-hidden">
+            <div className="lg:w-1/2 bg-[#f5f5f4] rounded-2xl overflow-hidden">
               <div className="p-8">
                 {activeFeature === 'feature1' && <DatabaseAnimation />}
                 {activeFeature === 'feature2' && <PersonaAnimation />}
@@ -583,7 +700,7 @@ function LandingPage() {
                     <div className="flex items-start">
                       <div className="mr-4 mt-2">
                         <div className={`w-1 h-full rounded ${
-                          feature.isActive ? 'bg-[#4AA3DF]' : 'bg-gray-200'
+                          feature.isActive ? 'bg-[#103F31]' : 'bg-gray-200'
                         }`} style={{ height: '24px' }}></div>
                       </div>
                       <div>
@@ -605,187 +722,216 @@ function LandingPage() {
     );
   };
 
-  const DemoAnimation = () => {
-    const [demoState, setDemoState] = useState(0); // 0: typing, 1: loading, 2: response
-    const [typedText, setTypedText] = useState('');
-    const [loadingMessage, setLoadingMessage] = useState('Analyzing responses from top finance professionals...');
-    const demoQuestion = "How early should I start networking for junior internships?";
+  const AutomationDemo = () => {
+    const [isProcessing, setIsProcessing] = useState(true);
+    const [showContent, setShowContent] = useState(false);
 
     useEffect(() => {
-      // Type out the demo question
-      if (demoState === 0) {
-        let currentText = '';
-        const typeInterval = setInterval(() => {
-          if (currentText.length < demoQuestion.length) {
-            currentText = demoQuestion.slice(0, currentText.length + 1);
-            setTypedText(currentText);
-          } else {
-            clearInterval(typeInterval);
-            setDemoState(1); // Move to loading state
-          }
-        }, 50);
+      const animationInterval = setInterval(() => {
+        setIsProcessing(true);
+        setShowContent(false);
 
-        return () => clearInterval(typeInterval);
-      }
-
-      // Handle loading state
-      if (demoState === 1) {
+        // Show results after processing
         setTimeout(() => {
-          setDemoState(2);
-        }, 2000);
-      }
-    }, [demoState]);
+          setIsProcessing(false);
+          setShowContent(true);
+        }, 1500);
+
+      }, 6000); // Total animation cycle
+
+      return () => clearInterval(animationInterval);
+    }, []);
 
     return (
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
-        {/* Demo Chat Interface */}
-        <div className="p-6 space-y-6">
-          {/* User Question */}
-          <div className="flex justify-end">
-            <div className="bg-[#4AA3DF] text-white rounded-2xl px-6 py-4 max-w-2xl">
-              <p>{typedText || "..."}</p>
-            </div>
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+        <div className="p-8">
+          {/* Main Content Area */}
+          <div className="relative min-h-[200px] flex items-center justify-center">
+            {/* File Preview */}
+            {showContent && (
+              <div className="w-full max-w-lg mx-auto transition-all duration-500">
+                <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+                  {/* Report Header */}
+                  <div className="border-b border-gray-200 pb-3 mb-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900">Daily Field Report</h3>
+                        <p className="text-sm text-gray-500">May 26, 2024</p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs text-gray-400">PDF</span>
+                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#103F31]/10 text-[#103F31]">
+                          ✓ Uploaded
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Report Content */}
+                  <div className="space-y-3 text-left">
+                    <div className="flex items-start">
+                      <span className="text-red-500 mr-2 mt-1">•</span>
+                      <p className="text-sm text-gray-700">Insulate ductwork on 2nd floor delayed due to missing material.</p>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-red-500 mr-2 mt-1">•</span>
+                      <p className="text-sm text-gray-700">Projected completion pushed back by 3 days.</p>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-yellow-500 mr-2 mt-1">•</span>
+                      <p className="text-sm text-gray-700">Spent $9,000 on additional sealant delivery (unplanned).</p>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-[#103F31] mr-2 mt-1">•</span>
+                      <p className="text-sm text-gray-700">Site crew worked 8 hours. Minor rain delays.</p>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-gray-400 mr-2 mt-1">•</span>
+                      <p className="text-sm text-gray-700">No update on thermostat wiring – likely pushed to next week.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Processing Indicator */}
+            {isProcessing && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm">
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-2 mb-2">
+                    <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  </div>
+                  <p className="text-sm font-medium text-[#103F31]">Bract is reading your report...</p>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Loading State */}
-          {demoState === 1 && (
-            <div className="flex items-start space-x-4 animate-fade-in">
-              <div className="w-8 h-8 rounded-full bg-[#4AA3DF]/10 flex items-center justify-center">
-                <img 
-                  src="/humint_icon.png" 
-                  alt="HUMINT AI"
-                  className="w-5 h-5 object-contain"
-                />
-              </div>
-              <div className="flex-1 bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center space-x-3">
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-[#4AA3DF] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-[#4AA3DF] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-[#4AA3DF] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          {/* Insights Dashboard */}
+          {showContent && (
+            <div className="mt-8 space-y-6 animate-fade-in">
+              <div className="grid grid-cols-2 gap-6">
+                {/* Project Completion - Radial Progress */}
+                <div className="bg-white rounded-xl p-6 border border-[#103F31]/10">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-gray-900">Project Completion</h3>
+                    <span className="text-lg font-bold text-[#103F31]">64%</span>
                   </div>
-                  <span className="text-gray-600 animate-fade-in">
-                    {loadingMessage}
-                  </span>
+                  <div className="relative w-32 h-32 mx-auto">
+                    <svg className="w-full h-full" viewBox="0 0 100 100">
+                      {/* Background circle */}
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        stroke="#E5E7EB"
+                        strokeWidth="8"
+                      />
+                      {/* Progress circle */}
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        stroke="#103F31"
+                        strokeWidth="8"
+                        strokeDasharray="283"
+                        strokeDashoffset="102"
+                        transform="rotate(-90 50 50)"
+                        className="transition-all duration-1000 ease-out"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-2xl font-bold text-[#103F31]">64%</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Task Delay - Timeline */}
+                <div className="bg-white rounded-xl p-6 border border-red-100">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-red-800">Task Delay</h3>
+                    <span className="text-sm text-red-600">3 days late</span>
+                  </div>
+                  <div className="relative h-16">
+                    {/* Timeline bar */}
+                    <div className="absolute inset-y-0 left-0 w-full bg-gray-100 rounded-full"></div>
+                    {/* Progress */}
+                    <div className="absolute inset-y-0 left-0 w-3/4 bg-[#103F31] rounded-full"></div>
+                    {/* Delay marker */}
+                    <div className="absolute top-0 bottom-0 left-3/4 w-0.5 bg-red-500">
+                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                        <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-sm text-gray-600">"Insulate ductwork"</p>
+                </div>
+
+                {/* Underbilling - Sparkline */}
+                <div className="bg-white rounded-xl p-6 border border-yellow-100">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-yellow-800">Underbilling Trend</h3>
+                    <span className="text-lg font-bold text-yellow-900">$12,400</span>
+                  </div>
+                  <div className="h-20 relative">
+                    {/* Sparkline */}
+                    <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
+                      <path
+                        d="M0,35 L20,30 L40,25 L60,20 L80,15 L100,10"
+                        fill="none"
+                        stroke="#103F31"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M0,35 L20,30 L40,25 L60,20 L80,15 L100,10"
+                        fill="url(#gradient)"
+                        opacity="0.2"
+                      />
+                      <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#103F31" />
+                          <stop offset="100%" stopColor="#103F31" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    {/* Current value marker */}
+                    <div className="absolute right-0 top-0 w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  </div>
+                </div>
+
+                {/* Cost Overrun - Trend */}
+                <div className="bg-white rounded-xl p-6 border border-red-100">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-red-800">Cost Overrun Forecast</h3>
+                    <span className="text-lg font-bold text-red-900">$8,900</span>
+                  </div>
+                  <div className="h-20 relative">
+                    {/* Trend arrow */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg className="w-12 h-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                      </svg>
+                    </div>
+                    {/* Background graph */}
+                    <svg className="w-full h-full absolute inset-0" viewBox="0 0 100 40" preserveAspectRatio="none">
+                      <path
+                        d="M0,20 L20,18 L40,15 L60,12 L80,8 L100,5"
+                        fill="none"
+                        stroke="#FEE2E2"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
           )}
-
-          {/* AI Response */}
-          {demoState === 2 && (
-            <div className="flex items-start space-x-4 animate-fade-in">
-              <div className="w-8 h-8 rounded-full bg-[#4AA3DF]/10 flex items-center justify-center">
-                <img 
-                  src="/humint_icon.png" 
-                  alt="HUMINT AI"
-                  className="w-5 h-5 object-contain"
-                />
-              </div>
-              <div className="flex-1 bg-white border border-gray-200 rounded-2xl shadow-sm">
-                {/* Metadata Bar */}
-                <div className="px-4 py-2 bg-gray-50 rounded-t-2xl flex items-center justify-between border-b">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-500">Confidence:</span>
-                      <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
-                        High
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-500">🎯 Persona:</span>
-                      <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">
-                        Early Career IB Analyst
-                      </span>
-                    </div>
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    Based on 8 sources
-                  </div>
-                </div>
-
-                {/* Main Response */}
-                <div className="p-4">
-                  <p className="text-gray-800 mb-4">
-                    While opinions vary on the ideal timing, the consensus is that starting early gives you more options. However, quality of networking matters more than timing—focus on building genuine relationships rather than rushing to check a box.
-                  </p>
-
-                  {/* Expert Insights */}
-                  <div className="bg-gray-50 rounded-xl p-4 mt-4">
-                    <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center">
-                      <span className="mr-2">📚</span>
-                      Expert Perspectives
-                    </h3>
-                    <div className="space-y-3">
-                      {/* Early Start Perspective */}
-                      <div className="bg-white rounded-lg border border-gray-200 p-3">
-                        <blockquote className="text-gray-700 mb-3 italic">
-                          "Starting early in freshman year gave me a huge advantage. I had time to build relationships naturally and was well-prepared when accelerated recruiting began."
-                        </blockquote>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                              <span className="text-base">💼</span>
-                            </div>
-                            <div>
-                              <div className="text-[#4AA3DF] font-medium flex items-center">
-                                Jane Doe
-                              </div>
-                              <div className="text-xs text-gray-600 flex items-center">
-                                <span className="font-medium">Goldman Sachs</span>
-                                <span className="mx-1.5">·</span>
-                                <span>Investment Banking</span>
-                                <span className="mx-1.5">·</span>
-                                <span>Summer Analyst</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Alternative Perspective */}
-                      <div className="bg-white rounded-lg border border-gray-200 p-3">
-                        <blockquote className="text-gray-700 mb-3 italic">
-                          "Don't stress too much about starting super early. I began networking mid-sophomore year and still landed my dream role. Focus on quality connections and genuine interest in the industry."
-                        </blockquote>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                              <span className="text-base">💼</span>
-                            </div>
-                            <div>
-                              <div className="text-[#4AA3DF] font-medium flex items-center">
-                                John Doe
-                              </div>
-                              <div className="text-xs text-gray-600 flex items-center">
-                                <span className="font-medium">Jefferies</span>
-                                <span className="mx-1.5">·</span>
-                                <span>Investment Banking</span>
-                                <span className="mx-1.5">·</span>
-                                <span>Analyst</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Demo Input Bar */}
-        <div className="border-t bg-gray-50 p-4">
-          <div className="max-w-4xl mx-auto flex items-center space-x-4">
-            <div className="flex-1 bg-white rounded-full border border-gray-200 px-6 py-3 text-gray-400">
-              Ask about finance recruiting...
-            </div>
-            <button className="p-3 rounded-full bg-[#4AA3DF] text-white">
-              <span className="w-5 h-5 block">➤</span>
-            </button>
-          </div>
         </div>
       </div>
     );
@@ -797,13 +943,13 @@ function LandingPage() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-3">
-            We Interviewed 200+ Bankers
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4AA3DF] to-[#3182a8] block mt-1">
-              So You Don't Have To
+            Sync field and operations.
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50] block mt-1">
+              Instantly.
             </span>
           </h1>
           <p className="text-sm text-gray-600 mb-4">
-            Stop guessing in recruiting. Get AI-powered answers from real bankers.
+            Upload what you already have — reports, schedules, invoices. Bract reads them, extracts key metrics, and keeps both the field and accounting on the same page.
           </p>
           
           {/* Updated email form with proper form handling */}
@@ -820,20 +966,10 @@ function LandingPage() {
             />
             <button 
               type="submit"
-              className="w-full px-4 py-2.5 bg-[#4AA3DF] text-white rounded-lg font-medium text-sm"
+              className="w-full px-4 py-2.5 bg-[#103F31] text-white rounded-lg font-medium text-sm hover:bg-[#176a50] transition-colors"
             >
               Join Waitlist
             </button>
-            <div className="text-center">
-              <a 
-                href="https://www.notion.so/Terms-and-Conditions-1e5e61a777638057bb1fd022c0f739e8?pvs=4"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                Terms & Conditions
-              </a>
-            </div>
           </form>
         </div>
       </div>
@@ -1016,7 +1152,7 @@ function LandingPage() {
         <div className="text-xs text-gray-500 mb-2">🎯 Duke Alumni, Econ Major</div>
         <div className="flex flex-wrap gap-1">
           {['Duke', 'Econ Major'].map((tag) => (
-            <span key={tag} className="bg-sky-50 text-sky-600 text-[10px] px-2 py-1 rounded-full">
+            <span key={tag} className="bg-emerald-50 text-emerald-600 text-[10px] px-2 py-1 rounded-full">
               {tag}
             </span>
           ))}
@@ -1133,7 +1269,7 @@ function LandingPage() {
             <div
               key={index}
               className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                activeFeature === index ? 'bg-[#4AA3DF]' : 'bg-gray-200'
+                activeFeature === index ? 'bg-emerald-500' : 'bg-gray-200'
               }`}
             />
           ))}
@@ -1273,11 +1409,11 @@ function LandingPage() {
 
   // Add a simplified mobile CTA section
   const MobileCTASection = () => (
-    <section className="px-4 py-8 bg-gray-50">
+    <section className="px-4 py-8 bg-[#f0fdfa]">
       <div className="text-center">
         <h2 className="text-lg font-semibold mb-3">Ready to Get Started?</h2>
         <p className="text-sm text-gray-600 mb-4">
-          Join the waitlist to be among the first to experience humint
+          Join the waitlist to be among the first to experience Bract
         </p>
         
         <form 
@@ -1293,20 +1429,10 @@ function LandingPage() {
           />
           <button 
             type="submit"
-            className="w-full px-4 py-2.5 bg-[#4AA3DF] text-white rounded-lg font-medium text-sm"
+            className="w-full px-4 py-2.5 bg-[#103F31] text-white rounded-lg font-medium text-sm hover:bg-[#176a50] transition-colors"
           >
             Join Waitlist
           </button>
-          <div className="text-center">
-            <a 
-              href="https://www.notion.so/Terms-and-Conditions-1e5e61a777638057bb1fd022c0f739e8?pvs=4"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
-            >
-              Terms & Conditions
-            </a>
-          </div>
         </form>
       </div>
     </section>
@@ -1321,6 +1447,20 @@ function LandingPage() {
     .hide-scrollbar::-webkit-scrollbar {
       display: none;
     }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   `;
 
   if (isMobile) {
@@ -1332,9 +1472,9 @@ function LandingPage() {
         <nav className="px-4 py-3 border-b border-gray-100 bg-white">
           <div className="flex justify-between items-center">
             <img 
-              src="/humint_logo.png" 
-              alt="HUMINT"
-              className="h-6 w-auto"
+              src="/bract-logo-upscaled.png" 
+              alt="Bract"
+              className="h-8 w-auto"
             />
           </div>
         </nav>
@@ -1342,7 +1482,6 @@ function LandingPage() {
         <MobileHeroSection />
         <MobileDemoAnimation />
         <MobileFeaturesSection />
-        <MobileInstitutionsSection />
         <MobileCTASection />
         
         {/* Mobile Footer */}
@@ -1357,14 +1496,14 @@ function LandingPage() {
 
   // Return the existing desktop version exactly as is
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#f0fdfa] to-white">
       {/* Navigation */}
       <nav className="px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <img 
-            src="/humint_logo.png" 
-            alt="HUMINT"
-            className="h-8 w-auto"
+            src="/bract-logo-upscaled.png" 
+            alt="Bract"
+            className="h-10 w-auto mt-4"
           />
         </div>
       </nav>
@@ -1375,23 +1514,23 @@ function LandingPage() {
           {/* Text Content */}
           <div className="text-center max-w-4xl mx-auto mb-12">
             <h1 className="text-6xl font-bold text-gray-900 mb-6">
-              We Interviewed 200+ Bankers 
+              Sync field and operations.
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4AA3DF] to-[#3182a8]">
-                So You Don't Have To
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">
+                Instantly.
               </span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-            Stop guessing in recruiting. Get AI-powered answers by real people at top investment banks.
+              Upload what you already have — reports, schedules, invoices. Bract reads them, extracts key metrics, and keeps both the field and accounting on the same page.
             </p>
             
-            {/* New Email Form */}
+            {/* Email Form */}
             <div className="max-w-md mx-auto">
               <form 
                 onSubmit={handleEmailSubmit}
                 className="flex flex-col items-center gap-3"
               >
-                <div className="w-full flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#4AA3DF]/20">
+                <div className="w-full flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#103F31]/20">
                   <input
                     type="email"
                     name="email"
@@ -1401,39 +1540,32 @@ function LandingPage() {
                   />
                   <button 
                     type="submit"
-                    className="px-6 py-2 bg-[#4AA3DF] text-white rounded-full hover:bg-[#3182a8] transition-colors text-base font-medium whitespace-nowrap"
+                    className="px-6 py-2 bg-[#103F31] text-white rounded-full hover:bg-[#176a50] transition-colors text-base font-medium whitespace-nowrap"
                   >
                     Join Waitlist
                   </button>
                 </div>
-                <a 
-                  href="https://www.notion.so/Terms-and-Conditions-1e5e61a777638057bb1fd022c0f739e8?pvs=4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
-                >
-                  Terms & Conditions
-                </a>
               </form>
             </div>
           </div>
 
-          {/* Demo Animation */}
-          <DemoAnimation />
+          {/* Automation Demo */}
+          <AutomationDemo />
         </div>
       </section>
+
+      {/* Problem Section */}
+      <ProblemSection />
 
       {/* Features Section */}
       <FeaturesSection />
 
-      <ExpertSection />
-
       {/* CTA Section */}
-      <section className="px-6 py-20 bg-sky-50">
+      <section className="px-6 py-20 bg-[#f0fdfa]">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-900">Ready to Get Started?</h2>
           <p className="text-gray-600 mb-8">
-            Join the waitlist to be among the first to experience humint
+            Join the waitlist to be among the first to experience Bract
           </p>
           
           <div className="max-w-md mx-auto">
@@ -1441,7 +1573,7 @@ function LandingPage() {
               onSubmit={handleEmailSubmit}
               className="flex flex-col items-center gap-3"
             >
-              <div className="w-full flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#4AA3DF]/20">
+              <div className="w-full flex items-center gap-3 bg-white rounded-full p-1 border-2 border-[#103F31]/20">
                 <input
                   type="email"
                   name="email"
@@ -1451,28 +1583,20 @@ function LandingPage() {
                 />
                 <button 
                   type="submit"
-                  className="px-6 py-2 bg-[#4AA3DF] text-white rounded-full hover:bg-[#3182a8] transition-colors text-base font-medium whitespace-nowrap"
+                  className="px-6 py-2 bg-[#103F31] text-white rounded-full hover:bg-[#176a50] transition-colors text-base font-medium whitespace-nowrap"
                 >
                   Join Waitlist
                 </button>
               </div>
-              <a 
-                href="https://www.notion.so/Terms-and-Conditions-1e5e61a777638057bb1fd022c0f739e8?pvs=4"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                Terms & Conditions
-              </a>
             </form>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-8 bg-gray-50">
+      <footer className="px-6 py-8 bg-[#f5f5f4]">
         <div className="max-w-7xl mx-auto text-center text-gray-600">
-          <p>© 2024 Humint. All rights reserved.</p>
+          <p>© 2024 Bract. All rights reserved.</p>
         </div>
       </footer>
     </div>
