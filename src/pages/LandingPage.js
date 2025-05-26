@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/animations.css';
 import { API_URL } from '../services/config';
 import { isMobile } from 'react-device-detect';
+import { supabase } from '../lib/supabaseClient';
 
 
 function LandingPage() {
@@ -11,6 +12,9 @@ function LandingPage() {
   const mobileSliderRef = useRef(null);
   const mobileScrollIntervalRef = useRef(null);
   const [activeFeature, setActiveFeature] = useState('feature1');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   const startScrolling = () => {
@@ -69,32 +73,42 @@ function LandingPage() {
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage('');
+    setSuccessMessage('');
+
     const formData = new FormData(e.target);
     const email = formData.get('email');
-    
+
+    if (!email) {
+      setErrorMessage('Please enter your email address');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      // Add to waitlist
-      const response = await fetch(`${API_URL}/api/waitlist/join`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          email,
-          has_valid_card: false,
-          created_at: new Date().toISOString()
-        })
-      });
+      const { error } = await supabase
+        .from('landing-page-waitlist')
+        .insert([
+          { 
+            email,
+            created_at: new Date().toISOString()
+          }
+        ]);
 
-      if (!response.ok) {
-        throw new Error('Failed to join waitlist');
-      }
+      if (error) throw error;
 
+      // Clear the form
+      e.target.reset();
+      setSuccessMessage('Successfully joined the waitlist!');
+      
       // Navigate to confirmation page
       navigate('/confirmation', { state: { email } });
     } catch (error) {
       console.error('Error:', error);
-      // Handle error (show error message to user)
+      setErrorMessage(error.message || 'Failed to join waitlist. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -952,9 +966,8 @@ function LandingPage() {
             Upload what you already have — reports, schedules, invoices. Bract reads them, extracts key metrics, and keeps both the field and accounting on the same page.
           </p>
           
-          {/* Updated email form with proper form handling */}
           <form 
-            onSubmit={handleEmailSubmit}  // Use the same handler as desktop version
+            onSubmit={handleEmailSubmit}
             className="space-y-3"
           >
             <input
@@ -963,13 +976,21 @@ function LandingPage() {
               placeholder="Enter your email"
               className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 outline-none text-sm text-gray-800 placeholder-gray-400"
               required
+              disabled={isSubmitting}
             />
             <button 
               type="submit"
-              className="w-full px-4 py-2.5 bg-[#103F31] text-white rounded-lg font-medium text-sm hover:bg-[#176a50] transition-colors"
+              className="w-full px-4 py-2.5 bg-[#103F31] text-white rounded-lg font-medium text-sm hover:bg-[#176a50] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={isSubmitting}
             >
-              Join Waitlist
+              {isSubmitting ? 'Joining...' : 'Join Waitlist'}
             </button>
+            {errorMessage && (
+              <div className="text-red-500 text-sm">{errorMessage}</div>
+            )}
+            {successMessage && (
+              <div className="text-green-500 text-sm">{successMessage}</div>
+            )}
           </form>
         </div>
       </div>
@@ -1417,7 +1438,7 @@ function LandingPage() {
         </p>
         
         <form 
-          onSubmit={handleEmailSubmit}  // Use the same handler as desktop version
+          onSubmit={handleEmailSubmit}
           className="space-y-3"
         >
           <input
@@ -1426,13 +1447,21 @@ function LandingPage() {
             placeholder="Enter your email"
             className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 outline-none text-sm text-gray-800 placeholder-gray-400"
             required
+            disabled={isSubmitting}
           />
           <button 
             type="submit"
-            className="w-full px-4 py-2.5 bg-[#103F31] text-white rounded-lg font-medium text-sm hover:bg-[#176a50] transition-colors"
+            className="w-full px-4 py-2.5 bg-[#103F31] text-white rounded-lg font-medium text-sm hover:bg-[#176a50] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
-            Join Waitlist
+            {isSubmitting ? 'Joining...' : 'Join Waitlist'}
           </button>
+          {errorMessage && (
+            <div className="text-red-500 text-sm">{errorMessage}</div>
+          )}
+          {successMessage && (
+            <div className="text-green-500 text-sm">{successMessage}</div>
+          )}
         </form>
       </div>
     </section>
