@@ -9,8 +9,6 @@ import { supabase } from '../lib/supabaseClient';
 function LandingPage() {
   const sliderRef = useRef(null);
   const scrollIntervalRef = useRef(null);
-  const mobileSliderRef = useRef(null);
-  const mobileScrollIntervalRef = useRef(null);
   const [activeFeature, setActiveFeature] = useState('feature1');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -1010,20 +1008,20 @@ function LandingPage() {
                   </div>
                   {/* Center column (col 2) is intentionally left empty for the icon */}
                 </div>
-                {/* Center File Icon with Encircling Line (absolute overlay) */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center" style={{width: '80px', height: '80px'}}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg width="80" height="80" viewBox="0 0 80 80">
-                      <circle cx="40" cy="40" r="36" fill="none" stroke="#103F31" strokeWidth="2.5" />
-                    </svg>
-                  </div>
-                  <div className="flex flex-col items-center justify-center w-full h-full">
-                    <svg className="w-10 h-10 text-[#103F31] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <span className="text-xs font-semibold text-gray-900 text-center whitespace-nowrap">Daily Field Report</span>
-                  </div>
-                </div>
++                {/* Center File Icon with Encircling Line (absolute overlay) */}
++                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center" style={{width: '80px', height: '80px'}}>
++                  <div className="absolute inset-0 flex items-center justify-center">
++                    <svg width="80" height="80" viewBox="0 0 80 80">
++                      <circle cx="40" cy="40" r="36" fill="none" stroke="#103F31" strokeWidth="2.5" />
++                    </svg>
++                  </div>
++                  <div className="flex flex-col items-center justify-center w-full h-full">
++                    <svg className="w-10 h-10 text-[#103F31] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
++                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
++                    </svg>
++                    <span className="text-xs font-semibold text-gray-900 text-center whitespace-nowrap">Daily Field Report</span>
++                  </div>
++                </div>
               </div>
             )}
           </div>
@@ -1237,21 +1235,6 @@ function LandingPage() {
                     <div className="bg-red-50 rounded-lg p-3 border border-red-200 shadow-sm h-24 flex flex-col justify-between">
                       <h3 className="text-[10px] font-medium text-red-800">🔺 Over budget</h3>
                       <span className="text-lg font-bold text-red-800">$8,900</span>
-                    </div>
-                  </div>
-                  
-                  {/* Center File Icon */}
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center" style={{width: '60px', height: '60px'}}>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <svg width="60" height="60" viewBox="0 0 60 60">
-                        <circle cx="30" cy="30" r="28" fill="none" stroke="#103F31" strokeWidth="1.5" />
-                      </svg>
-                    </div>
-                    <div className="flex flex-col items-center justify-center w-full h-full">
-                      <svg className="w-4 h-4 text-[#103F31] mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <span className="text-[8px] font-semibold text-gray-900 text-center">Report</span>
                     </div>
                   </div>
                 </div>
@@ -1531,135 +1514,6 @@ function LandingPage() {
     );
   };
 
-  // Add a new function for mobile scrolling
-  const startMobileScrolling = () => {
-    const slider = mobileSliderRef.current;
-    if (slider) {
-      if (mobileScrollIntervalRef.current) {
-        clearInterval(mobileScrollIntervalRef.current);
-      }
-      
-      mobileScrollIntervalRef.current = setInterval(() => {
-        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-          slider.scrollLeft = 0;
-        } else {
-          slider.scrollLeft += 1;
-        }
-      }, 30);
-    }
-  };
-
-  // Update the MobileInstitutionsSection component
-  const MobileInstitutionsSection = () => {
-    useEffect(() => {
-      startMobileScrolling();
-      
-      return () => {
-        if (mobileScrollIntervalRef.current) {
-          clearInterval(mobileScrollIntervalRef.current);
-        }
-      };
-    }, []);
-
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              startMobileScrolling();
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      if (mobileSliderRef.current) {
-        observer.observe(mobileSliderRef.current);
-      }
-
-      return () => {
-        if (mobileSliderRef.current) {
-          observer.unobserve(mobileSliderRef.current);
-        }
-      };
-    }, []);
-
-    return (
-      <section className="px-4 py-8 bg-gray-50">
-        <h2 className="text-lg font-semibold text-center mb-4">
-          Expert Insights from Top Institutions
-        </h2>
-        
-        {/* Scrolling Logos Container */}
-        <div className="relative overflow-hidden py-4 bg-white rounded-xl shadow-sm mb-6">
-          {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10"></div>
-          
-          {/* Scrolling Logos */}
-          <div 
-            ref={mobileSliderRef}
-            className="flex space-x-8 overflow-x-hidden whitespace-nowrap px-4"
-          >
-            <div className="flex items-center space-x-8">
-              {[
-                { src: '/logos/Duke.png', alt: 'Duke', width: 'min-w-[100px]' },
-                { src: '/logos/Wharton.png', alt: 'Wharton', width: 'min-w-[150px]' },
-                { src: '/logos/GS.png', alt: 'Goldman Sachs', width: 'min-w-[100px]' },
-                { src: '/logos/JPM.png', alt: 'JP Morgan', width: 'min-w-[175px]' },
-                { src: '/logos/BofA.png', alt: 'Bank of America', width: 'min-w-[100px]' },
-                { src: '/logos/Evercore.png', alt: 'Evercore', width: 'min-w-[200px]' },
-                { src: '/logos/Foros.png', alt: 'Foros', width: 'min-w-[100px]' }
-              ].map((logo, i) => (
-                <div key={i} className={`inline-flex flex-col items-center ${logo.width}`}>
-                  <img 
-                    src={logo.src} 
-                    alt={logo.alt}
-                    className="h-8 w-auto grayscale hover:grayscale-0 transition-all"
-                  />
-                </div>
-              ))}
-              {/* Duplicate logos for continuous scroll */}
-              {[
-                { src: '/logos/Duke.png', alt: 'Duke', width: 'min-w-[100px]' },
-                { src: '/logos/Wharton.png', alt: 'Wharton', width: 'min-w-[150px]' },
-                { src: '/logos/GS.png', alt: 'Goldman Sachs', width: 'min-w-[100px]' },
-                { src: '/logos/JPM.png', alt: 'JP Morgan', width: 'min-w-[175px]' },
-                { src: '/logos/BofA.png', alt: 'Bank of America', width: 'min-w-[100px]' },
-                { src: '/logos/Evercore.png', alt: 'Evercore', width: 'min-w-[200px]' },
-                { src: '/logos/Foros.png', alt: 'Foros', width: 'min-w-[100px]' }
-              ].map((logo, i) => (
-                <div key={`duplicate-${i}`} className={`inline-flex flex-col items-center ${logo.width}`}>
-                  <img 
-                    src={logo.src} 
-                    alt={logo.alt}
-                    className="h-8 w-auto grayscale hover:grayscale-0 transition-all"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Stats in a row */}
-        <div className="grid [grid-template-columns:1fr_120px_1fr] gap-3">
-          <div className="text-center">
-            <div className="text-xl font-bold text-[#4AA3DF]">200+</div>
-            <div className="text-xs text-gray-600">Interviews</div>
-          </div>
-          <div className="text-center">
-            <div className="text-xl font-bold text-[#4AA3DF]">15+</div>
-            <div className="text-xs text-gray-600">Universities</div>
-          </div>
-          <div className="text-center">
-            <div className="text-xl font-bold text-[#4AA3DF]">15+</div>
-            <div className="text-xs text-gray-600">Banks</div>
-          </div>
-        </div>
-      </section>
-    );
-  };
-
   // Add a simplified mobile CTA section
   const MobileCTASection = () => (
     <section className="px-4 py-8 bg-[#f0fdfa]">
@@ -1759,7 +1613,6 @@ function LandingPage() {
         <MobileDemoAnimation />
         <MobileProblemSection />
         <MobileFeaturesSection />
-        <MobileInstitutionsSection />
         <MobileCTASection />
         
         {/* Mobile Footer */}
