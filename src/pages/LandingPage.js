@@ -910,15 +910,15 @@ function LandingPage() {
                 {/* Left Side - Insights Grid */}
                 <div className="w-1/2 grid grid-cols-1 gap-4 pr-4">
                   {/* Project Completion - Enhanced */}
-                  <div className="bg-white rounded-xl p-4 border border-[#103F31]/10 flex flex-col justify-between shadow-lg transform scale-105 animate-fade-in-up h-full">
-                    <div>
+                  <div className="bg-white rounded-xl p-4 border border-[#103F31]/10 flex flex-row items-center justify-between shadow-lg transform scale-105 animate-fade-in-up h-full">
+                    <div className="flex-1">
                       <h3 className="text-sm font-medium text-gray-900 mb-1">✅ 64% complete</h3>
                       <p className="text-xs text-gray-600 mb-2">11 of 17 total tasks parsed from the report</p>
                       <span className="text-2xl font-bold text-[#103F31]">64%</span>
                     </div>
-                    <div className="relative w-16 h-16 self-end">
+                    <div className="relative w-28 h-28 flex-shrink-0 flex items-center justify-end">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" strokeWidth="8" />
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" strokeWidth="10" />
                         <circle 
                           cx="50" 
                           cy="50" 
@@ -931,21 +931,18 @@ function LandingPage() {
                           className="transition-all duration-1000 ease-out"
                         />
                       </svg>
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs text-gray-500">
-                        11/17
-                      </div>
                     </div>
                   </div>
 
                   {/* Underbilling Detected - Enhanced */}
                   <div className="bg-yellow-50 rounded-xl pt-4 px-4 pb-1 border border-yellow-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.1s'}}>
                     <div>
-                      <h3 className="text-sm font-medium text-yellow-800 mb-1">⚠️ You're underbilling by $12,400</h3>
-                      <p className="text-xs text-yellow-700 mb-3">Based on 64% actual completion vs. 48% recognized revenue</p>
-                      <div className="text-xl font-bold text-yellow-900 mb-3">$12,400</div>
+                      <h3 className="text-sm font-medium text-yellow-800 mb-3">⚠️ You're underbilling by $12,400</h3>
+                      <p className="text-xs text-yellow-700 mb-1">Based on 64% actual completion vs. 48% recognized revenue</p>
+                      <div className="text-xl font-bold text-yellow-900 mb-1">$12,400</div>
                     </div>
-                    {/* Bar chart comparison - moved further down */}
-                    <div className="mt-4 flex items-end space-x-4">
+                    {/* Bar chart comparison - reduced spacing */}
+                    <div className="mt-0 flex items-end space-x-4">
                       {/* Actual bar */}
                       <div className="flex-1 flex flex-col items-center">
                         <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '96px'}}>
@@ -968,35 +965,21 @@ function LandingPage() {
                   </div>
                 </div>
 
-                {/* Center - Daily Report (De-emphasized) */}
-                <div className="w-1/3 flex justify-center items-center px-2">
-                  <div className="bg-white rounded-lg shadow-md p-3 border border-[#103F31]/10 max-w-xs opacity-75 scale-90">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <svg className="w-5 h-5 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <div>
-                        <h3 className="text-xs font-semibold text-gray-900">Daily Field Report</h3>
-                        <p className="text-xs text-gray-500">May 26, 2025</p>
+                {/* Center - Bract Platform with Encircling Circle */}
+                <div className="w-1/3 flex justify-center items-center px-2 relative z-10">
+                  <div className="flex flex-col items-center w-full z-10 relative">
+                    {/* Encircling circle around file icon and label */}
+                    <div className="relative flex items-center justify-center mt-12 mb-8" style={{width: '140px', height: '140px'}}>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg width="140" height="140" viewBox="0 0 140 140">
+                          <circle cx="70" cy="70" r="66" fill="none" stroke="#103F31" strokeWidth="2.5" />
+                        </svg>
                       </div>
-                    </div>
-                    
-                    <div className="space-y-1 text-left">
-                      <div className="flex items-start">
-                        <span className="text-red-500 mr-1 mt-0.5 text-xs">•</span>
-                        <p className="text-xs text-gray-700">Insulate ductwork delayed due to missing material</p>
-                      </div>
-                      <div className="flex items-start">
-                        <span className="text-red-500 mr-1 mt-0.5 text-xs">•</span>
-                        <p className="text-xs text-gray-700">Projected completion pushed back by 3 days</p>
-                      </div>
-                      <div className="flex items-start">
-                        <span className="text-yellow-500 mr-1 mt-0.5 text-xs">•</span>
-                        <p className="text-xs text-gray-700">Spent $9,000 on unplanned sealant delivery</p>
-                      </div>
-                      <div className="flex items-start">
-                        <span className="text-gray-400 mr-1 mt-0.5 text-xs">•</span>
-                        <p className="text-xs text-gray-700">No update on thermostat wiring</p>
+                      <div className="flex flex-col items-center justify-center w-full h-full">
+                        <svg className="w-10 h-10 text-[#103F31] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span className="text-xs font-semibold text-gray-900 text-center whitespace-nowrap">Daily Field Report</span>
                       </div>
                     </div>
                   </div>
@@ -1004,44 +987,53 @@ function LandingPage() {
 
                 {/* Right Side - More Insights */}
                 <div className="w-1/2 grid grid-cols-1 gap-4 pl-4">
-                  {/* Task Delay - Enhanced */}
+                  {/* Task Delay - Enhanced as Calendar Heatmap */}
                   <div className="bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.2s'}}>
                     <div>
-                      <h3 className="text-sm font-medium text-red-800 mb-1">🕒 "Insulate ductwork" is 3 days late</h3>
-                      <p className="text-xs text-red-700 mb-3">Delays 2 downstream tasks and risks HVAC inspection deadline</p>
-                    </div>
-                    <div>
-                      <div className="relative h-4 bg-gray-200 rounded-full mb-2">
-                        <div className="absolute inset-y-0 left-0 w-3/4 bg-[#103F31] rounded-full"></div>
-                        {/* Deadline marker */}
-                        <div className="absolute top-0 bottom-0 left-3/4 w-0.5 bg-red-500 rounded-full">
-                          <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></div>
-                          <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-red-600 whitespace-nowrap">
-                            Deadline
-                          </div>
-                        </div>
+                      <h3 className="text-sm font-medium text-red-800 mb-2">🕒 "Insulate ductwork" is 3 days late</h3>
+                      {/* Calendar heatmap */}
+                      <div className="flex items-center justify-between gap-x-2 my-2 px-1">
+                        {/* Example: [green, green, gray, red, red, red, gray] */}
+                        <div className="w-9 h-9 rounded bg-[#16a34a] border-2 border-white"></div>
+                        <div className="w-9 h-9 rounded bg-[#16a34a] border-2 border-white"></div>
+                        <div className="w-9 h-9 rounded bg-[#E5E7EB] border-2 border-white"></div>
+                        <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
+                        <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
+                        <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
+                        <div className="w-9 h-9 rounded bg-[#E5E7EB] border-2 border-white"></div>
                       </div>
-                      <span className="text-sm font-bold text-red-600">3 days late</span>
+                    </div>
+                    <div className="mt-1 flex flex-col items-center">
+                      <span className="text-sm text-gray-500 mb-1 font-medium">Last 7 days</span>
+                      <span className="text-base text-red-700 text-center font-semibold">3 delayed days detected — task is at risk</span>
                     </div>
                   </div>
 
-                  {/* Cost Overrun Forecast - Enhanced */}
+                  {/* Cost Overrun Forecast - Enhanced as Stacked Line Graph */}
                   <div className="bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.3s'}}>
                     <div>
                       <h3 className="text-sm font-medium text-red-800 mb-1">🔺 $8,900 over budget</h3>
                       <p className="text-xs text-red-700 mb-3">If material delay continues 3+ days</p>
-                      <div className="text-xl font-bold text-red-900 mb-3">$8,900</div>
                     </div>
-                    <div className="h-8 relative">
-                      <svg className="w-full h-full" viewBox="0 0 100 25" preserveAspectRatio="none">
-                        {/* Budget baseline */}
-                        <line x1="0" y1="20" x2="100" y2="20" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="2,2" />
-                        {/* Trending cost line */}
-                        <path d="M0,20 L25,18 L50,15 L75,10 L100,5" fill="none" stroke="#DC2626" strokeWidth="2" />
-                        <path d="M85,10 L100,5 L95,15 Z" fill="#DC2626" />
+                    {/* Stacked line graph */}
+                    <div className="relative w-full h-32 flex items-end">
+                      <svg className="w-full h-full" viewBox="0 0 180 100" preserveAspectRatio="none">
+                        {/* Y-axis label */}
+                        <text x="0" y="10" fontSize="10" fill="#6B7280" textAnchor="start" transform="rotate(-90 10,60)">Cumulative Cost</text>
+                        {/* X-axis label */}
+                        <text x="90" y="98" fontSize="10" fill="#6B7280" textAnchor="middle">Timeline</text>
+                        {/* Budget line (gray, steady) */}
+                        <polyline points="20,80 60,70 100,60 140,60 170,60" fill="none" stroke="#9CA3AF" strokeWidth="2.5" />
+                        {/* Actual Forecast line (red, overtakes) */}
+                        <polyline points="20,90 60,80 100,70 140,50 170,40" fill="none" stroke="#DC2626" strokeWidth="2.5" />
+                        {/* Overrun point (red dot) */}
+                        <circle cx="140" cy="50" r="4" fill="#DC2626" className="animate-pulse" />
+                        {/* Callout line and text */}
+                        <line x1="140" y1="50" x2="160" y2="30" stroke="#DC2626" strokeWidth="1.5" />
+                        <rect x="160" y="18" width="48" height="18" rx="4" fill="#fff" stroke="#DC2626" strokeWidth="1" />
+                        <text x="184" y="30" fontSize="10" fill="#DC2626" textAnchor="middle" fontWeight="bold">$8,900</text>
+                        <text x="184" y="38" fontSize="8" fill="#DC2626" textAnchor="middle">over budget</text>
                       </svg>
-                      <div className="absolute bottom-0 left-0 text-xs text-gray-500">Budget</div>
-                      <div className="absolute top-0 right-0 text-xs text-red-600">Forecast</div>
                     </div>
                   </div>
                 </div>
