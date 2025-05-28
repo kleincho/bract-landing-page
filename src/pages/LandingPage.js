@@ -906,17 +906,15 @@ function LandingPage() {
 
             {/* Phase 3: Insights */}
             {phase === 'insights' && (
-              <div className="w-full h-full flex">
-                {/* Left Side - Insights Grid */}
-                <div className="w-1/2 grid grid-cols-1 gap-4 pr-4">
-                  {/* Project Completion - Enhanced */}
-                  <div className="bg-white rounded-xl p-4 border border-[#103F31]/10 flex flex-row items-center justify-between shadow-lg transform scale-105 animate-fade-in-up h-full">
-                    <div className="flex-1">
-                      <h3 className="text-sm font-medium text-gray-900 mb-1">✅ 64% complete</h3>
-                      <p className="text-xs text-gray-600 mb-2">11 of 17 total tasks parsed from the report</p>
-                      <span className="text-2xl font-bold text-[#103F31]">64%</span>
-                    </div>
-                    <div className="relative w-28 h-28 flex-shrink-0 flex items-center justify-end">
+              <div className="w-full relative">
+                {/* 3-column, 2-row grid with center gap for icon */}
+                <div className="grid grid-cols-[1fr_80px_1fr] gap-2">
+                  {/* Top Left Card */}
+                  <div className="col-start-1 row-start-1 bg-white rounded-xl p-4 border border-[#103F31]/10 shadow-lg w-full h-56 flex flex-col justify-between">
+                    <h3 className="text-sm font-medium text-gray-900 mb-1">✅ 64% complete</h3>
+                    <p className="text-xs text-gray-600 mb-2">11 of 17 total tasks parsed from the report</p>
+                    <span className="text-2xl font-bold text-[#103F31]">64%</span>
+                    <div className="relative w-28 h-28 flex-shrink-0 flex items-center justify-end mx-auto mt-2">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                         <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" strokeWidth="10" />
                         <circle 
@@ -933,108 +931,97 @@ function LandingPage() {
                       </svg>
                     </div>
                   </div>
-
-                  {/* Underbilling Detected - Enhanced */}
-                  <div className="bg-yellow-50 rounded-xl pt-4 px-4 pb-1 border border-yellow-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.1s'}}>
-                    <div>
-                      <h3 className="text-sm font-medium text-yellow-800 mb-3">⚠️ You're underbilling by $12,400</h3>
-                      <p className="text-xs text-yellow-700 mb-1">Based on 64% actual completion vs. 48% recognized revenue</p>
-                      <div className="text-xl font-bold text-yellow-900 mb-1">$12,400</div>
-                    </div>
-                    {/* Bar chart comparison - reduced spacing */}
+                  {/* Top Right Card */}
+                  <div className="col-start-3 row-start-1 bg-yellow-50 rounded-xl p-4 border border-yellow-200 shadow-lg w-full h-56 flex flex-col justify-between">
+                    <h3 className="text-sm font-medium text-yellow-800 mb-3">⚠️ You're underbilling by $12,400</h3>
+                    <p className="text-xs text-yellow-700 mb-1">Based on 64% actual completion vs. 48% recognized revenue</p>
+                    <div className="text-xl font-bold text-yellow-900 mb-1">$12,400</div>
                     <div className="mt-0 flex items-end space-x-4">
                       {/* Actual bar */}
                       <div className="flex-1 flex flex-col items-center">
-                        <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '96px'}}>
-                          <div className="w-full bg-yellow-500 rounded-t transition-all duration-1000 ease-out" style={{height: '64%'}}>
-                          </div>
+                        <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '64px'}}>
+                          <div className="w-full bg-yellow-500 rounded-t transition-all duration-1000 ease-out" style={{height: '64%'}}></div>
                         </div>
                         <div className="text-xs text-yellow-700 mt-0 font-medium">Actual</div>
                         <div className="text-xs text-yellow-800 font-bold mb-0">64%</div>
                       </div>
                       {/* Billed bar */}
                       <div className="flex-1 flex flex-col items-center">
-                        <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '96px'}}>
-                          <div className="w-full bg-yellow-600 rounded-t transition-all duration-1000 ease-out" style={{height: '48%'}}>
-                          </div>
+                        <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '64px'}}>
+                          <div className="w-full bg-yellow-600 rounded-t transition-all duration-1000 ease-out" style={{height: '48%'}}></div>
                         </div>
                         <div className="text-xs text-yellow-700 mt-0 font-medium">Billed</div>
                         <div className="text-xs text-yellow-800 font-bold mb-0">48%</div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Center - Bract Platform with Encircling Circle */}
-                <div className="w-1/3 flex justify-center items-center px-2 relative z-10">
-                  <div className="flex flex-col items-center w-full z-10 relative">
-                    {/* Encircling circle around file icon and label */}
-                    <div className="relative flex items-center justify-center mt-12 mb-8" style={{width: '140px', height: '140px'}}>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg width="140" height="140" viewBox="0 0 140 140">
-                          <circle cx="70" cy="70" r="66" fill="none" stroke="#103F31" strokeWidth="2.5" />
-                        </svg>
-                      </div>
-                      <div className="flex flex-col items-center justify-center w-full h-full">
-                        <svg className="w-10 h-10 text-[#103F31] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <span className="text-xs font-semibold text-gray-900 text-center whitespace-nowrap">Daily Field Report</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Side - More Insights */}
-                <div className="w-1/2 grid grid-cols-1 gap-4 pl-4">
-                  {/* Task Delay - Enhanced as Calendar Heatmap */}
-                  <div className="bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.2s'}}>
-                    <div>
-                      <h3 className="text-sm font-medium text-red-800 mb-2">🕒 "Insulate ductwork" is 3 days late</h3>
-                      {/* Calendar heatmap */}
-                      <div className="flex items-center justify-between gap-x-2 my-2 px-1">
-                        {/* Example: [green, green, gray, red, red, red, gray] */}
-                        <div className="w-9 h-9 rounded bg-[#16a34a] border-2 border-white"></div>
-                        <div className="w-9 h-9 rounded bg-[#16a34a] border-2 border-white"></div>
-                        <div className="w-9 h-9 rounded bg-[#E5E7EB] border-2 border-white"></div>
-                        <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
-                        <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
-                        <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
-                        <div className="w-9 h-9 rounded bg-[#E5E7EB] border-2 border-white"></div>
-                      </div>
+                  {/* Bottom Left Card */}
+                  <div className="col-start-1 row-start-2 bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg w-full h-56 flex flex-col justify-between">
+                    <h3 className="text-sm font-medium text-red-800 mb-4">🕒 "Insulate ductwork" is 3 days late</h3>
+                    {/* Calendar heatmap */}
+                    <div className="flex items-center justify-between gap-x-2 my-2 px-1">
+                      <div className="w-9 h-9 rounded bg-[#16a34a] border-2 border-white"></div>
+                      <div className="w-9 h-9 rounded bg-[#16a34a] border-2 border-white"></div>
+                      <div className="w-9 h-9 rounded bg-[#E5E7EB] border-2 border-white"></div>
+                      <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
+                      <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
+                      <div className="w-9 h-9 rounded bg-[#DC2626] border-2 border-white"></div>
+                      <div className="w-9 h-9 rounded bg-[#E5E7EB] border-2 border-white"></div>
                     </div>
                     <div className="mt-1 flex flex-col items-center">
                       <span className="text-sm text-gray-500 mb-1 font-medium">Last 7 days</span>
                       <span className="text-base text-red-700 text-center font-semibold">3 delayed days detected — task is at risk</span>
                     </div>
                   </div>
-
-                  {/* Cost Overrun Forecast - Enhanced as Stacked Line Graph */}
-                  <div className="bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg transform scale-105 animate-fade-in-up h-full flex flex-col justify-between" style={{animationDelay: '0.3s'}}>
-                    <div>
-                      <h3 className="text-sm font-medium text-red-800 mb-1">🔺 $8,900 over budget</h3>
-                      <p className="text-xs text-red-700 mb-3">If material delay continues 3+ days</p>
-                    </div>
-                    {/* Stacked line graph */}
-                    <div className="relative w-full h-32 flex items-end">
-                      <svg className="w-full h-full" viewBox="0 0 180 100" preserveAspectRatio="none">
-                        {/* Y-axis label */}
-                        <text x="0" y="10" fontSize="10" fill="#6B7280" textAnchor="start" transform="rotate(-90 10,60)">Cumulative Cost</text>
-                        {/* X-axis label */}
-                        <text x="90" y="98" fontSize="10" fill="#6B7280" textAnchor="middle">Timeline</text>
-                        {/* Budget line (gray, steady) */}
-                        <polyline points="20,80 60,70 100,60 140,60 170,60" fill="none" stroke="#9CA3AF" strokeWidth="2.5" />
-                        {/* Actual Forecast line (red, overtakes) */}
-                        <polyline points="20,90 60,80 100,70 140,50 170,40" fill="none" stroke="#DC2626" strokeWidth="2.5" />
-                        {/* Overrun point (red dot) */}
-                        <circle cx="140" cy="50" r="4" fill="#DC2626" className="animate-pulse" />
-                        {/* Callout line and text */}
-                        <line x1="140" y1="50" x2="160" y2="30" stroke="#DC2626" strokeWidth="1.5" />
-                        <rect x="160" y="18" width="48" height="18" rx="4" fill="#fff" stroke="#DC2626" strokeWidth="1" />
-                        <text x="184" y="30" fontSize="10" fill="#DC2626" textAnchor="middle" fontWeight="bold">$8,900</text>
-                        <text x="184" y="38" fontSize="8" fill="#DC2626" textAnchor="middle">over budget</text>
+                  {/* Bottom Right Card */}
+                  <div className="col-start-3 row-start-2 bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg w-full h-56 flex flex-col justify-between">
+                    <div className="flex items-center space-x-3 mb-2">
+                      <svg className="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
+                      <h3 className="text-lg font-bold text-red-800"> $8,900 over budget </h3>
                     </div>
+                    <p className="text-xs text-red-700 mb-4">If material delay continues 3+ days</p>
+                    {/* Budget and Forecast Bars */}
+                    <div className="space-y-3 mt-2">
+                      {/* Budget Bar */}
+                      <div className="flex items-center">
+                        <span className="text-xs text-gray-500 mr-2 w-14">Budget</span>
+                        <div className="relative flex-1 h-4 bg-gray-200 rounded-full">
+                          <div className="absolute left-0 top-0 h-4 bg-gray-500 rounded-full" style={{ width: '70%' }}></div>
+                          <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-700">$50K</span>
+                        </div>
+                      </div>
+                      {/* Forecast Bar */}
+                      <div className="flex items-center">
+                        <span className="text-xs text-gray-500 mr-2 w-14">Forecast</span>
+                        <div className="relative flex-1 h-4 bg-red-100 rounded-full">
+                          <div className="absolute left-0 top-0 h-4 bg-red-500 rounded-full" style={{ width: '82%' }}></div>
+                          <span className="absolute right-10 top-1/2 -translate-y-1/2 text-xs font-semibold text-red-700">$60K</span>
+                          {/* Alert icon at end of bar */}
+                          <span className="absolute right-2 top-1/2 -translate-y-1/2">
+                            <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Center column (col 2) is intentionally left empty for the icon */}
+                </div>
+                {/* Center File Icon with Encircling Line (absolute overlay) */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center" style={{width: '80px', height: '80px'}}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                      <circle cx="40" cy="40" r="36" fill="none" stroke="#103F31" strokeWidth="2.5" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col items-center justify-center w-full h-full">
+                    <svg className="w-10 h-10 text-[#103F31] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span className="text-xs font-semibold text-gray-900 text-center whitespace-nowrap">Daily Field Report</span>
                   </div>
                 </div>
               </div>
@@ -1092,169 +1079,277 @@ function LandingPage() {
     </section>
   );
 
-  // Simplified Mobile Demo Animation (Chat-like interface)
+  // Mobile version of AutomationDemo
   const MobileDemoAnimation = () => {
-    const [demoState, setDemoState] = useState(0);
-    const [typedText, setTypedText] = useState('');
-    const demoQuestion = "How early should I start networking?"; // Shortened for mobile
+    const [phase, setPhase] = useState('upload');
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
-      if (demoState === 0) {
-        let currentText = '';
-        const typeInterval = setInterval(() => {
-          if (currentText.length < demoQuestion.length) {
-            currentText = demoQuestion.slice(0, currentText.length + 1);
-            setTypedText(currentText);
-          } else {
-            clearInterval(typeInterval);
-            setDemoState(1);
-          }
-        }, 50);
-
-        return () => clearInterval(typeInterval);
-      }
-
-      if (demoState === 1) {
-        setTimeout(() => setDemoState(2), 1500);
-      }
-    }, [demoState]);
+      const runAnimation = () => {
+        setPhase('upload');
+        setIsDragging(true);
+        setCursorPosition({ x: 25, y: 50 });
+        
+        setTimeout(() => {
+          const startTime = Date.now();
+          const duration = 1500;
+          
+          const animateCursor = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const easeProgress = progress < 0.5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            
+            const x = 25 + (50 * easeProgress);
+            setCursorPosition({ x, y: 50 });
+            
+            if (progress < 1) {
+              requestAnimationFrame(animateCursor);
+            } else {
+              setPhase('processing');
+              setIsDragging(false);
+              
+              setTimeout(() => {
+                setPhase('insights');
+                
+                setTimeout(() => {
+                  runAnimation();
+                }, 5000);
+              }, 1500);
+            }
+          };
+          
+          requestAnimationFrame(animateCursor);
+        }, 1500);
+      };
+      
+      runAnimation();
+    }, []);
 
     return (
       <div className="mx-4 mb-6">
-        <div className="bg-gray-100 rounded-2xl p-4">
-          {/* Chat Interface */}
-          <div className="space-y-4">
-            {/* User Message */}
-            <div className="flex justify-end">
-              <div className="bg-[#4AA3DF] text-white rounded-2xl px-4 py-2 max-w-[80%]">
-                <p className="text-sm">{typedText || "..."}</p>
-              </div>
-            </div>
-
-            {/* AI Response */}
-            {demoState >= 1 && (
-              <div className="space-y-4">
-                {/* Initial Response */}
-                <div className="flex items-start space-x-2">
-                  <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                    <img 
-                      src="/humint_icon.png" 
-                      alt="HUMINT"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  {demoState === 1 ? (
-                    <div className="bg-white rounded-2xl px-3 py-2">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                        <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></div>
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+          <div className="p-4">
+            <div className="relative h-[300px] flex items-center justify-center">
+              
+              {/* Phase 1: Upload */}
+              {phase === 'upload' && (
+                <div className="w-full h-full flex items-center justify-between">
+                  {/* Left Side - Daily Report */}
+                  <div className="w-1/2 flex justify-center">
+                    <div className="bg-white rounded-lg shadow-md p-3 border border-gray-200 max-w-[140px]">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <svg className="w-4 h-4 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <div>
+                          <h3 className="text-xs font-semibold text-gray-900">Daily Report</h3>
+                          <p className="text-[10px] text-gray-500">May 26, 2025</p>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-1 text-left">
+                        <div className="flex items-start">
+                          <span className="text-red-500 mr-1 mt-0.5 text-[8px]">•</span>
+                          <p className="text-[8px] text-gray-700">Ductwork delayed</p>
+                        </div>
+                        <div className="flex items-start">
+                          <span className="text-yellow-500 mr-1 mt-0.5 text-[8px]">•</span>
+                          <p className="text-[8px] text-gray-700">$9K unplanned cost</p>
+                        </div>
                       </div>
                     </div>
-                  ) : (
-                    <div className="bg-white rounded-2xl px-4 py-3 w-full">
-                      {/* Metadata Bar */}
-                      <div className="flex items-center justify-between mb-2 text-[10px]">
-                        <div className="flex items-center space-x-2">
-                          <span className="px-1.5 py-0.5 bg-green-100 text-green-700 rounded-full">
-                            High Confidence
-                          </span>
-                          <span className="px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded-full">
-                            Early Career
-                          </span>
-                        </div>
-                        <span className="text-gray-500">8 sources</span>
-                      </div>
+                  </div>
 
-                      {/* Main Response */}
-                      <p className="text-sm text-gray-800 mb-3">
-                        While opinions vary, quality of networking matters more than timing. Here's what successful bankers say:
-                      </p>
+                  {/* Right Side - Drop Zone */}
+                  <div className="w-1/2 flex justify-center">
+                    <div className={`border-2 border-dashed rounded-xl p-4 text-center transition-all duration-200 ease-out w-32 h-24 flex flex-col items-center justify-center ${
+                      isDragging && cursorPosition.x > 60 ? 'border-[#103F31] bg-[#103F31]/8' : 'border-gray-300'
+                    }`}>
+                      <svg className={`w-6 h-6 mb-1 transition-all duration-200 ease-out ${
+                        isDragging && cursorPosition.x > 60 ? 'text-[#103F31]' : 'text-gray-400'
+                      }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      <p className="text-[10px] text-gray-500">Drop here</p>
+                    </div>
+                  </div>
 
-                      {/* Expert Quotes */}
-                      <div className="space-y-3">
-                        <div className="bg-gray-50 rounded-xl p-3">
-                          <blockquote className="text-xs text-gray-700 italic mb-2">
-                            "Starting early in freshman year gave me a huge advantage. I had time to build genuine relationships."
-                          </blockquote>
-                          <div className="flex items-center space-x-2">
-                            <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center">
-                              <span className="text-xs">💼</span>
-                            </div>
-                            <div>
-                              <div className="text-[#4AA3DF] text-xs font-medium">
-                                Jane Doe
-                              </div>
-                              <div className="text-[10px] text-gray-600">
-                                Goldman Sachs · IB
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="bg-gray-50 rounded-xl p-3">
-                          <blockquote className="text-xs text-gray-700 italic mb-2">
-                            "Don't stress about starting super early. Focus on quality connections and genuine interest."
-                          </blockquote>
-                          <div className="flex items-center space-x-2">
-                            <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center">
-                              <span className="text-xs">💼</span>
-                            </div>
-                            <div>
-                              <div className="text-[#4AA3DF] text-xs font-medium">
-                                John Doe
-                              </div>
-                              <div className="text-[10px] text-gray-600">
-                                Jefferies · IB
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                  {/* Animated Cursor */}
+                  {isDragging && (
+                    <div 
+                      className="absolute pointer-events-none z-50"
+                      style={{
+                        left: `${cursorPosition.x}%`,
+                        top: `${cursorPosition.y}%`,
+                        transform: 'translate(-50%, -50%)',
+                        transition: 'all 0.05s ease-out'
+                      }}
+                    >
+                      <svg className="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" />
+                      </svg>
                     </div>
                   )}
                 </div>
-              </div>
-            )}
-          </div>
+              )}
 
-          {/* Mobile Chat Input */}
-          <div className="mt-4 flex items-center space-x-2">
-            <input
-              type="text"
-              placeholder="Ask about recruiting..."
-              className="flex-1 bg-white rounded-full px-4 py-2 text-sm border border-gray-200"
-              disabled
-            />
-            <button className="w-8 h-8 bg-[#4AA3DF] rounded-full flex items-center justify-center">
-              <span className="text-white text-sm">➤</span>
-            </button>
+              {/* Phase 2: Processing */}
+              {phase === 'processing' && (
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="flex items-center justify-center space-x-1 mb-3">
+                      <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-[#103F31] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    </div>
+                    <p className="text-sm font-medium text-[#103F31]">Bract is processing...</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Phase 3: Insights - Mobile Grid */}
+              {phase === 'insights' && (
+                <div className="w-full relative">
+                  <div className="grid grid-cols-2 gap-2">
+                    {/* Project Completion */}
+                    <div className="bg-white rounded-lg p-3 border border-[#103F31]/10 shadow-sm h-24 flex flex-col justify-between">
+                      <h3 className="text-[10px] font-medium text-gray-900">✅ 64% complete</h3>
+                      <span className="text-lg font-bold text-[#103F31]">64%</span>
+                    </div>
+
+                    {/* Underbilling */}
+                    <div className="bg-yellow-50 rounded-lg p-3 border border-yellow-200 shadow-sm h-24 flex flex-col justify-between">
+                      <h3 className="text-[10px] font-medium text-yellow-800">⚠️ Underbilling</h3>
+                      <span className="text-lg font-bold text-yellow-900">$12,400</span>
+                    </div>
+
+                    {/* Task Delay */}
+                    <div className="bg-red-50 rounded-lg p-3 border border-red-200 shadow-sm h-24 flex flex-col justify-between">
+                      <h3 className="text-[10px] font-medium text-red-800">🕒 3 days late</h3>
+                      <span className="text-xs text-red-700 font-semibold">At risk</span>
+                    </div>
+
+                    {/* Cost Overrun */}
+                    <div className="bg-red-50 rounded-lg p-3 border border-red-200 shadow-sm h-24 flex flex-col justify-between">
+                      <h3 className="text-[10px] font-medium text-red-800">🔺 Over budget</h3>
+                      <span className="text-lg font-bold text-red-800">$8,900</span>
+                    </div>
+                  </div>
+                  
+                  {/* Center File Icon */}
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center" style={{width: '60px', height: '60px'}}>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg width="60" height="60" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="28" fill="none" stroke="#103F31" strokeWidth="1.5" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col items-center justify-center w-full h-full">
+                      <svg className="w-4 h-4 text-[#103F31] mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span className="text-[8px] font-semibold text-gray-900 text-center">Report</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
     );
   };
 
-  // Move these animation components BEFORE MobileFeaturesSection
+  // Mobile Problem Section
+  const MobileProblemSection = () => (
+    <section className="px-4 py-8 bg-white">
+      <div className="max-w-md mx-auto">
+        <h2 className="text-lg font-semibold text-center mb-8 text-gray-900">
+          The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">Problem</span> We're Solving
+        </h2>
+        
+        {/* Visual Elements */}
+        <div className="flex items-center justify-center space-x-8 mb-8">
+          {/* Field Icon */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-12 flex items-center justify-center">
+              <svg className="w-8 h-8 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+              </svg>
+            </div>
+            <span className="text-xs font-medium text-gray-600 mt-1">Field</span>
+          </div>
+
+          {/* Disconnect Line */}
+          <div className="flex-1 max-w-[100px] relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="absolute left-2 right-2 h-0.5 bg-gray-500"></div>
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+            </div>
+            <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-600">Disconnect</span>
+          </div>
+
+          {/* Operations Icon */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-12 flex items-center justify-center">
+              <svg className="w-8 h-8 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <span className="text-xs font-medium text-gray-600 mt-1">Operations</span>
+          </div>
+        </div>
+
+        {/* Problem Description */}
+        <div className="text-center space-y-3">
+          <p className="text-base text-gray-600">
+            Field data gets buried in PDFs and spreadsheets.
+          </p>
+          <p className="text-base font-semibold text-gray-900">
+            Operations can't see what's really happening — until it's too late.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+
+  // Mobile Database Animation for Feature 1
   const MobileDatabaseAnimation = () => (
-    <div className="relative w-full h-[200px] flex items-center justify-center">
-      <div className="absolute inset-0 flex items-center justify-center scale-[0.6]">
-        {/* Single transcript for mobile */}
-        <div className="bg-white rounded-lg shadow-lg p-4 w-full max-w-[280px]">
-          <div className="border-b border-gray-200 pb-2 mb-2">
-            <div className="font-mono text-[10px] text-gray-500">
-              INTERVIEW_ID: GS_VP_2024_03
+    <div className="relative w-full h-[160px] flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-sm p-3 w-[280px] scale-[0.8]">
+        <div className="space-y-2">
+          <div className="bg-white rounded-lg shadow-sm p-3 border border-gray-200">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-xs font-medium text-gray-900">Install HVAC Units</h3>
+              <span className="text-xs px-2 py-1 rounded-full bg-[#103F31]/10 text-[#103F31]">In Progress</span>
             </div>
-            <div className="text-xs font-medium text-gray-900">
-              Vice President
+            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-full bg-[#103F31] rounded-full w-3/4 transition-all duration-1000"></div>
             </div>
-            <div className="text-[10px] text-gray-600">
-              Goldman Sachs - IB
+            <div className="mt-1 flex justify-between items-center">
+              <span className="text-xs text-gray-500">Progress</span>
+              <span className="text-xs font-medium text-[#103F31]">75%</span>
             </div>
           </div>
-          <div className="font-mono text-[10px] space-y-2">
-            <div className="text-gray-800">
-              "The process typically starts with client outreach..."
+          
+          <div className="bg-white rounded-lg shadow-sm p-3 border border-gray-200">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-xs font-medium text-gray-900">Wire Thermostat</h3>
+              <span className="text-xs px-2 py-1 rounded-full bg-red-50 text-red-600">Delayed</span>
+            </div>
+            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-full bg-red-500 rounded-full w-1/2 transition-all duration-1000"></div>
+            </div>
+            <div className="mt-1 flex justify-between items-center">
+              <span className="text-xs text-gray-500">Progress</span>
+              <span className="text-xs font-medium text-red-600">45%</span>
             </div>
           </div>
         </div>
@@ -1262,46 +1357,91 @@ function LandingPage() {
     </div>
   );
 
+  // Mobile Persona Animation for Feature 2
   const MobilePersonaAnimation = () => (
-    <div className="relative w-full h-[200px] flex items-center justify-center">
-      <div className="bg-white rounded-xl shadow-sm p-3 w-[280px] scale-[0.8]">
-        <div className="text-xs text-gray-500 mb-2">🎯 Duke Alumni, Econ Major</div>
-        <div className="flex flex-wrap gap-1">
-          {['Duke', 'Econ Major'].map((tag) => (
-            <span key={tag} className="bg-emerald-50 text-emerald-600 text-[10px] px-2 py-1 rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  const MobileChatAnimation = () => (
-    <div className="relative w-full h-[200px] flex items-center justify-center">
-      <div className="w-[280px] scale-[0.8]">
-        <div className="bg-[#4AA3DF] text-white rounded-xl px-3 py-2 text-xs mb-2 ml-auto">
-          What's the difference between offices?
-        </div>
-        <div className="flex items-start space-x-2">
-          <div className="w-6 h-6 rounded-full bg-[#4AA3DF]/10 flex items-center justify-center">
-            <img 
-              src="/humint_icon.png" 
-              alt="HUMINT"
-              className="w-4 h-4"
+    <div className="relative w-full h-[160px] flex items-center justify-center">
+      <div className="bg-white rounded-xl shadow-sm p-4 w-[280px] scale-[0.8]">
+        {/* Radial Progress */}
+        <div className="relative w-24 h-24 mx-auto mb-4">
+          <svg className="w-full h-full" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" strokeWidth="8" />
+            <circle 
+              cx="50" 
+              cy="50" 
+              r="40" 
+              fill="none" 
+              stroke="#103F31" 
+              strokeWidth="8"
+              strokeDasharray="251"
+              strokeDashoffset="90"
+              transform="rotate(-90 50 50)"
+              className="transition-all duration-1000"
             />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-lg font-bold text-[#103F31]">65%</span>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-3 flex-1">
-            <p className="text-xs text-gray-600">
-              Based on our interviews, there are several key differences...
-            </p>
+        </div>
+
+        {/* Financial Metrics */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="text-xs text-gray-600">Earned Revenue</div>
+            <div className="text-sm font-bold text-[#103F31]">$52,000</div>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-xs text-gray-600">Actual Cost</div>
+            <div className="text-sm font-bold text-[#103F31]">$49,500</div>
           </div>
         </div>
       </div>
     </div>
   );
 
-  // Then update MobileFeaturesSection to use these components
+  // Mobile Chat Animation for Feature 3
+  const MobileChatAnimation = () => (
+    <div className="relative w-full h-[160px] flex items-center justify-center">
+      <div className="w-[280px] scale-[0.8]">
+        <div className="bg-white rounded-xl shadow-sm p-4">
+          {/* Task Progress */}
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-xs font-medium text-gray-900">HVAC Installation</h3>
+              <span className="text-xs text-gray-500">Progress</span>
+            </div>
+            <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div className="absolute inset-y-0 left-0 bg-[#103F31] rounded-full w-4/5 transition-all duration-1000"></div>
+              {/* Delay Flag */}
+              <div className="absolute top-0 left-3/5 transform -translate-x-1/2 -translate-y-full">
+                <div className="bg-red-50 text-red-600 px-2 py-1 rounded-full text-[10px] font-medium whitespace-nowrap">
+                  3 days late
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Risk Warnings */}
+          <div className="space-y-2">
+            <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-2">
+              <div className="flex items-center justify-between">
+                <div className="text-xs font-medium text-yellow-800">Underbilling Risk</div>
+                <div className="text-sm font-bold text-yellow-900">$12,400</div>
+              </div>
+            </div>
+            
+            <div className="bg-red-50 border border-red-100 rounded-lg p-2">
+              <div className="flex items-center justify-between">
+                <div className="text-xs font-medium text-red-800">Cost Overrun</div>
+                <div className="text-sm font-bold text-red-800">$8,900</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Updated Mobile Features Section
   const MobileFeaturesSection = () => {
     const [activeFeature, setActiveFeature] = useState(0);
     const containerRef = useRef(null);
@@ -1309,24 +1449,21 @@ function LandingPage() {
     const features = [
       {
         id: 'feature1',
-        icon: '📚',
-        title: 'Proprietary Expert Knowledge Base',
-        description: 'Every response is powered by real insights from our database of 200+ banker interviews.',
-        component: MobileDatabaseAnimation  // Updated reference
+        title: 'Automated Task & Progress Tracking',
+        description: 'Bract parses WIP schedules and daily field reports to generate and update task progress — no manual data entry required.',
+        component: MobileDatabaseAnimation
       },
       {
         id: 'feature2',
-        icon: '🎯',
-        title: 'Target Persona Matching',
-        description: 'Get personalized advice based on your background and goals, ensuring relevant guidance for your specific situation.',
-        component: MobilePersonaAnimation  // Updated reference
+        title: 'Built-in Cost & Revenue Engine',
+        description: 'From contract value to actual cost and earned revenue, Bract keeps your numbers updated in real time so that field progress matches financial truth.',
+        component: MobilePersonaAnimation
       },
       {
         id: 'feature3',
-        icon: '💬',
-        title: 'Interactive Follow-ups',
-        description: 'Keep the conversation going with AI-powered suggestions and follow-ups based on what you ask.',
-        component: MobileChatAnimation  // Updated reference
+        title: 'Risk Flagging & Operational Visibility',
+        description: 'Bract flags anomalies like delayed tasks or underbilling risks — helping both operations and finance stay ahead of problems, not react to them.',
+        component: MobileChatAnimation
       }
     ];
 
@@ -1347,9 +1484,9 @@ function LandingPage() {
     }, []);
 
     return (
-      <section className="py-6 bg-white">
-        <h2 className="text-lg font-semibold text-center mb-4">
-          Why Choose humint
+      <section className="py-8 bg-white">
+        <h2 className="text-lg font-semibold text-center mb-6 px-4">
+          Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">Bract</span>
         </h2>
         
         {/* Feature Cards with Animations */}
@@ -1371,8 +1508,8 @@ function LandingPage() {
                 
                 {/* Feature Text */}
                 <div className="text-center mt-4">
-                  <h3 className="text-base font-medium mb-1">{feature.title}</h3>
-                  <p className="text-sm text-gray-600">{feature.description}</p>
+                  <h3 className="text-base font-medium mb-2">{feature.title}</h3>
+                  <p className="text-sm text-gray-600 px-2">{feature.description}</p>
                 </div>
               </div>
             </div>
@@ -1385,7 +1522,7 @@ function LandingPage() {
             <div
               key={index}
               className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                activeFeature === index ? 'bg-emerald-500' : 'bg-gray-200'
+                activeFeature === index ? 'bg-[#103F31]' : 'bg-gray-200'
               }`}
             />
           ))}
@@ -1505,7 +1642,7 @@ function LandingPage() {
         </div>
 
         {/* Stats in a row */}
-        <div className="grid grid-cols-3 gap-2 px-2">
+        <div className="grid [grid-template-columns:1fr_120px_1fr] gap-3">
           <div className="text-center">
             <div className="text-xl font-bold text-[#4AA3DF]">200+</div>
             <div className="text-xs text-gray-600">Interviews</div>
@@ -1620,13 +1757,15 @@ function LandingPage() {
 
         <MobileHeroSection />
         <MobileDemoAnimation />
+        <MobileProblemSection />
         <MobileFeaturesSection />
+        <MobileInstitutionsSection />
         <MobileCTASection />
         
         {/* Mobile Footer */}
         <footer className="px-4 py-6 bg-gray-50 border-t border-gray-100">
           <div className="text-center text-xs text-gray-600">
-            <p>© 2024 Humint. All rights reserved.</p>
+            <p>© 2024 Bract. All rights reserved.</p>
           </div>
         </footer>
       </div>
@@ -1743,4 +1882,5 @@ function LandingPage() {
 }
 
 export default LandingPage;
+
 
