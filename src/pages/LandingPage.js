@@ -959,14 +959,14 @@ function LandingPage() {
     <section className="px-4 py-8">
       <div className="text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          <span className="whitespace-nowrap">Sync HVAC field and operations.</span>
+          <span className="whitespace-nowrap">Sync HVAC field and operations</span>
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">
-            Instantly.
+            Instantly
           </span>
         </h1>
         <p className="text-base text-gray-600 mb-6">
-          Upload what you already have — reports, schedules, invoices. Bract reads them, extracts key metrics, and keeps both the field and accounting on the same page.
+            No more manual updates. Bract automatically turns field reports into real-time progress, cost, and billing insights.
         </p>
         
         <form 
@@ -1525,14 +1525,14 @@ function LandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-5xl mx-auto mb-12">
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
-              <span className="whitespace-nowrap">Sync HVAC field and operations.</span>
+              <span className="whitespace-nowrap">Sync HVAC field and operations</span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">
-                Instantly.
+                Instantly
               </span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Upload what you already have — reports, schedules, invoices. Bract reads them, extracts key metrics, and keeps both the field and accounting on the same page.
+                No more manual updates. Bract automatically turns field reports into real-time progress, cost, and billing insights.
             </p>
             
             <div className="max-w-md mx-auto">
