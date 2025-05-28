@@ -415,90 +415,87 @@ function LandingPage() {
       return (
         <div className="relative w-full h-[32rem] flex items-center justify-center">
           <div className="bg-white rounded-xl shadow-lg p-8 w-[32rem]">
-            <div className="relative w-48 h-48 mx-auto mb-8">
-              <svg className="w-full h-full" viewBox="0 0 100 100">
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="45"
-                  fill="none"
-                  stroke="#E5E7EB"
-                  strokeWidth="8"
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-medium text-gray-900">HVAC Installation</h3>
+                <span className="text-sm text-gray-500">Task Progress</span>
+              </div>
+              
+              <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden mb-2">
+                <div 
+                  className="absolute inset-y-0 left-0 bg-[#103F31] rounded-full transition-all duration-100 ease-out"
+                  style={{ width: `${progress}%` }}
                 />
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="45"
-                  fill="none"
-                  stroke="#103F31"
-                  strokeWidth="8"
-                  strokeDasharray="283"
-                  strokeDashoffset={283 - (283 * progress) / 100}
-                  transform="rotate(-90 50 50)"
-                  className="transition-all duration-100 ease-out"
-                />
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-3xl font-bold text-[#103F31]">{progress}%</span>
+                
+                <div 
+                  className={`absolute -top-8 left-[60%] transform -translate-x-1/2 transition-all duration-500 ${
+                    showDelay ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                  }`}
+                >
+                  <div className="bg-red-50 text-red-600 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap border border-red-200">
+                    3 days late
+                  </div>
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 -translate-y-1 rotate-45 w-2 h-2 bg-red-50 border-r border-b border-red-200"></div>
+                </div>
               </div>
             </div>
 
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-gray-600">Earned Revenue</div>
-                <div className="text-lg font-bold text-[#103F31]">
-                  ${showMetrics ? Math.floor(82000 * (progress / 65)) : 0}
+            <div className={`space-y-6 transition-all duration-500 ${
+              showWarnings ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}>
+              <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm font-medium text-yellow-800">Underbilling Risk</div>
+                  <div className="text-lg font-bold text-yellow-900">$12,400</div>
                 </div>
+                <p className="text-xs text-yellow-700">
+                  Current progress exceeds billed amount by 15%
+                </p>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-gray-600">Actual Cost</div>
-                <div className="text-lg font-bold text-[#103F31]">
-                  ${showMetrics ? Math.floor(63000 * (progress / 65)) : 0}
+              <div className="bg-white border border-gray-100 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-sm font-medium text-gray-900">Cost Forecast</div>
+                  <div className="text-sm font-medium text-red-600">+8.9%</div>
                 </div>
-              </div>
-
-              <div className={`flex items-center justify-between transition-opacity duration-500 ${
-                progress >= 50 ? 'opacity-100' : 'opacity-0'
-              }`}>
-                <div className="text-sm text-gray-600">Forecasted Cost Overrun</div>
-                <div className="text-lg font-bold text-red-600">
-                  ${showMetrics ? Math.floor(12000 * ((progress - 50) / 15)) : 0}
-                </div>
-              </div>
-
-              <div className="mt-6 pt-6 border-t border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-600">Profit Margin</div>
-                  <div className="text-lg font-bold text-[#103F31]">
-                    {showMetrics ? (8.0 * (progress / 65)).toFixed(1) : 0}%
+                
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <span className="text-xs text-gray-500 mr-3 w-16">Budget</span>
+                    <div className="relative flex-1 h-4 bg-gray-200 rounded-full">
+                      <div className="absolute left-0 top-0 h-4 bg-gray-500 rounded-full transition-all duration-1000 ease-out" style={{ width: '70%' }}></div>
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-700">$50K</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-xs text-gray-500 mr-3 w-16">Forecast</span>
+                    <div className="relative flex-1 h-4 bg-red-100 rounded-full">
+                      <div 
+                        className="absolute left-0 top-0 h-4 bg-red-500 rounded-full transition-all duration-1000 ease-out" 
+                        style={{ width: showWarnings ? '82%' : '0%' }}
+                      ></div>
+                      <span className="absolute right-10 top-1/2 -translate-y-1/2 text-xs font-semibold text-red-700">$60K</span>
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2">
+                        <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 h-16 relative">
-              <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
-                <path
-                  d={`M0,35 L20,${35 - (progress * 0.3)} L40,${35 - (progress * 0.4)} L60,${35 - (progress * 0.5)} L80,${35 - (progress * 0.6)} L100,${35 - (progress * 0.7)}`}
-                  fill="none"
-                  stroke="#103F31"
-                  strokeWidth="2"
-                  className="transition-all duration-100 ease-out"
-                />
-                <path
-                  d={`M0,35 L20,${35 - (progress * 0.3)} L40,${35 - (progress * 0.4)} L60,${35 - (progress * 0.5)} L80,${35 - (progress * 0.6)} L100,${35 - (progress * 0.7)}`}
-                  fill="url(#gradient)"
-                  opacity="0.2"
-                  className="transition-all duration-100 ease-out"
-                />
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#103F31" />
-                    <stop offset="100%" stopColor="#103F31" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-              </svg>
+            <div className={`mt-8 pt-6 border-t border-gray-100 transition-all duration-500 ${
+              showWarnings ? 'opacity-100' : 'opacity-0'
+            }`}>
+              <div className="flex items-center justify-between">
+                <div className="text-sm text-gray-600">Risk Level</div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-red-600">High</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -544,26 +541,26 @@ function LandingPage() {
         <div className="relative w-full h-[32rem] flex items-center justify-center">
           <div className="bg-white rounded-xl shadow-lg p-8 w-[32rem]">
             <div className="mb-8">
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-medium text-gray-900">HVAC Installation</h3>
                 <span className="text-sm text-gray-500">Task Progress</span>
               </div>
               
-              <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden">
+              <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden mb-2">
                 <div 
                   className="absolute inset-y-0 left-0 bg-[#103F31] rounded-full transition-all duration-100 ease-out"
                   style={{ width: `${progress}%` }}
                 />
                 
                 <div 
-                  className={`absolute top-0 left-[60%] transform -translate-x-1/2 transition-all duration-500 ${
+                  className={`absolute -top-8 left-[60%] transform -translate-x-1/2 transition-all duration-500 ${
                     showDelay ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
                   }`}
                 >
-                  <div className="bg-red-50 text-red-600 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap">
+                  <div className="bg-red-50 text-red-600 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap border border-red-200">
                     3 days late
                   </div>
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-red-50"></div>
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 -translate-y-1 rotate-45 w-2 h-2 bg-red-50 border-r border-b border-red-200"></div>
                 </div>
               </div>
             </div>
@@ -587,31 +584,29 @@ function LandingPage() {
                   <div className="text-sm font-medium text-red-600">+8.9%</div>
                 </div>
                 
-                <div className="h-16 relative">
-                  <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
-                    <path
-                      d="M0,35 L100,35"
-                      stroke="#E5E7EB"
-                      strokeWidth="1"
-                      fill="none"
-                    />
-                    <path
-                      d={`M0,35 L20,${35 - (progress * 0.2)} L40,${35 - (progress * 0.3)} L60,${35 - (progress * 0.4)} L80,${35 - (progress * 0.5)} L100,${35 - (progress * 0.6)}`}
-                      stroke="#DC2626"
-                      strokeWidth="2"
-                      fill="none"
-                      className="transition-all duration-100 ease-out"
-                    />
-                    <path
-                      d="M90,20 L100,10 L100,30 Z"
-                      fill="#DC2626"
-                      className="transition-all duration-100 ease-out"
-                      style={{
-                        opacity: progress > 40 ? 1 : 0,
-                        transform: `translate(${progress * 0.1}px, ${-progress * 0.3}px)`
-                      }}
-                    />
-                  </svg>
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <span className="text-xs text-gray-500 mr-3 w-16">Budget</span>
+                    <div className="relative flex-1 h-4 bg-gray-200 rounded-full">
+                      <div className="absolute left-0 top-0 h-4 bg-gray-500 rounded-full transition-all duration-1000 ease-out" style={{ width: '70%' }}></div>
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-700">$50K</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-xs text-gray-500 mr-3 w-16">Forecast</span>
+                    <div className="relative flex-1 h-4 bg-red-100 rounded-full">
+                      <div 
+                        className="absolute left-0 top-0 h-4 bg-red-500 rounded-full transition-all duration-1000 ease-out" 
+                        style={{ width: showWarnings ? '82%' : '0%' }}
+                      ></div>
+                      <span className="absolute right-10 top-1/2 -translate-y-1/2 text-xs font-semibold text-red-700">$60K</span>
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2">
+                        <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -912,7 +907,7 @@ function LandingPage() {
                         <span className="text-xs text-gray-500 mr-2 w-14">Forecast</span>
                         <div className="relative flex-1 h-4 bg-red-100 rounded-full">
                           <div className="absolute left-0 top-0 h-4 bg-red-500 rounded-full" style={{ width: '82%' }}></div>
-                          <span className="absolute right-10 top-1/2 -translate-y-1/2 text-xs font-semibold text-red-700">$60K</span>
+                          <span className="absolute right-14 top-1/2 -translate-y-1/2 text-xs font-semibold text-red-700">$60K</span>
                           <span className="absolute right-2 top-1/2 -translate-y-1/2">
                             <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
