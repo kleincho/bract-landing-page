@@ -1502,7 +1502,7 @@ function LandingPage() {
         
         <footer className="px-4 py-6 bg-gray-50 border-t border-gray-100">
           <div className="text-center text-xs text-gray-600">
-            <p>© 2024 Bract. All rights reserved.</p>
+            <p>© 2025 Bract. All rights reserved.</p>
           </div>
         </footer>
       </div>
@@ -1600,7 +1600,7 @@ function LandingPage() {
 
       <footer className="px-6 py-8 bg-[#f5f5f4]">
         <div className="max-w-7xl mx-auto text-center text-gray-600">
-          <p>© 2024 Bract. All rights reserved.</p>
+          <p>© 2025 Bract. All rights reserved.</p>
         </div>
       </footer>
     </div>
