@@ -389,11 +389,15 @@ function LandingPage() {
     const PersonaAnimation = () => {
       const [showMetrics, setShowMetrics] = useState(false);
       const [progress, setProgress] = useState(0);
+      const [showDelay, setShowDelay] = useState(false);
+      const [showWarnings, setShowWarnings] = useState(false);
 
       useEffect(() => {
         if (activeFeature === 'feature2') {
           setShowMetrics(false);
           setProgress(0);
+          setShowDelay(false);
+          setShowWarnings(false);
 
           setTimeout(() => {
             setShowMetrics(true);
@@ -406,6 +410,14 @@ function LandingPage() {
                 return prev + 1;
               });
             }, 20);
+
+            setTimeout(() => {
+              setShowDelay(true);
+            }, 1200);
+
+            setTimeout(() => {
+              setShowWarnings(true);
+            }, 1800);
 
             return () => clearInterval(progressInterval);
           }, 500);
