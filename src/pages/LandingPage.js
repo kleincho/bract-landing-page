@@ -5,7 +5,6 @@ import { API_URL } from '../services/config';
 import { isMobile } from 'react-device-detect';
 import { supabase } from '../lib/supabaseClient';
 
-
 function LandingPage() {
   const sliderRef = useRef(null);
   const scrollIntervalRef = useRef(null);
@@ -96,11 +95,8 @@ function LandingPage() {
 
       if (error) throw error;
 
-      // Clear the form
       e.target.reset();
       setSuccessMessage('Successfully joined the waitlist!');
-      
-      // Navigate to confirmation page
       navigate('/confirmation', { state: { email } });
     } catch (error) {
       console.error('Error:', error);
@@ -117,9 +113,7 @@ function LandingPage() {
           The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">Problem</span> We're Solving
         </h2>
         
-        {/* Visual Elements */}
         <div className="flex items-center justify-center space-x-16 mb-12">
-          {/* Field Icon */}
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 flex items-center justify-center">
               <svg className="w-12 h-12 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,10 +123,8 @@ function LandingPage() {
             <span className="text-sm font-medium text-gray-600 mt-2">Field</span>
           </div>
 
-          {/* Disconnect Line */}
           <div className="flex-1 max-w-[200px] relative">
             <div className="absolute inset-0 flex items-center">
-              {/* Line with X mark */}
               <div className="absolute left-4 right-4 h-1 bg-gray-500"></div>
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,7 +135,6 @@ function LandingPage() {
             <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-gray-600">Disconnect</span>
           </div>
 
-          {/* Operations Icon */}
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 flex items-center justify-center">
               <svg className="w-12 h-12 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,7 +145,6 @@ function LandingPage() {
           </div>
         </div>
 
-        {/* Problem Description */}
         <div className="max-w-3xl mx-auto text-center space-y-4">
           <p className="text-xl text-gray-600">
             Field data gets buried in PDFs and spreadsheets.
@@ -177,18 +167,14 @@ function LandingPage() {
           Our interviews feature professionals and students from leading institutions
         </p>
 
-        {/* Logos Container */}
         <div className="relative overflow-hidden py-8 bg-white rounded-xl shadow-sm">
-          {/* Gradient Overlays */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
           
-          {/* Scrolling Logos */}
           <div 
             ref={sliderRef}
             className="flex space-x-12 overflow-x-hidden whitespace-nowrap px-12"
           >
-            {/* Universities */}
             <div className="flex items-center space-x-12">
               <div className="inline-flex flex-col items-center min-w-[200px]">
                 <img 
@@ -211,8 +197,6 @@ function LandingPage() {
                   className="h-12 w-auto grayscale hover:grayscale-0 transition-all"
                 />
               </div>
-
-              {/* Finance Companies */}
               <div className="inline-flex flex-col items-center min-w-[400px]">
                 <img 
                   src="/logos/Evercore.png" 
@@ -234,8 +218,6 @@ function LandingPage() {
                   className="h-12 w-auto grayscale hover:grayscale-0 transition-all"
                 />
               </div>
-
-              {/* Duplicate logos for continuous scroll */}
               <div className="inline-flex flex-col items-center min-w-[200px]">
                 <img 
                   src="/logos/Foros.png" 
@@ -243,12 +225,10 @@ function LandingPage() {
                   className="h-12 w-auto grayscale hover:grayscale-0 transition-all"
                 />
               </div>
-              {/* ... duplicate other logos ... */}
             </div>
           </div>
         </div>
 
-        {/* Stats or Additional Info */}
         <div className="grid md:grid-cols-3 gap-8 mt-16">
           <div className="p-6 bg-white rounded-xl shadow-sm">
             <div className="text-3xl font-bold text-sky-600 mb-2">200+</div>
@@ -289,7 +269,6 @@ function LandingPage() {
       }
     ];
 
-    // Animation for Feature 1: Task Progress Animation
     const DatabaseAnimation = () => {
       const [showCards, setShowCards] = useState(false);
       const [activeCard, setActiveCard] = useState(0);
@@ -299,12 +278,10 @@ function LandingPage() {
           setShowCards(false);
           setActiveCard(0);
           
-          // Start animation sequence
           setTimeout(() => {
             setShowCards(true);
           }, 500);
 
-          // Animate cards in sequence
           const cardInterval = setInterval(() => {
             setActiveCard(prev => (prev + 1) % 4);
           }, 1500);
@@ -343,7 +320,6 @@ function LandingPage() {
       return (
         <div className="relative w-full h-[32rem] flex items-center justify-center">
           <div className="absolute inset-0 flex items-center justify-center">
-            {/* WIP Schedule Upload */}
             <div className={`absolute top-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
               showCards ? 'opacity-0 -translate-y-4' : 'opacity-100'
             }`}>
@@ -362,7 +338,6 @@ function LandingPage() {
               </div>
             </div>
 
-            {/* Task Cards */}
             <div className="space-y-4">
               {tasks.map((task, index) => (
                 <div
@@ -390,7 +365,6 @@ function LandingPage() {
                     </span>
                   </div>
                   
-                  {/* Progress Bar */}
                   <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-[#103F31] rounded-full transition-all duration-1000 ease-out"
@@ -412,7 +386,6 @@ function LandingPage() {
       );
     };
 
-    // Animation for Feature 2: Cost & Revenue Engine
     const PersonaAnimation = () => {
       const [showMetrics, setShowMetrics] = useState(false);
       const [progress, setProgress] = useState(0);
@@ -422,10 +395,8 @@ function LandingPage() {
           setShowMetrics(false);
           setProgress(0);
 
-          // Start animation sequence
           setTimeout(() => {
             setShowMetrics(true);
-            // Animate progress from 0 to 65%
             const progressInterval = setInterval(() => {
               setProgress(prev => {
                 if (prev >= 65) {
@@ -444,10 +415,8 @@ function LandingPage() {
       return (
         <div className="relative w-full h-[32rem] flex items-center justify-center">
           <div className="bg-white rounded-xl shadow-lg p-8 w-[32rem]">
-            {/* Radial Progress */}
             <div className="relative w-48 h-48 mx-auto mb-8">
               <svg className="w-full h-full" viewBox="0 0 100 100">
-                {/* Background circle */}
                 <circle
                   cx="50"
                   cy="50"
@@ -456,7 +425,6 @@ function LandingPage() {
                   stroke="#E5E7EB"
                   strokeWidth="8"
                 />
-                {/* Progress circle */}
                 <circle
                   cx="50"
                   cy="50"
@@ -475,46 +443,40 @@ function LandingPage() {
               </div>
             </div>
 
-            {/* Financial Metrics */}
             <div className="space-y-6">
-              {/* Earned Revenue */}
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-600">Earned Revenue</div>
                 <div className="text-lg font-bold text-[#103F31]">
-                  ${showMetrics ? Math.floor(52000 * (progress / 65)) : 0}
+                  ${showMetrics ? Math.floor(82000 * (progress / 65)) : 0}
                 </div>
               </div>
 
-              {/* Actual Cost */}
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-600">Actual Cost</div>
                 <div className="text-lg font-bold text-[#103F31]">
-                  ${showMetrics ? Math.floor(49500 * (progress / 65)) : 0}
+                  ${showMetrics ? Math.floor(63000 * (progress / 65)) : 0}
                 </div>
               </div>
 
-              {/* Cost Overrun */}
               <div className={`flex items-center justify-between transition-opacity duration-500 ${
                 progress >= 50 ? 'opacity-100' : 'opacity-0'
               }`}>
                 <div className="text-sm text-gray-600">Forecasted Cost Overrun</div>
                 <div className="text-lg font-bold text-red-600">
-                  ${showMetrics ? Math.floor(8900 * ((progress - 50) / 15)) : 0}
+                  ${showMetrics ? Math.floor(12000 * ((progress - 50) / 15)) : 0}
                 </div>
               </div>
 
-              {/* Profit Margin */}
               <div className="mt-6 pt-6 border-t border-gray-100">
                 <div className="flex items-center justify-between">
                   <div className="text-sm text-gray-600">Profit Margin</div>
                   <div className="text-lg font-bold text-[#103F31]">
-                    {showMetrics ? Math.floor((52000 - 49500) * (progress / 65)) : 0}%
+                    {showMetrics ? (8.0 * (progress / 65)).toFixed(1) : 0}%
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Sparkline */}
             <div className="mt-8 h-16 relative">
               <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
                 <path
@@ -543,7 +505,6 @@ function LandingPage() {
       );
     };
 
-    // Animation for Feature 3: Risk Flagging
     const ChatAnimation = () => {
       const [progress, setProgress] = useState(0);
       const [showDelay, setShowDelay] = useState(false);
@@ -555,9 +516,7 @@ function LandingPage() {
           setShowDelay(false);
           setShowWarnings(false);
 
-          // Start animation sequence
           setTimeout(() => {
-            // Animate progress bar
             const progressInterval = setInterval(() => {
               setProgress(prev => {
                 if (prev >= 80) {
@@ -568,12 +527,10 @@ function LandingPage() {
               });
             }, 20);
 
-            // Show delay flag at 60% progress
             setTimeout(() => {
               setShowDelay(true);
             }, 1200);
 
-            // Show warnings after delay flag
             setTimeout(() => {
               setShowWarnings(true);
             }, 1800);
@@ -586,21 +543,18 @@ function LandingPage() {
       return (
         <div className="relative w-full h-[32rem] flex items-center justify-center">
           <div className="bg-white rounded-xl shadow-lg p-8 w-[32rem]">
-            {/* Task Progress Section */}
             <div className="mb-8">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-sm font-medium text-gray-900">HVAC Installation</h3>
                 <span className="text-sm text-gray-500">Task Progress</span>
               </div>
               
-              {/* Progress Bar */}
               <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden">
                 <div 
                   className="absolute inset-y-0 left-0 bg-[#103F31] rounded-full transition-all duration-100 ease-out"
                   style={{ width: `${progress}%` }}
                 />
                 
-                {/* Delay Flag */}
                 <div 
                   className={`absolute top-0 left-[60%] transform -translate-x-1/2 transition-all duration-500 ${
                     showDelay ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
@@ -614,11 +568,9 @@ function LandingPage() {
               </div>
             </div>
 
-            {/* Risk Warnings */}
             <div className={`space-y-6 transition-all duration-500 ${
               showWarnings ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>
-              {/* Underbilling Warning */}
               <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-sm font-medium text-yellow-800">Underbilling Risk</div>
@@ -629,24 +581,20 @@ function LandingPage() {
                 </p>
               </div>
 
-              {/* Cost Forecast */}
               <div className="bg-white border border-gray-100 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-4">
                   <div className="text-sm font-medium text-gray-900">Cost Forecast</div>
                   <div className="text-sm font-medium text-red-600">+8.9%</div>
                 </div>
                 
-                {/* Trend Graph */}
                 <div className="h-16 relative">
                   <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
-                    {/* Background line */}
                     <path
                       d="M0,35 L100,35"
                       stroke="#E5E7EB"
                       strokeWidth="1"
                       fill="none"
                     />
-                    {/* Trend line */}
                     <path
                       d={`M0,35 L20,${35 - (progress * 0.2)} L40,${35 - (progress * 0.3)} L60,${35 - (progress * 0.4)} L80,${35 - (progress * 0.5)} L100,${35 - (progress * 0.6)}`}
                       stroke="#DC2626"
@@ -654,7 +602,6 @@ function LandingPage() {
                       fill="none"
                       className="transition-all duration-100 ease-out"
                     />
-                    {/* Trend arrow */}
                     <path
                       d="M90,20 L100,10 L100,30 Z"
                       fill="#DC2626"
@@ -669,7 +616,6 @@ function LandingPage() {
               </div>
             </div>
 
-            {/* Risk Summary */}
             <div className={`mt-8 pt-6 border-t border-gray-100 transition-all duration-500 ${
               showWarnings ? 'opacity-100' : 'opacity-0'
             }`}>
@@ -694,7 +640,6 @@ function LandingPage() {
           </h2>
           
           <div className="flex flex-col lg:flex-row gap-12">
-            {/* Visualization Area */}
             <div className="lg:w-1/2 bg-[#f5f5f4] rounded-2xl overflow-hidden">
               <div className="p-8">
                 {activeFeature === 'feature1' && <DatabaseAnimation />}
@@ -703,7 +648,6 @@ function LandingPage() {
               </div>
             </div>
 
-            {/* Feature List - Right Side */}
             <div className="lg:w-1/2">
               <div className="space-y-8">
                 {features.map((feature) => (
@@ -741,23 +685,18 @@ function LandingPage() {
     );
   };
 
-    const AutomationDemo = () => {
-    const [phase, setPhase] = useState('upload'); // 'upload', 'processing', 'insights'
+  const AutomationDemo = () => {
+    const [phase, setPhase] = useState('upload');
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
       const runAnimation = () => {
-        // Phase 1: Upload (3 seconds total)
         setPhase('upload');
-        setIsDragging(true); // Show cursor from the beginning
-        
-        // Set initial cursor position (left side)
+        setIsDragging(true);
         setCursorPosition({ x: 25, y: 50 });
         
-        // Wait 1.5 seconds, then start cursor movement
         setTimeout(() => {
-          // Animate cursor from left to right over 1.5 seconds
           const startTime = Date.now();
           const duration = 1500;
           
@@ -765,28 +704,23 @@ function LandingPage() {
             const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Smooth easing function for more natural movement
             const easeProgress = progress < 0.5
               ? 4 * progress * progress * progress
               : 1 - Math.pow(-2 * progress + 2, 3) / 2;
             
-            // Move cursor from left (25%) to right (75%) of container
             const x = 25 + (50 * easeProgress);
             setCursorPosition({ x, y: 50 });
             
             if (progress < 1) {
               requestAnimationFrame(animateCursor);
             } else {
-              // Phase 2: Processing (1.5 seconds)
               setPhase('processing');
               setIsDragging(false);
               
               setTimeout(() => {
-                // Phase 3: Insights (5 seconds)
                 setPhase('insights');
                 
                 setTimeout(() => {
-                  // Restart the cycle
                   runAnimation();
                 }, 5000);
               }, 1500);
@@ -794,7 +728,7 @@ function LandingPage() {
           };
           
           requestAnimationFrame(animateCursor);
-        }, 1500); // Wait 1.5 seconds before starting cursor animation
+        }, 1500);
       };
       
       runAnimation();
@@ -803,13 +737,10 @@ function LandingPage() {
     return (
       <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
         <div className="p-8">
-          {/* Fixed Height Container */}
           <div className="relative h-[500px] flex items-center justify-center">
             
-            {/* Phase 1: Upload */}
             {phase === 'upload' && (
               <div className="w-full h-full flex items-center justify-between">
-                {/* Left Side - Daily Report */}
                 <div className="w-1/2 flex justify-center">
                   <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200 max-w-sm">
                     <div className="flex items-center space-x-3 mb-4">
@@ -843,52 +774,47 @@ function LandingPage() {
                   </div>
                 </div>
 
-                                 {/* Right Side - Drop Zone */}
-                 <div className="w-1/2 flex justify-center">
-                   <div className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 ease-out w-64 h-48 flex flex-col items-center justify-center ${
-                     isDragging && cursorPosition.x > 60 ? 'border-[#103F31] bg-[#103F31]/8 shadow-lg' : 'border-gray-300'
-                   }`}>
-                     <svg className={`w-12 h-12 mb-4 transition-all duration-200 ease-out ${
-                       isDragging && cursorPosition.x > 60 ? 'text-[#103F31] scale-110' : 'text-gray-400'
-                     }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                     </svg>
-                     <h3 className={`text-lg font-medium mb-2 transition-colors duration-200 ${
-                       isDragging && cursorPosition.x > 60 ? 'text-[#103F31]' : 'text-gray-900'
-                     }`}>Drop report here</h3>
-                     <p className="text-sm text-gray-500">Upload your daily field report</p>
-                   </div>
-                 </div>
+                <div className="w-1/2 flex justify-center">
+                  <div className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 ease-out w-64 h-48 flex flex-col items-center justify-center ${
+                    isDragging && cursorPosition.x > 60 ? 'border-[#103F31] bg-[#103F31]/8 shadow-lg' : 'border-gray-300'
+                  }`}>
+                    <svg className={`w-12 h-12 mb-4 transition-all duration-200 ease-out ${
+                      isDragging && cursorPosition.x > 60 ? 'text-[#103F31] scale-110' : 'text-gray-400'
+                    }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <h3 className={`text-lg font-medium mb-2 transition-colors duration-200 ${
+                      isDragging && cursorPosition.x > 60 ? 'text-[#103F31]' : 'text-gray-900'
+                    }`}>Drop report here</h3>
+                    <p className="text-sm text-gray-500">Upload your daily field report</p>
+                  </div>
+                </div>
 
-                                 {/* Animated Cursor */}
-                 {isDragging && (
-                   <div 
-                     className="absolute pointer-events-none z-50"
-                     style={{
-                       left: `${cursorPosition.x}%`,
-                       top: `${cursorPosition.y}%`,
-                       transform: 'translate(-50%, -50%)',
-                       transition: 'all 0.05s ease-out'
-                     }}
-                   >
-                     <div className="relative">
-                       {/* Cursor shadow */}
-                       <div className="absolute inset-0 translate-x-0.5 translate-y-0.5">
-                         <svg className="w-6 h-6 text-gray-300 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                         </svg>
-                       </div>
-                       {/* Main cursor */}
-                       <svg className="w-6 h-6 text-gray-700 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                       </svg>
-                     </div>
-                   </div>
-                 )}
+                {isDragging && (
+                  <div 
+                    className="absolute pointer-events-none z-50"
+                    style={{
+                      left: `${cursorPosition.x}%`,
+                      top: `${cursorPosition.y}%`,
+                      transform: 'translate(-50%, -50%)',
+                      transition: 'all 0.05s ease-out'
+                    }}
+                  >
+                    <div className="relative">
+                      <div className="absolute inset-0 translate-x-0.5 translate-y-0.5">
+                        <svg className="w-6 h-6 text-gray-300 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                        </svg>
+                      </div>
+                      <svg className="w-6 h-6 text-gray-700 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
-            {/* Phase 2: Processing */}
             {phase === 'processing' && (
               <div className="w-full h-full flex items-center justify-center">
                 <div className="text-center">
@@ -902,12 +828,9 @@ function LandingPage() {
               </div>
             )}
 
-            {/* Phase 3: Insights */}
             {phase === 'insights' && (
               <div className="w-full relative">
-                {/* 3-column, 2-row grid with center gap for icon */}
-                <div className="grid grid-cols-[1fr_80px_1fr] gap-2">
-                  {/* Top Left Card */}
+                <div className="grid grid-cols-[1fr_120px_1fr] gap-6">
                   <div className="col-start-1 row-start-1 bg-white rounded-xl p-4 border border-[#103F31]/10 shadow-lg w-full h-56 flex flex-col justify-between">
                     <h3 className="text-sm font-medium text-gray-900 mb-1">✅ 64% complete</h3>
                     <p className="text-xs text-gray-600 mb-2">11 of 17 total tasks parsed from the report</p>
@@ -929,13 +852,12 @@ function LandingPage() {
                       </svg>
                     </div>
                   </div>
-                  {/* Top Right Card */}
+
                   <div className="col-start-3 row-start-1 bg-yellow-50 rounded-xl p-4 border border-yellow-200 shadow-lg w-full h-56 flex flex-col justify-between">
                     <h3 className="text-sm font-medium text-yellow-800 mb-3">⚠️ You're underbilling by $12,400</h3>
                     <p className="text-xs text-yellow-700 mb-1">Based on 64% actual completion vs. 48% recognized revenue</p>
                     <div className="text-xl font-bold text-yellow-900 mb-1">$12,400</div>
                     <div className="mt-0 flex items-end space-x-4">
-                      {/* Actual bar */}
                       <div className="flex-1 flex flex-col items-center">
                         <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '64px'}}>
                           <div className="w-full bg-yellow-500 rounded-t transition-all duration-1000 ease-out" style={{height: '64%'}}></div>
@@ -943,7 +865,6 @@ function LandingPage() {
                         <div className="text-xs text-yellow-700 mt-0 font-medium">Actual</div>
                         <div className="text-xs text-yellow-800 font-bold mb-0">64%</div>
                       </div>
-                      {/* Billed bar */}
                       <div className="flex-1 flex flex-col items-center">
                         <div className="w-full bg-yellow-50 rounded-t flex items-end" style={{height: '64px'}}>
                           <div className="w-full bg-yellow-600 rounded-t transition-all duration-1000 ease-out" style={{height: '48%'}}></div>
@@ -953,10 +874,9 @@ function LandingPage() {
                       </div>
                     </div>
                   </div>
-                  {/* Bottom Left Card */}
+
                   <div className="col-start-1 row-start-2 bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg w-full h-56 flex flex-col justify-between">
                     <h3 className="text-sm font-medium text-red-800 mb-4">🕒 "Insulate ductwork" is 3 days late</h3>
-                    {/* Calendar heatmap */}
                     <div className="flex items-center justify-between gap-x-2 my-2 px-1">
                       <div className="w-9 h-9 rounded bg-[#16a34a] border-2 border-white"></div>
                       <div className="w-9 h-9 rounded bg-[#16a34a] border-2 border-white"></div>
@@ -971,7 +891,7 @@ function LandingPage() {
                       <span className="text-base text-red-700 text-center font-semibold">3 delayed days detected — task is at risk</span>
                     </div>
                   </div>
-                  {/* Bottom Right Card */}
+
                   <div className="col-start-3 row-start-2 bg-red-50 rounded-xl p-4 border border-red-200 shadow-lg w-full h-56 flex flex-col justify-between">
                     <div className="flex items-center space-x-3 mb-2">
                       <svg className="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -980,9 +900,7 @@ function LandingPage() {
                       <h3 className="text-lg font-bold text-red-800"> $8,900 over budget </h3>
                     </div>
                     <p className="text-xs text-red-700 mb-4">If material delay continues 3+ days</p>
-                    {/* Budget and Forecast Bars */}
                     <div className="space-y-3 mt-2">
-                      {/* Budget Bar */}
                       <div className="flex items-center">
                         <span className="text-xs text-gray-500 mr-2 w-14">Budget</span>
                         <div className="relative flex-1 h-4 bg-gray-200 rounded-full">
@@ -990,13 +908,11 @@ function LandingPage() {
                           <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-700">$50K</span>
                         </div>
                       </div>
-                      {/* Forecast Bar */}
                       <div className="flex items-center">
                         <span className="text-xs text-gray-500 mr-2 w-14">Forecast</span>
                         <div className="relative flex-1 h-4 bg-red-100 rounded-full">
                           <div className="absolute left-0 top-0 h-4 bg-red-500 rounded-full" style={{ width: '82%' }}></div>
                           <span className="absolute right-10 top-1/2 -translate-y-1/2 text-xs font-semibold text-red-700">$60K</span>
-                          {/* Alert icon at end of bar */}
                           <span className="absolute right-2 top-1/2 -translate-y-1/2">
                             <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1006,22 +922,24 @@ function LandingPage() {
                       </div>
                     </div>
                   </div>
-                  {/* Center column (col 2) is intentionally left empty for the icon */}
                 </div>
-+                {/* Center File Icon with Encircling Line (absolute overlay) */}
-+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center" style={{width: '80px', height: '80px'}}>
-+                  <div className="absolute inset-0 flex items-center justify-center">
-+                    <svg width="80" height="80" viewBox="0 0 80 80">
-+                      <circle cx="40" cy="40" r="36" fill="none" stroke="#103F31" strokeWidth="2.5" />
-+                    </svg>
-+                  </div>
-+                  <div className="flex flex-col items-center justify-center w-full h-full">
-+                    <svg className="w-10 h-10 text-[#103F31] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-+                    </svg>
-+                    <span className="text-xs font-semibold text-gray-900 text-center whitespace-nowrap">Daily Field Report</span>
-+                  </div>
-+                </div>
+
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center" style={{width: '120px', height: '120px'}}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg width="150" height="150" viewBox="0 0 150 150">
+                      <circle cx="75" cy="75" r="67.5" fill="none" stroke="#103F31" strokeWidth="2.5" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col items-center justify-center w-full h-full">
+                    <svg className="w-12 h-12 text-[#103F31] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <div className="text-xs font-semibold text-gray-900 text-center">
+                      <div>Daily Field</div>
+                      <div>Report</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -1030,54 +948,50 @@ function LandingPage() {
     );
   };
 
-  // Updated Mobile Hero Section
   const MobileHeroSection = () => (
-    <section className="px-4 py-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-3">
-            <span className="whitespace-nowrap">Sync HVAC field and operations.</span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50] block mt-1">
-              Instantly.
-            </span>
-          </h1>
-          <p className="text-sm text-gray-600 mb-4">
-            Upload what you already have — reports, schedules, invoices. Bract reads them, extracts key metrics, and keeps both the field and accounting on the same page.
-          </p>
-          
-          <form 
-            onSubmit={handleEmailSubmit}
-            className="space-y-3"
+    <section className="px-4 py-8">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          <span className="whitespace-nowrap">Sync HVAC field and operations.</span>
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">
+            Instantly.
+          </span>
+        </h1>
+        <p className="text-base text-gray-600 mb-6">
+          Upload what you already have — reports, schedules, invoices. Bract reads them, extracts key metrics, and keeps both the field and accounting on the same page.
+        </p>
+        
+        <form 
+          onSubmit={handleEmailSubmit}
+          className="space-y-3"
+        >
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 outline-none text-sm text-gray-800 placeholder-gray-400"
+            required
+            disabled={isSubmitting}
+          />
+          <button 
+            type="submit"
+            className="w-full px-4 py-2.5 bg-[#103F31] text-white rounded-lg font-medium text-sm hover:bg-[#176a50] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 outline-none text-sm text-gray-800 placeholder-gray-400"
-              required
-              disabled={isSubmitting}
-            />
-            <button 
-              type="submit"
-              className="w-full px-4 py-2.5 bg-[#103F31] text-white rounded-lg font-medium text-sm hover:bg-[#176a50] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Joining...' : 'Join Waitlist'}
-            </button>
-            {errorMessage && (
-              <div className="text-red-500 text-sm">{errorMessage}</div>
-            )}
-            {successMessage && (
-              <div className="text-green-500 text-sm">{successMessage}</div>
-            )}
-          </form>
-        </div>
+            {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+          </button>
+          {errorMessage && (
+            <div className="text-red-500 text-sm">{errorMessage}</div>
+          )}
+          {successMessage && (
+            <div className="text-green-500 text-sm">{successMessage}</div>
+          )}
+        </form>
       </div>
     </section>
   );
 
-  // Mobile version of AutomationDemo
   const MobileDemoAnimation = () => {
     const [phase, setPhase] = useState('upload');
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -1133,10 +1047,8 @@ function LandingPage() {
           <div className="p-4">
             <div className="relative h-[300px] flex items-center justify-center">
               
-              {/* Phase 1: Upload */}
               {phase === 'upload' && (
                 <div className="w-full h-full flex items-center justify-between">
-                  {/* Left Side - Daily Report */}
                   <div className="w-1/2 flex justify-center">
                     <div className="bg-white rounded-lg shadow-md p-3 border border-gray-200 max-w-[140px]">
                       <div className="flex items-center space-x-2 mb-2">
@@ -1162,7 +1074,6 @@ function LandingPage() {
                     </div>
                   </div>
 
-                  {/* Right Side - Drop Zone */}
                   <div className="w-1/2 flex justify-center">
                     <div className={`border-2 border-dashed rounded-xl p-4 text-center transition-all duration-200 ease-out w-32 h-24 flex flex-col items-center justify-center ${
                       isDragging && cursorPosition.x > 60 ? 'border-[#103F31] bg-[#103F31]/8' : 'border-gray-300'
@@ -1176,7 +1087,6 @@ function LandingPage() {
                     </div>
                   </div>
 
-                  {/* Animated Cursor */}
                   {isDragging && (
                     <div 
                       className="absolute pointer-events-none z-50"
@@ -1195,7 +1105,6 @@ function LandingPage() {
                 </div>
               )}
 
-              {/* Phase 2: Processing */}
               {phase === 'processing' && (
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-center">
@@ -1209,31 +1118,26 @@ function LandingPage() {
                 </div>
               )}
 
-              {/* Phase 3: Insights - Mobile Grid */}
               {phase === 'insights' && (
                 <div className="w-full relative">
                   <div className="grid grid-cols-2 gap-2">
-                    {/* Project Completion */}
                     <div className="bg-white rounded-lg p-3 border border-[#103F31]/10 shadow-sm h-24 flex flex-col justify-between">
                       <h3 className="text-[10px] font-medium text-gray-900">✅ 64% complete</h3>
                       <span className="text-lg font-bold text-[#103F31]">64%</span>
                     </div>
 
-                    {/* Underbilling */}
                     <div className="bg-yellow-50 rounded-lg p-3 border border-yellow-200 shadow-sm h-24 flex flex-col justify-between">
-                      <h3 className="text-[10px] font-medium text-yellow-800">⚠️ Underbilling</h3>
+                      <h3 className="text-sm font-medium text-yellow-800">⚠️ Underbilling</h3>
                       <span className="text-lg font-bold text-yellow-900">$12,400</span>
                     </div>
 
-                    {/* Task Delay */}
                     <div className="bg-red-50 rounded-lg p-3 border border-red-200 shadow-sm h-24 flex flex-col justify-between">
-                      <h3 className="text-[10px] font-medium text-red-800">🕒 3 days late</h3>
+                      <h3 className="text-sm font-medium text-red-800">🕒 3 days late</h3>
                       <span className="text-xs text-red-700 font-semibold">At risk</span>
                     </div>
 
-                    {/* Cost Overrun */}
                     <div className="bg-red-50 rounded-lg p-3 border border-red-200 shadow-sm h-24 flex flex-col justify-between">
-                      <h3 className="text-[10px] font-medium text-red-800">🔺 Over budget</h3>
+                      <h3 className="text-sm font-medium text-red-800">🔺 Over budget</h3>
                       <span className="text-lg font-bold text-red-800">$8,900</span>
                     </div>
                   </div>
@@ -1246,7 +1150,6 @@ function LandingPage() {
     );
   };
 
-  // Mobile Problem Section
   const MobileProblemSection = () => (
     <section className="px-4 py-8 bg-white">
       <div className="max-w-md mx-auto">
@@ -1254,9 +1157,7 @@ function LandingPage() {
           The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">Problem</span> We're Solving
         </h2>
         
-        {/* Visual Elements */}
         <div className="flex items-center justify-center space-x-8 mb-8">
-          {/* Field Icon */}
           <div className="flex flex-col items-center">
             <div className="w-12 h-12 flex items-center justify-center">
               <svg className="w-8 h-8 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1266,7 +1167,6 @@ function LandingPage() {
             <span className="text-xs font-medium text-gray-600 mt-1">Field</span>
           </div>
 
-          {/* Disconnect Line */}
           <div className="flex-1 max-w-[100px] relative">
             <div className="absolute inset-0 flex items-center">
               <div className="absolute left-2 right-2 h-0.5 bg-gray-500"></div>
@@ -1279,7 +1179,6 @@ function LandingPage() {
             <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-600">Disconnect</span>
           </div>
 
-          {/* Operations Icon */}
           <div className="flex flex-col items-center">
             <div className="w-12 h-12 flex items-center justify-center">
               <svg className="w-8 h-8 text-[#103F31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1290,7 +1189,6 @@ function LandingPage() {
           </div>
         </div>
 
-        {/* Problem Description */}
         <div className="text-center space-y-3">
           <p className="text-base text-gray-600">
             Field data gets buried in PDFs and spreadsheets.
@@ -1303,128 +1201,6 @@ function LandingPage() {
     </section>
   );
 
-  // Mobile Database Animation for Feature 1
-  const MobileDatabaseAnimation = () => (
-    <div className="relative w-full h-[160px] flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-sm p-3 w-[280px] scale-[0.8]">
-        <div className="space-y-2">
-          <div className="bg-white rounded-lg shadow-sm p-3 border border-gray-200">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-xs font-medium text-gray-900">Install HVAC Units</h3>
-              <span className="text-xs px-2 py-1 rounded-full bg-[#103F31]/10 text-[#103F31]">In Progress</span>
-            </div>
-            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-[#103F31] rounded-full w-3/4 transition-all duration-1000"></div>
-            </div>
-            <div className="mt-1 flex justify-between items-center">
-              <span className="text-xs text-gray-500">Progress</span>
-              <span className="text-xs font-medium text-[#103F31]">75%</span>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-sm p-3 border border-gray-200">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-xs font-medium text-gray-900">Wire Thermostat</h3>
-              <span className="text-xs px-2 py-1 rounded-full bg-red-50 text-red-600">Delayed</span>
-            </div>
-            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-red-500 rounded-full w-1/2 transition-all duration-1000"></div>
-            </div>
-            <div className="mt-1 flex justify-between items-center">
-              <span className="text-xs text-gray-500">Progress</span>
-              <span className="text-xs font-medium text-red-600">45%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Mobile Persona Animation for Feature 2
-  const MobilePersonaAnimation = () => (
-    <div className="relative w-full h-[160px] flex items-center justify-center">
-      <div className="bg-white rounded-xl shadow-sm p-4 w-[280px] scale-[0.8]">
-        {/* Radial Progress */}
-        <div className="relative w-24 h-24 mx-auto mb-4">
-          <svg className="w-full h-full" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" strokeWidth="8" />
-            <circle 
-              cx="50" 
-              cy="50" 
-              r="40" 
-              fill="none" 
-              stroke="#103F31" 
-              strokeWidth="8"
-              strokeDasharray="251"
-              strokeDashoffset="90"
-              transform="rotate(-90 50 50)"
-              className="transition-all duration-1000"
-            />
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-lg font-bold text-[#103F31]">65%</span>
-          </div>
-        </div>
-
-        {/* Financial Metrics */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <div className="text-xs text-gray-600">Earned Revenue</div>
-            <div className="text-sm font-bold text-[#103F31]">$52,000</div>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="text-xs text-gray-600">Actual Cost</div>
-            <div className="text-sm font-bold text-[#103F31]">$49,500</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Mobile Chat Animation for Feature 3
-  const MobileChatAnimation = () => (
-    <div className="relative w-full h-[160px] flex items-center justify-center">
-      <div className="w-[280px] scale-[0.8]">
-        <div className="bg-white rounded-xl shadow-sm p-4">
-          {/* Task Progress */}
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-xs font-medium text-gray-900">HVAC Installation</h3>
-              <span className="text-xs text-gray-500">Progress</span>
-            </div>
-            <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden">
-              <div className="absolute inset-y-0 left-0 bg-[#103F31] rounded-full w-4/5 transition-all duration-1000"></div>
-              {/* Delay Flag */}
-              <div className="absolute top-0 left-3/5 transform -translate-x-1/2 -translate-y-full">
-                <div className="bg-red-50 text-red-600 px-2 py-1 rounded-full text-[10px] font-medium whitespace-nowrap">
-                  3 days late
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Risk Warnings */}
-          <div className="space-y-2">
-            <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-2">
-              <div className="flex items-center justify-between">
-                <div className="text-xs font-medium text-yellow-800">Underbilling Risk</div>
-                <div className="text-sm font-bold text-yellow-900">$12,400</div>
-              </div>
-            </div>
-            
-            <div className="bg-red-50 border border-red-100 rounded-lg p-2">
-              <div className="flex items-center justify-between">
-                <div className="text-xs font-medium text-red-800">Cost Overrun</div>
-                <div className="text-sm font-bold text-red-800">$8,900</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Updated Mobile Features Section
   const MobileFeaturesSection = () => {
     const [activeFeature, setActiveFeature] = useState(0);
     const containerRef = useRef(null);
@@ -1434,23 +1210,19 @@ function LandingPage() {
         id: 'feature1',
         title: 'Automated Task & Progress Tracking',
         description: 'Bract parses WIP schedules and daily field reports to generate and update task progress — no manual data entry required.',
-        component: MobileDatabaseAnimation
       },
       {
         id: 'feature2',
         title: 'Built-in Cost & Revenue Engine',
         description: 'From contract value to actual cost and earned revenue, Bract keeps your numbers updated in real time so that field progress matches financial truth.',
-        component: MobilePersonaAnimation
       },
       {
         id: 'feature3',
         title: 'Risk Flagging & Operational Visibility',
         description: 'Bract flags anomalies like delayed tasks or underbilling risks — helping both operations and finance stay ahead of problems, not react to them.',
-        component: MobileChatAnimation
       }
     ];
 
-    // Handle scroll events to update active feature
     useEffect(() => {
       const container = containerRef.current;
       if (!container) return;
@@ -1466,13 +1238,125 @@ function LandingPage() {
       return () => container.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const MobileDatabaseAnimation = () => (
+      <div className="relative w-full h-[160px] flex items-center justify-center">
+        <div className="bg-white rounded-lg shadow-sm p-3 w-[280px] scale-[0.8]">
+          <div className="space-y-2">
+            <div className="bg-white rounded-lg shadow-sm p-3 border border-gray-200">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-xs font-medium text-gray-900">Install HVAC Units</h3>
+                <span className="text-xs px-2 py-1 rounded-full bg-[#103F31]/10 text-[#103F31]">In Progress</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full bg-[#103F31] rounded-full w-3/4 transition-all duration-1000"></div>
+              </div>
+              <div className="mt-1 flex justify-between items-center">
+                <span className="text-xs text-gray-500">Progress</span>
+                <span className="text-xs font-medium text-[#103F31]">75%</span>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-sm p-3 border border-gray-200">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-xs font-medium text-gray-900">Wire Thermostat</h3>
+                <span className="text-xs px-2 py-1 rounded-full bg-red-50 text-red-600">Delayed</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full bg-red-500 rounded-full w-1/2 transition-all duration-1000"></div>
+              </div>
+              <div className="mt-1 flex justify-between items-center">
+                <span className="text-xs text-gray-500">Progress</span>
+                <span className="text-xs font-medium text-red-600">45%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+    const MobilePersonaAnimation = () => (
+      <div className="relative w-full h-[160px] flex items-center justify-center">
+        <div className="bg-white rounded-xl shadow-sm p-4 w-[280px] scale-[0.8]">
+          <div className="relative w-24 h-24 mx-auto mb-4">
+            <svg className="w-full h-full" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" strokeWidth="8" />
+              <circle 
+                cx="50" 
+                cy="50" 
+                r="40" 
+                fill="none" 
+                stroke="#103F31" 
+                strokeWidth="8"
+                strokeDasharray="251"
+                strokeDashoffset="90"
+                transform="rotate(-90 50 50)"
+                className="transition-all duration-1000"
+              />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-lg font-bold text-[#103F31]">65%</span>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="text-xs text-gray-600">Earned Revenue</div>
+              <div className="text-sm font-bold text-[#103F31]">$82,000</div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="text-xs text-gray-600">Actual Cost</div>
+              <div className="text-sm font-bold text-[#103F31]">$63,000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+    const MobileChatAnimation = () => (
+      <div className="relative w-full h-[160px] flex items-center justify-center">
+        <div className="w-[280px] scale-[0.8]">
+          <div className="bg-white rounded-xl shadow-sm p-4">
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-xs font-medium text-gray-900">HVAC Installation</h3>
+                <span className="text-xs text-gray-500">Progress</span>
+              </div>
+              <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div className="absolute inset-y-0 left-0 bg-[#103F31] rounded-full w-4/5 transition-all duration-1000"></div>
+                <div className="absolute top-0 left-3/5 transform -translate-x-1/2 -translate-y-full">
+                  <div className="bg-red-50 text-red-600 px-2 py-1 rounded-full text-[10px] font-medium whitespace-nowrap">
+                    3 days late
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-medium text-yellow-800">Underbilling Risk</div>
+                  <div className="text-sm font-bold text-yellow-900">$12,400</div>
+                </div>
+              </div>
+              
+              <div className="bg-red-50 border border-red-100 rounded-lg p-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-medium text-red-800">Cost Overrun</div>
+                  <div className="text-sm font-bold text-red-800">$8,900</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
     return (
       <section className="py-8 bg-white">
         <h2 className="text-lg font-semibold text-center mb-6 px-4">
           Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#103F31] to-[#176a50]">Bract</span>
         </h2>
         
-        {/* Feature Cards with Animations */}
         <div 
           ref={containerRef}
           className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar"
@@ -1484,12 +1368,10 @@ function LandingPage() {
               className="snap-center w-full flex-shrink-0"
             >
               <div className="px-4">
-                {/* Animation Container */}
                 {index === 0 && <MobileDatabaseAnimation />}
                 {index === 1 && <MobilePersonaAnimation />}
                 {index === 2 && <MobileChatAnimation />}
                 
-                {/* Feature Text */}
                 <div className="text-center mt-4">
                   <h3 className="text-base font-medium mb-2">{feature.title}</h3>
                   <p className="text-sm text-gray-600 px-2">{feature.description}</p>
@@ -1499,7 +1381,6 @@ function LandingPage() {
           ))}
         </div>
 
-        {/* Dots Indicator */}
         <div className="flex justify-center space-x-2 mt-6">
           {features.map((_, index) => (
             <div
@@ -1514,7 +1395,6 @@ function LandingPage() {
     );
   };
 
-  // Add a simplified mobile CTA section
   const MobileCTASection = () => (
     <section className="px-4 py-8 bg-[#f0fdfa]">
       <div className="text-center">
@@ -1553,7 +1433,6 @@ function LandingPage() {
     </section>
   );
 
-  // Add this CSS to hide scrollbar but keep functionality
   const styles = `
     .hide-scrollbar {
       -ms-overflow-style: none;
@@ -1598,7 +1477,6 @@ function LandingPage() {
       <div className="min-h-screen bg-white">
         <style>{styles}</style>
         
-        {/* Mobile Navigation */}
         <nav className="px-4 py-3 border-b border-gray-100 bg-white">
           <div className="flex justify-between items-center">
             <img 
@@ -1615,7 +1493,6 @@ function LandingPage() {
         <MobileFeaturesSection />
         <MobileCTASection />
         
-        {/* Mobile Footer */}
         <footer className="px-4 py-6 bg-gray-50 border-t border-gray-100">
           <div className="text-center text-xs text-gray-600">
             <p>© 2024 Bract. All rights reserved.</p>
@@ -1625,10 +1502,8 @@ function LandingPage() {
     );
   }
 
-  // Return the existing desktop version exactly as is
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f0fdfa] to-white">
-      {/* Navigation */}
       <nav className="px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <img 
@@ -1639,10 +1514,8 @@ function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <section className="px-6 py-20">
         <div className="max-w-7xl mx-auto">
-          {/* Text Content */}
           <div className="text-center max-w-5xl mx-auto mb-12">
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
               <span className="whitespace-nowrap">Sync HVAC field and operations.</span>
@@ -1655,7 +1528,6 @@ function LandingPage() {
               Upload what you already have — reports, schedules, invoices. Bract reads them, extracts key metrics, and keeps both the field and accounting on the same page.
             </p>
             
-            {/* Email Form */}
             <div className="max-w-md mx-auto">
               <form 
                 onSubmit={handleEmailSubmit}
@@ -1680,18 +1552,13 @@ function LandingPage() {
             </div>
           </div>
 
-          {/* Automation Demo */}
           <AutomationDemo />
         </div>
       </section>
 
-      {/* Problem Section */}
       <ProblemSection />
-
-      {/* Features Section */}
       <FeaturesSection />
 
-      {/* CTA Section */}
       <section className="px-6 py-20 bg-[#f0fdfa]">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-900">Ready to Get Started?</h2>
@@ -1724,7 +1591,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="px-6 py-8 bg-[#f5f5f4]">
         <div className="max-w-7xl mx-auto text-center text-gray-600">
           <p>© 2024 Bract. All rights reserved.</p>
@@ -1734,6 +1600,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
-
-
+export default LandingPage; 
